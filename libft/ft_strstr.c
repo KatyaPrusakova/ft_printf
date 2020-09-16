@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
+/*   Updated: 2020/06/30 09:41:11 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+char		*ft_strstr(const char *big, const char *little)
 {
-	char *str;
-	int i;
+	size_t		i;
+	size_t		j;
+	int			len;
 
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+	i = 0;
+	len = 0;
+	len = ft_strlen(little);
+	if (len == 0)
+		return ((char*)big);
+	while (big[i] != '\0')
+	{
+		j = 0;
+		while (little[j] != '\0' && big[i + j] == little[j])
+		{
+			j++;
+		}
+		if (little[j] == '\0')
+			return ((char*)big + i);
+		i++;
+	}
+	return (0);
 }

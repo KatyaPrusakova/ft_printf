@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/06 14:10:06 by eprusako          #+#    #+#             */
+/*   Updated: 2020/06/30 09:34:15 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char *str;
-	int i;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (i < n && (*str1 == *str2))
+	{
+		i++;
+		str1++;
+		str2++;
+	}
+	if (i == n)
+		return (0);
+	return ((*str1 - *str2));
 }

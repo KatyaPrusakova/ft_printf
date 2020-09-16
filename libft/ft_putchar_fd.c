@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
+/*   Updated: 2020/06/17 11:38:57 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+void		ft_putchar_fd(char c, int fd)
 {
-	char *str;
-	int i;
-
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+	write(fd, &c, 1);
 }

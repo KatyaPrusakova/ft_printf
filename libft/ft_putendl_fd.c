@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
+/*   Updated: 2020/06/17 11:45:15 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+void		ft_putendl_fd(char const *s, int fd)
 {
-	char *str;
-	int i;
+	int		i;
 
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
 }

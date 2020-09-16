@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/06 14:10:06 by eprusako          #+#    #+#             */
+/*   Updated: 2020/06/30 09:33:44 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-
-int		main(void)
+int		ft_isalnum(int a)
 {
-	char *str;
-	int i;
-
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+	if (a >= 65 && a <= 90)
+		return (1);
+	if (a >= 97 && a <= 122)
+		return (1);
+	if (a >= 48 && a <= 57)
+		return (1);
+	else
+		return (0);
 }

@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
+/*   Updated: 2020/06/26 16:21:28 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	char *str;
-	int i;
+	t_list		*head;
+	t_list		*current;
 
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+	if (lst == NULL || f == NULL)
+		return (NULL);
+	head = (*f)(lst);
+	current = head;
+	while (lst->next)
+	{
+		lst = lst->next;
+		current->next = f(lst);
+		if (!(current = current->next))
+			return (NULL);
+		current = current->next;
+	}
+	return (head);
 }

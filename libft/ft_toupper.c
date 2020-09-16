@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/06 14:10:06 by eprusako          #+#    #+#             */
+/*   Updated: 2020/06/30 09:33:14 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-
-int		main(void)
+int		ft_toupper(int a)
 {
-	char *str;
-	int i;
-
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+	if (a > 96 && a < 123)
+		return (a - 32);
+	else
+		return (a);
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:10 by eprusako         ###   ########.fr       */
+/*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
+/*   Updated: 2020/09/16 16:19:43 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "ft_printf.h"
 
-int		main(void)
+void	add_flag(char **f)
 {
-	char *str;
-	int i;
+	printf("add_flag %s\n", *f);
+}
 
-	str = "Hello";
-	i = 5;
-	ft_printf("|simple %s %d|", str, i);
+void	parse_flag(char *format)
+{
+	while (format)
+	{
+		if (*format == '%')
+			add_flag(&format);
+		format++;
+	}
 }
