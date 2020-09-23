@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/23 18:50:39 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/23 18:54:33 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ void	add_flags(t_flags *data)
 	}
 }
 
-static void	switch_type(const char *str, t_flags *data)
+static void	switch_type(t_flags *data)
 {
 	char c;
 
-	c = str[data->pos];
+	c = data->str[data->pos];
 	if (c == 'd' || c == 'i' || c == 'D')
 		print_decimal(data);
 	else if (c == 'c' || c == 'C')
@@ -122,7 +122,7 @@ void	parse_flags(char *format, t_flags *data)
 {
 	data->str = format;
 	data->format_size = ft_strlen(format);
-	printf("|it got you %s %d|", data->str, data->format_size);
+	printf("|it got you %s %d|\n", data->str, data->format_size);
 	while (data->str[data->pos])
 	{
 		if (ft_strchr(CASE, data->str[data->pos]))

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:20:38 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/23 18:37:10 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/23 18:55:41 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int		ft_printf(const char *format, ...)
 	va_start(data->args, format);
 
 	parse_flags((char*)format, data);
-	printf("1. %s\n", va_arg(data->args,char*));
+	// printf("1. %s\n", va_arg(data->args,char*));
 
 
 	va_end (data->args) ;
 	return (1);
 }
+/*  */
