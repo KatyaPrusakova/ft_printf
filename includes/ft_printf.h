@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/24 15:02:45 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/24 15:55:30 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,9 @@
 # define FALSE 0
 
 
-typedef	struct	s_flags
+typedef	struct	s_print
 {
-	va_list	args;
-
-	char	*str;
-	char	buff[SIZE];
 	char	type;
-	int		len;
-	int		pos;
-	int		printed;
-	int		format_size;
-
 	int		width;
 	int		precision;
 	int		lenght;
@@ -47,6 +38,31 @@ typedef	struct	s_flags
 	int		minus;
 	int		space;
 	int		zero;
+
+}				t_print;
+
+typedef	struct	s_flags
+{
+	va_list	args;
+
+	char	*str;
+	char	buff[SIZE];
+	int		len;
+	int		pos;
+	int		printed;
+	int		format_size;
+	struct	*t_print;
+}				t_flags;
+
+
+
+void	parse_menu(t_flags *data);
+void	add_flags(t_flags *data);
+void	parse_flags(t_flags *data);
+int		ft_printf(const char *format, ...);
+
+
+#endif
 
 	// int c; // (character)
 	// int s; // (string)
@@ -58,19 +74,6 @@ typedef	struct	s_flags
 	// int x; // (hexadecimal in lowercase)
 	// int X; // (hexadecimal in upper case)
 	// int f; // (float)
-
-
-}				t_flags;
-
-
-
-void	parse_menu(char *format, t_flags *data);
-void	add_flags(t_flags *data);
-void	parse_flags(char *format, t_flags *data);
-int		ft_printf(const char *format, ...);
-
-
-#endif
 
     /*
     '#'(hash) - For o, x, X types, the text 0, 0x, 0X, respectively, is prepended to non-zero numbers.
