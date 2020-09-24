@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/24 10:33:43 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/24 15:02:45 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,32 @@ typedef	struct	s_flags
 
 	char	*str;
 	char	buff[SIZE];
+	char	type;
 	int		len;
 	int		pos;
 	int		printed;
 	int		format_size;
 
 	int		width;
+	int		precision;
+	int		lenght;
+
 	int		hash;
 	int		plus;
 	int		minus;
 	int		space;
 	int		zero;
 
-	int c; // (character)
-	int s; // (string)
-	int p; // (address)
-	int d; // (digit)
-	int i; // (integer)
-	int o; // (digit in octal)
-	int u; // (unsigned integer)
-	int x; // (hexadecimal in lowercase)
-	int X; // (hexadecimal in upper case)
-	int f; // (float)
+	// int c; // (character)
+	// int s; // (string)
+	// int p; // (address)
+	// int d; // (digit)
+	// int i; // (integer)
+	// int o; // (digit in octal)
+	// int u; // (unsigned integer)
+	// int x; // (hexadecimal in lowercase)
+	// int X; // (hexadecimal in upper case)
+	// int f; // (float)
 
 
 }				t_flags;
