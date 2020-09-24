@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/23 18:54:33 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/24 10:35:02 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,13 @@ static void		save_to_buff(char c, t_flags *data)
 		data->buff[data->len] = c;
 		data->len++;
 	}
+	// write(1, data->buff, data->len);
 }
 
 void	parse_flags(char *format, t_flags *data)
 {
 	data->str = format;
-	data->format_size = ft_strlen(format);
+
 	printf("|it got you %s %d|\n", data->str, data->format_size);
 	while (data->str[data->pos])
 	{
@@ -129,10 +130,21 @@ void	parse_flags(char *format, t_flags *data)
 			add_flags(data);
 		else if (ft_strchr(SPECIFIERS, data->str[data->pos]))
 			switch_type(data);
+		data->pos++;
+	}
+}
+
+void	parse_menu(char *format, t_flags *data)
+{
+	while (*format)
+	{
+		if (*format == '%')
+			parse_flags(format, data);
 		else
 		{
-			save_to_buff(format[data->pos], data);
+			save_to_buff(*format, data);
+			data->printed++;
 		}
-		data->pos++;
+		format++;
 	}
 }

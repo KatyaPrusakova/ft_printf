@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/23 18:50:59 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/24 10:33:43 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct	s_flags
 	char	buff[SIZE];
 	int		len;
 	int		pos;
+	int		printed;
 	int		format_size;
 
 	int		width;
@@ -59,7 +60,7 @@ typedef	struct	s_flags
 
 
 
-
+void	parse_menu(char *format, t_flags *data);
 void	add_flags(t_flags *data);
 void	parse_flags(char *format, t_flags *data);
 int		ft_printf(const char *format, ...);

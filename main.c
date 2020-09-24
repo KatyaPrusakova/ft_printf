@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/23 15:41:46 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/24 10:33:22 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@ int		main(void)
 
 	str = "Hello";
 	i = 5;
-	ft_printf("|simple %s|", str);
+	ft_printf("|simple %+-s %#3d %.f|\n", str);
+	i = printf("|real print %s|\n", str);
+	printf("|return %d|\n", i);
 }
