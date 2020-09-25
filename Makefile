@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/15 11:04:15 by eprusako          #+#    #+#              #
-#    Updated: 2020/09/16 16:49:28 by eprusako         ###   ########.fr        #
+#    Updated: 2020/09/25 15:18:16 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ NOCOLOR = "\033[0m"
 SRCS = $(addprefix $(DIR_SRC)/, $(SRC))
 OBJS = $(addprefix $(DIR_OBJ)/, $(SRC:.c=.o))
 
-all: $(NAME) $(TEST)
+all: $(NAME)
 
 $(NAME): $(DIR_OBJ) $(OBJS)
 	@echo $(YELLOW)Compiling libftprintf.a...$(NOCOLOR)
@@ -46,7 +46,7 @@ $(DIR_OBJ):
 	@mkdir $(DIR_OBJ)
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.c $(HEADER)/ft_printf.h
-	@gcc -Wall -Wextra -Werror -I$(HEADER) -c -o $@ $<
+	@gcc -g -Wall -Wextra -Werror -I$(HEADER) -c -o $@ $<
 
 clean:
 	@echo $(YELLOW)Cleaning...$(NOCOLOR)
