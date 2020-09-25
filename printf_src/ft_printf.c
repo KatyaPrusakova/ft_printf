@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:20:38 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/24 15:17:38 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/25 15:18:27 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,4 @@ int		ft_printf(const char *format, ...)
 	va_end (data->args) ;
 	return (1);
 }
-/*  */
+

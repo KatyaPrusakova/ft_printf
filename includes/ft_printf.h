@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/24 15:55:30 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/25 14:19:43 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define SPECIFIERS	"cspdiouxXf%"
 # define FLAGS		"#0-+ .*0123456789hlLz"
-# define CASE		"#0-+ .*0123456789hlLzcspdiouxXf%"
+# define CASE		"#0-+ .*0123456789hlLzcspdiouxXf" /* % separate case */
 
 # define SIZE 1024
 # define TRUE 1
@@ -51,7 +51,17 @@ typedef	struct	s_flags
 	int		pos;
 	int		printed;
 	int		format_size;
-	struct	*t_print;
+
+	char	type;
+	int		width;
+	int		precision;
+	int		lenght;
+
+	int		hash;
+	int		plus;
+	int		minus;
+	int		space;
+	int		zero;
 }				t_flags;
 
 
