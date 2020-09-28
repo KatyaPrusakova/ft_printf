@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/28 18:00:34 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/28 20:46:33 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,6 @@ static void	print_string(t_flags *data)
 		s = "(null)";
 	s = ft_strdup(s);
 	i = ft_strlen(s);
-	/* 	if (data->precision >= i)
-		{
-			data->precision = -1;
-			data->pr_width = 0;
-			data->width -= i;
-		}
-		else */
 	if (data->width && !data->minus && data->precision == -1)
 	{
 		data->width -= i;
@@ -125,9 +118,7 @@ static void	print_string(t_flags *data)
 	else if (data->width > 0 && !data->minus && data->precision >= 0)
 	{
 		if (data->pr_width >= i)
-		{
 			data->width -= i;
-		}
 		else
 			data->width -= data->pr_width;
 		while (data->width > 0)
@@ -140,7 +131,10 @@ static void	print_string(t_flags *data)
 	}
 	else if (data->width > 0 && data->minus == 1 && data->precision >= 0)
 	{
-		data->width -= i;
+		if (data->pr_width >= i)
+			data->width -= i;
+		else
+			data->width -= data->pr_width;
 		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
 		string_to_buff(s, data);
 		while (data->width > 0)
@@ -154,6 +148,7 @@ static void	print_string(t_flags *data)
 		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
 		string_to_buff(s, data);
 	}
+
 	else
 		string_to_buff(s, data);
 }
@@ -287,6 +282,12 @@ static	int	add_precision(t_flags *data)
 	{
 		data->precision = TRUE;
 		data->pos++;
+		if (data->str[data->pos] == '*')
+		{
+			data->pr_width = va_arg(data->args, int);
+			data->pos++;
+			data->precision = (data->pr_width < 0 ? data->precision : -data->precision );
+		}
 		while (ft_isdigit(data->str[data->pos]))
 		{
 			if (data->str[data->pos] == '0')
