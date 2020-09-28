@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/28 17:14:12 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/28 18:00:34 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void		string_to_buff(char *s, t_flags *data)
 
 static void	print_string(t_flags *data)
 {
-	char *s;
+	char	*s;
 	int		i;
 
 	s = (char*)va_arg(data->args,char*);
@@ -95,8 +95,14 @@ static void	print_string(t_flags *data)
 		s = "(null)";
 	s = ft_strdup(s);
 	i = ft_strlen(s);
-
-	if (data->width && data->minus == 0 && data->precision == -1)
+	/* 	if (data->precision >= i)
+		{
+			data->precision = -1;
+			data->pr_width = 0;
+			data->width -= i;
+		}
+		else */
+	if (data->width && !data->minus && data->precision == -1)
 	{
 		data->width -= i;
 		while (data->width > 0)
@@ -116,13 +122,14 @@ static void	print_string(t_flags *data)
 			data->width--;
 		}
 	}
-	else if (data->width > 0 && data->minus == 0 && data->precision >= 0)
+	else if (data->width > 0 && !data->minus && data->precision >= 0)
 	{
-		/* if (data->pr_width < data->width)
+		if (data->pr_width >= i)
+		{
+			data->width -= i;
+		}
+		else
 			data->width -= data->pr_width;
-		else if (data->pr_width > data->width)
-			data->width -= i; */
-		data->width -= data->pr_width;
 		while (data->width > 0)
 		{
 			save_to_buff(' ', data);
@@ -131,7 +138,7 @@ static void	print_string(t_flags *data)
 		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
 		string_to_buff(s, data);
 	}
-	else if (data->width > 0 && data->minus == 1 && data->precision == 0)
+	else if (data->width > 0 && data->minus == 1 && data->precision >= 0)
 	{
 		data->width -= i;
 		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
