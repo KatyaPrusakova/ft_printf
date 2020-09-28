@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/28 20:46:33 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/28 21:13:46 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,15 @@ static void	print_string(t_flags *data)
 
 	s = (char*)va_arg(data->args,char*);
 	if (!s)
+	{
 		s = "(null)";
+	}
+	if (data->pr_width <= -1)
+	{
+		string_to_buff(s, data);
+		return ;
+	}
+
 	s = ft_strdup(s);
 	i = ft_strlen(s);
 	if (data->width && !data->minus && data->precision == -1)
@@ -286,7 +294,7 @@ static	int	add_precision(t_flags *data)
 		{
 			data->pr_width = va_arg(data->args, int);
 			data->pos++;
-			data->precision = (data->pr_width < 0 ? data->precision : -data->precision );
+			return (1);
 		}
 		while (ft_isdigit(data->str[data->pos]))
 		{
