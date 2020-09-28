@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/05 14:47:24 by eprusako          #+#    #+#              #
-#    Updated: 2020/06/30 09:54:39 by eprusako         ###   ########.fr        #
+#    Updated: 2020/09/28 11:20:12 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAG = -Wall -Wextra -Werror
 
 HDDIRS=-I ./
 
-CC = @gcc
+CC = @gcc -g
 
 AR = @ar rc
 

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/25 14:19:43 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/28 16:04:46 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define FLAGS		"#0-+ .*0123456789hlLz"
 # define CASE		"#0-+ .*0123456789hlLzcspdiouxXf" /* % separate case */
 
-# define SIZE 1024
+# define SIZE 1000
 # define TRUE 1
 # define FALSE 0
 
@@ -55,6 +55,7 @@ typedef	struct	s_flags
 	char	type;
 	int		width;
 	int		precision;
+	int		pr_width;
 	int		lenght;
 
 	int		hash;
@@ -67,8 +68,8 @@ typedef	struct	s_flags
 
 
 void	parse_menu(t_flags *data);
-void	add_flags(t_flags *data);
-void	parse_flags(t_flags *data);
+int		add_flags(t_flags *data);
+// void	parse_flags(t_flags *data);
 int		ft_printf(const char *format, ...);
 
 

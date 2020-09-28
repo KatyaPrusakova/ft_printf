@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/15 11:04:15 by eprusako          #+#    #+#              #
-#    Updated: 2020/09/25 15:18:16 by eprusako         ###   ########.fr        #
+#    Updated: 2020/09/28 11:20:22 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME): $(DIR_OBJ) $(OBJS)
 	@ranlib $(NAME)
 
 test: $(NAME)
-	gcc $(NAME) $(MAIN)
+	gcc -g $(NAME) $(MAIN)
 
 $(DIR_OBJ):
 	@echo $(YELLOW)Compiling to .o files...$(NOCOLOR)
