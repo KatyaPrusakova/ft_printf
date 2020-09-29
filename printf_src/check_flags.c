@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/28 21:13:46 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/29 13:32:42 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ static void	print_decimal(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
 }
-static void	print_pointer(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
+
 static void	print_float(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
@@ -49,10 +46,7 @@ static void	print_hex(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
 }
-static void	print_percent(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
+
 static void	print_uint(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
@@ -183,6 +177,45 @@ static void	print_char(t_flags *data)
 	}
 	else
 		save_to_buff(va_arg(data->args,int), data);
+}
+
+static void	print_pointer(t_flags *data)
+{
+	uintmax_t	pointer;
+	char		*p;
+	int			i;
+
+	pointer = va_arg(data->args,uintmax_t);
+	p =  ft_strjoin("0x", ft_itoa_base(pointer, 16));
+	i = ft_strlen(p);
+	if (data->width && !data->minus && data->precision == -1)
+	{
+		data->width -= i;
+		while (data->width > 0)
+		{
+			save_to_buff(' ', data);
+			data->width--;
+		}
+		string_to_buff(p, data);
+	}
+	else if (data->width > 0 && data->minus == 1 && data->precision == -1)
+	{
+		data->width -= i;
+		string_to_buff(p, data);
+		while (data->width > 0)
+		{
+			save_to_buff(' ', data);
+			data->width--;
+		}
+	}
+	else
+		string_to_buff(p, data);
+	free(p);
+}
+
+static void	print_percent(t_flags *data)
+{
+	printf("|buff string is %s|", data->buff);
 }
 
 static void	switch_type(t_flags *data)

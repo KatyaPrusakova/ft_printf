@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/28 20:42:52 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/29 13:14:44 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,15 @@ int		main(void)
 	/*    printf("|realpri |%10.2s| |%5.1s| |%3.0s| |%6.10s|\n", str, str, str, str);
 	ft_printf("|myprint |%10.2s| |%5.1s| |%3.0s| |%6.10s|\n", str, str, str, str);
  */
-
+/*
 	   printf("%.*s\n", -6 , 0);
 	   printf("\n");
-	ft_printf("%.*s\n", -6 , 0);
+	ft_printf("%.*s\n", -6 , 0); */
+
+	 printf("%5p\n", 5);
+	   printf("\n");
+	ft_printf("%5p\n", 5);
+
 	/* i = printf("\n|real print %s|\n", str);
 	printf("|return %d|\n", i); */
 }

@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/05 14:47:24 by eprusako          #+#    #+#              #
-#    Updated: 2020/09/28 11:20:12 by eprusako         ###   ########.fr        #
+#    Updated: 2020/09/29 11:58:43 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC =	ft_bzero.c \
 		ft_lstpushback.c \
 		ft_lst_len.c \
 		ft_isspace.c \
+		ft_itoa_base.c \
 
 OBJ = $(SRC:.c=.o)
 
