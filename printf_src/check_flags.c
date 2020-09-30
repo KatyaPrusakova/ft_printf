@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/30 11:42:15 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:59:45 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,69 @@ static void	print_binary(t_flags *data)
 	printf("|buff string is %s|", data->buff);
 }
 
+static int	print_width(char *s, int i, t_flags *data)
+{
+	char	width;
+
+	width = (data->zero > 0 ? '0' : ' ' );
+	if (data->width && !data->minus && data->precision == -1 && s[0] != '-')
+	{
+		data->width -= i;
+		while (data->width > 0)
+		{
+			save_to_buff(width, data);
+			data->width--;
+		}
+		string_to_buff(s, data);
+		return (1);
+	}
+	else if (data->width > 0 && !data->minus && data->precision == -1 && s[0] == '-')
+	{
+		if (data->zero)
+		{
+			save_to_buff('-', data);
+			s = ft_strsub(s, 1, (i-1)); /* make string witout minus */
+		}
+		data->width -= (i); /* i minus one because of minus signed*/
+		while (data->width > 0)
+		{
+			save_to_buff(width, data);
+			data->width--;
+		}
+		string_to_buff(s, data);
+		return (1);
+	}
+	else if (data->width > 0 && data->minus == 1 && data->precision == -1)
+	{
+		data->width -= i;
+		string_to_buff(s, data);
+		while (data->width > 0)
+		{
+			save_to_buff(width, data);
+			data->width--;
+		}
+		return (1);
+	}
+	return (0);
+}
+
+static int	print_precision(char *s, int i, t_flags *data)
+{
+	size_t		diff;
+	char	*new_s = NULL;
+
+	diff = 0;
+	/* if (i >= data->pr_width)
+		return ; */
+	if (i < data->pr_width)
+	{
+		diff = data->pr_width - i;
+		ft_memset(new_s, '0', diff);
+		ft_strjoin(new_s, s);
+		printf("%s\n", new_s);
+	}
+	return (0);
+}
 
 static void	print_decimal(t_flags *data)
 {
@@ -47,9 +110,38 @@ static void	print_decimal(t_flags *data)
 	}
 	s = ft_strdup(s);
 	i = ft_strlen(s);
-	string_to_buff(s, data);
-}
+	if (print_width(s, i, data))
+		printf("%s\n", s);
 
+	if (print_precision(s, i, data))
+		return ;
+	else if (data->precision >= 0 && !data->minus && s[0] == '-')
+	{
+		save_to_buff('-', data);
+		s = ft_strsub(s, 1, (i-1)); /* make string witout minus */
+		data->width = data->pr_width;
+		data->width -= (i-1); /* i minus one because of minus signed*/
+		while (data->width > 0)
+		{
+			save_to_buff('0', data);
+			data->width--;
+		}
+		string_to_buff(s, data);
+	}
+	else if (data->precision >= 0 && !data->minus)
+	{
+		data->width = data->pr_width;
+		data->width -= i;
+		while (data->width > 0)
+		{
+			save_to_buff('0', data);
+			data->width--;
+		}
+		string_to_buff(s, data);
+	}
+	else
+		string_to_buff(s, data);
+}
 
 static void	switch_type(t_flags *data)
 {
@@ -117,7 +209,7 @@ int			add_flags(t_flags *data)
 		return (1);
 }
 
-static	int		add_width(t_flags *data)
+static	void		add_width(t_flags *data)
 {
 	char	*s;
 	int		i;
@@ -139,12 +231,9 @@ static	int		add_width(t_flags *data)
 		}
 		data->width = ft_atoi(s);
 	}
-	else
-		return (0);
-	return (1);
 }
 
-static	int	add_precision(t_flags *data)
+static	void	add_precision(t_flags *data)
 {
 	char	*s;
 	int		i;
@@ -160,7 +249,6 @@ static	int	add_precision(t_flags *data)
 		{
 			data->pr_width = va_arg(data->args, int);
 			data->pos++;
-			return (1);
 		}
 		while (ft_isdigit(data->str[data->pos]))
 		{
@@ -174,9 +262,30 @@ static	int	add_precision(t_flags *data)
 		}
 		data->pr_width = ft_atoi(s);
 	}
-	else
-		return (0);
-	return (1);
+}
+
+static	void	add_lenght(t_flags *data)
+{
+	if (data->str[data->pos] == 'h')
+		if (data->str[data->pos + 1] == 'h')
+			data->length = HH;
+		else
+			data->length = H;
+	else if (data->str[data->pos] == 'l')
+		if (data->str[data->pos + 1] == 'l')
+			data->length = LL;
+		else
+			data->length = L;
+	else if (data->str[data->pos] == 'L')
+		data->length = BL;
+	else if (data->str[data->pos] == 'j')
+		data->length = J;
+	else if (data->str[data->pos] == 'z')
+		data->length = Z;
+	else if (data->str[data->pos] == 't')
+		data->length = T;
+	while (ft_strchr(LENGTH, data->str[data->pos]))
+		data->pos++;
 }
 
 static int	parse_flags(t_flags *data)
@@ -185,6 +294,7 @@ static int	parse_flags(t_flags *data)
 		data->pos++;
 	add_width(data);
 	add_precision(data);
+	add_lenght(data);
 	data->printed += scan_type(data);
 	return (1);
 }

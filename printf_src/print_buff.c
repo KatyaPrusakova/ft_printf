@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/30 11:02:26 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/30 18:00:24 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	reset(t_flags *data)
 	data->width = FALSE;
 	data->precision = -1;
 	data->pr_width = FALSE;
-	data->lenght = FALSE;
+	data->length = FALSE;
 
 	data->hash = FALSE;
 	data->plus = FALSE;

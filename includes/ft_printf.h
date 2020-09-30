@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/30 11:02:06 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:55:27 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,23 @@
 # include "libft.h"
 
 # define SPECIFIERS	"cspdiouxXf%"
-# define FLAGS		"#0-+ .*0123456789hlLz"
-# define CASE		"#0-+ .*0123456789hlLzcspdiouxXf" /* % separate case */
+# define LENGTH		"hlLzjt"
+# define FLAGS		"#0-+ .*0123456789hlLzjt"
+# define CASE		"#0-+ .*0123456789hlLzjtcspdiouxXf" /* % separate case */
 
 # define SIZE 1000
 # define TRUE 1
 # define FALSE 0
+# define L	1
+# define LL	2
+# define BL	3
+# define H	4
+# define HH	5
+# define J	6
+# define Z	7
+# define T	8
 
-
-typedef	struct	s_print
-{
-	char	type;
-	int		width;
-	int		precision;
-	int		lenght;
-
-	int		hash;
-	int		plus;
-	int		minus;
-	int		space;
-	int		zero;
-
-}				t_print;
-
+// lenght
 typedef	struct	s_flags
 {
 	va_list	args;
@@ -56,7 +50,7 @@ typedef	struct	s_flags
 	int		width;
 	int		precision;
 	int		pr_width;
-	int		lenght;
+	int		length;
 
 	int		hash;
 	int		plus;
@@ -109,8 +103,8 @@ void	reset(t_flags *data);
     */
 
     /*
-    'l' - For integer types, causes ft_printf to expect a long-sized integer argument.
-    'L' - For floating point types, causes ft_printf to expect a long double argument.
+    'L' - For integer types, causes ft_printf to expect a long-sized integer argument.
+    'LL' - For floating point types, causes ft_printf to expect a long double argument.
     'hh' - For integer types, causes ft_printf to expect an int-sized integer argument which was promoted from a char.
     'h' - For integer types, causes ft_printf to expect an int-sized integer argument which was promoted from a short.
     'l' - For integer types, causes ft_printf to expect a long-sized integer argument.
