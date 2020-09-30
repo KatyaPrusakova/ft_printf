@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/28 16:04:46 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:02:06 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,16 @@ void	parse_menu(t_flags *data);
 int		add_flags(t_flags *data);
 // void	parse_flags(t_flags *data);
 int		ft_printf(const char *format, ...);
+void	print_percent(t_flags *data);
+void	print_pointer(t_flags *data);
+void	print_char(t_flags *data);
+void	print_string(t_flags *data);
 
+void		string_to_buff(char *s, t_flags *data);
+void		print_buff(t_flags *data);
+void		save_to_buff(char c, t_flags *data);
+
+void	reset(t_flags *data);
 
 #endif
 

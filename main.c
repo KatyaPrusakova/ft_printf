@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/29 13:14:44 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:41:11 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int		main(void)
 	   printf("\n");
 	ft_printf("%.*s\n", -6 , 0); */
 
-	 printf("%5p\n", 5);
+	 printf("%5d\n", 578645);
 	   printf("\n");
-	ft_printf("%5p\n", 5);
+	ft_printf("%5d", 578645);
 
 	/* i = printf("\n|real print %s|\n", str);
 	printf("|return %d|\n", i); */

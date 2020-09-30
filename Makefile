@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/15 11:04:15 by eprusako          #+#    #+#              #
-#    Updated: 2020/09/28 11:20:22 by eprusako         ###   ########.fr        #
+#    Updated: 2020/09/30 11:00:18 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ DIR_OBJ = obj_dir
 HEADER = includes
 
 MAIN =	main.c
-SRC =	check_flags.c ft_printf.c\
+SRC =	check_flags.c ft_printf.c print_csp.c print_buff.c\
 
 YELLOW = "\033[1;33m"
 NOCOLOR = "\033[0m"

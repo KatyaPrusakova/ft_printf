@@ -6,33 +6,11 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/29 13:32:42 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:42:15 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
-static	void	reset(t_flags *data)
-{
-	data->width = FALSE;
-	data->precision = -1;
-	data->pr_width = FALSE;
-	data->lenght = FALSE;
-
-	data->hash = FALSE;
-	data->plus = FALSE;
-	data->minus = FALSE;
-	data->space = FALSE;
-	data->zero = FALSE;
-	// pf->precision = -1;
-}
-
-
-static void	print_decimal(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
 
 static void	print_float(t_flags *data)
 {
@@ -56,167 +34,22 @@ static void	print_binary(t_flags *data)
 	printf("|buff string is %s|", data->buff);
 }
 
-static void		save_to_buff(char c, t_flags *data)
-{
-	if (data->len < 1024)
-	{
-		data->buff[data->len] = c;
-		data->len++;
-	}
-}
 
-static void		print_buff(t_flags *data)
-{
-	write(1, data->buff, data->len);
-}
-
-static void		string_to_buff(char *s, t_flags *data)
-{
-	while (*s)
-	{
-		data->buff[data->len++] = *s;
-		s++;
-	}
-}
-
-static void	print_string(t_flags *data)
+static void	print_decimal(t_flags *data)
 {
 	char	*s;
 	int		i;
 
-	s = (char*)va_arg(data->args,char*);
+	s = ft_itoa(va_arg(data->args,int));
 	if (!s)
 	{
 		s = "(null)";
 	}
-	if (data->pr_width <= -1)
-	{
-		string_to_buff(s, data);
-		return ;
-	}
-
 	s = ft_strdup(s);
 	i = ft_strlen(s);
-	if (data->width && !data->minus && data->precision == -1)
-	{
-		data->width -= i;
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-		string_to_buff(s, data);
-	}
-	else if (data->width > 0 && data->minus == 1 && data->precision == -1)
-	{
-		data->width -= i;
-		string_to_buff(s, data);
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-	}
-	else if (data->width > 0 && !data->minus && data->precision >= 0)
-	{
-		if (data->pr_width >= i)
-			data->width -= i;
-		else
-			data->width -= data->pr_width;
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
-		string_to_buff(s, data);
-	}
-	else if (data->width > 0 && data->minus == 1 && data->precision >= 0)
-	{
-		if (data->pr_width >= i)
-			data->width -= i;
-		else
-			data->width -= data->pr_width;
-		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
-		string_to_buff(s, data);
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-	}
-	else if (data->precision >= 0)
-	{
-		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
-		string_to_buff(s, data);
-	}
-
-	else
-		string_to_buff(s, data);
+	string_to_buff(s, data);
 }
 
-static void	print_char(t_flags *data)
-{
-	if (data->width && data->minus == 0)
-	{
-		while (data->width > 1)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-		save_to_buff(va_arg(data->args,int), data);
-	}
-	else if (data->width > 0 && data->minus == 1)
-	{
-		save_to_buff(va_arg(data->args,int), data);
-		while (data->width > 1)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-	}
-	else
-		save_to_buff(va_arg(data->args,int), data);
-}
-
-static void	print_pointer(t_flags *data)
-{
-	uintmax_t	pointer;
-	char		*p;
-	int			i;
-
-	pointer = va_arg(data->args,uintmax_t);
-	p =  ft_strjoin("0x", ft_itoa_base(pointer, 16));
-	i = ft_strlen(p);
-	if (data->width && !data->minus && data->precision == -1)
-	{
-		data->width -= i;
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-		string_to_buff(p, data);
-	}
-	else if (data->width > 0 && data->minus == 1 && data->precision == -1)
-	{
-		data->width -= i;
-		string_to_buff(p, data);
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-	}
-	else
-		string_to_buff(p, data);
-	free(p);
-}
-
-static void	print_percent(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
 
 static void	switch_type(t_flags *data)
 {
