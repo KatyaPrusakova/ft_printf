@@ -1,53 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_buff.c                                       :+:      :+:    :+:   */
+/*   print_di.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/01 19:31:21 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/09/30 18:27:23 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 
-void	reset(t_flags *data)
-{
-	data->width = FALSE;
-	data->precision = -1;
-	data->pr_width = FALSE;
-	data->length = FALSE;
-
-	data->hash = FALSE;
-	data->plus = FALSE;
-	data->minus = FALSE;
-	data->space = FALSE;
-	data->zero = FALSE;
-	data->star = FALSE;
-}
-
-
-void		save_to_buff(char c, t_flags *data)
-{
-	if (data->len < 1024)
+/* 	else if (data->precision >= 0 && !data->minus && s[0] == '-')
 	{
-		data->buff[data->len] = c;
-		data->len++;
+		save_to_buff('-', data);
+		s = ft_strsub(s, 1, (i-1));
+		data->width = data->pr_width;
+		data->width -= (i-1);
+		while (data->width > 0)
+		{
+			save_to_buff('0', data);
+			data->width--;
+		}
+		string_to_buff(s, data);
 	}
-}
-
-void		print_buff(t_flags *data)
-{
-	write(1, data->buff, data->len);
-}
-
-void		string_to_buff(char *s, t_flags *data)
-{
-	while (*s)
+	else if (data->precision >= 0 && !data->minus)
 	{
-		data->buff[data->len++] = *s;
-		s++;
-	}
-}
+		data->width = data->pr_width;
+		data->width -= i;
+		while (data->width > 0)
+		{
+			save_to_buff('0', data);
+			data->width--;
+		}
+		string_to_buff(s, data);
+	}  */

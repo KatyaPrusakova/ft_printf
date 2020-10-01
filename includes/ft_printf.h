@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/30 17:55:27 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/01 18:58:06 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef	struct	s_flags
 
 	char	type;
 	int		width;
+	int		star;
 	int		precision;
 	int		pr_width;
 	int		length;
@@ -57,6 +58,7 @@ typedef	struct	s_flags
 	int		minus;
 	int		space;
 	int		zero;
+	int		negative;
 }				t_flags;
 
 
