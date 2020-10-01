@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/01 19:50:03 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:59:50 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ static void	print_float(t_flags *data)
 	printf("|buff string is %s|", data->buff);
 }
 static void	print_octal(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
-static void	print_hex(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
 }
@@ -163,12 +159,46 @@ static void	print_decimal(t_flags *data)
 
 // printf("precision %s %s\n",new_s, s);
 
+static void	print_hex(t_flags *data)
+{
+	uintmax_t	pointer;
+	char		*p;
+	int			i;
+
+	pointer = va_arg(data->args,uintmax_t);
+	p =  ft_itoa_base(pointer, 16);
+	i = ft_strlen(p);
+	if (data->width && !data->minus && data->precision == -1)
+	{
+		data->width -= i;
+		while (data->width > 0)
+		{
+			save_to_buff(' ', data);
+			data->width--;
+		}
+		string_to_buff(p, data);
+	}
+	else if (data->width > 0 && data->minus == 1 && data->precision == -1)
+	{
+		data->width -= i;
+		string_to_buff(p, data);
+		while (data->width > 0)
+		{
+			save_to_buff(' ', data);
+			data->width--;
+		}
+	}
+	else
+		string_to_buff(p, data);
+	free(p);
+}
+
 static void	switch_type(t_flags *data)
 {
 	char c;
 
 	c = data->str[data->pos];
-	// printf("|print %c|\n\n", c);
+	data->type = data->str[data->pos];
 
 	if (c == 'd' || c == 'i' || c == 'D')
 		print_decimal(data);

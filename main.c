@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/01 19:45:41 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:54:43 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,28 @@ printf("%030.3d|", 8375);
 	   printf("\n");
 	ft_printf("%7d\n", -14);
  */
- printf("\n");
-	printf("%07d", -14);
-	   printf("\n");
-	ft_printf("%07d", -14);
-
 
  printf("\n");
-	printf("%d|", -2375);
+	printf("%X|", 2375);
 	   printf("\n");
-	ft_printf("%d|\n\n", -2375);
+	ft_printf("%X|\n\n", 2375);
+
  printf("\n");
-	 printf("%.*d", -1, 12345);
+	printf("%X|", -2375);
 	   printf("\n");
-	ft_printf("%.*d\n", -1, 12345);
+	ft_printf("%X|\n\n", -2375);
+
+ printf("\n");
+	printf("%07x", -14);
+	   printf("\n");
+	ft_printf("%07x", -14);
+
+
+
+ printf("\n");
+	 printf("%.*X", -1, 12345);
+	   printf("\n");
+	ft_printf("%.*X\n", -1, 12345);
 
 	/* i = printf("\n|real print %s|\n", str);
 	printf("|return %d|\n", i); */
