@@ -135,12 +135,34 @@ static void	print_uint(t_flags *data)
 	}
 }
 
+static	void	check_lenght(t_flags *data)
+{
+
+	else if (data->length = H)
+
+	else if (data->length = HH)
+
+	else if (data->length = L)
+
+	else if (data->length = LL)
+
+	else if (data->length = BL)
+
+	else if (data->length = J)
+
+	else if (data->length = Z)
+
+	else if (data->length = T)
+
+}
+
 static void	print_decimal(t_flags *data)
 {
 	char	*s;
 	int		len;
 	long long	num;
 
+	check_lenght(data);
 	num = va_arg(data->args, int);
 
 	if (num < 0)
