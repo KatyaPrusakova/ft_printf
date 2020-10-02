@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   check_flags.c                                      :+:      :+:    :+:   */
@@ -24,21 +24,23 @@ static void	print_binary(t_flags *data)
 static int	print_width(char *s, int len, t_flags *data)
 {
 	char	width;
-	char *temp;
+	char	*temp;
 
 	temp = ft_memalloc(data->width);
 	temp[0] = '-';
-	if (data->precision != -1 && data->zero)
+	if ((data->precision != -1 && data->zero))
 		data->zero = 0;
 	width = (data->zero > 0 ? '0' : ' ' );
 	if (data->pr_width && data->precision == -1) /* case for (%0*i", 7, -54) */
+	{
 		data->width = (data->pr_width < 0) ? -data->pr_width : data->pr_width;
+	}
 	if (data->negative && data->precision && !data->zero)
 	{
 		s = ft_strjoin(temp, s);
 		data->width--;
 	}
-	if (data->width && !data->minus && data->precision == -1 && !data->pr_width)
+	if (data->width && !data->minus && data->precision == -1)
 	{
 		data->width -= len;
 		if (data->zero && data->negative)
@@ -138,9 +140,9 @@ static void	print_decimal(t_flags *data)
 {
 	char	*s;
 	int		len;
-	int		num;
+	long long	num;
 
-	num = va_arg(data->args,int);
+	num = va_arg(data->args, int);
 
 	if (num < 0)
 	{
@@ -315,6 +317,8 @@ static	void		add_width(t_flags *data)
 	{
 		data->star = TRUE;
 		data->pr_width = va_arg(data->args, int);
+		if (data->pr_width < 0)
+			data->minus = TRUE;
 		data->pos++;
 	}
 }
