@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 15:57:09 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/29 11:58:29 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/02 11:07:25 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int					ft_toupper(int a);
 int					ft_tolower(int a);
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
-char				*ft_itoa_base(uintmax_t num, int base);
+char				*ft_itoa_base(uintmax_t num, int base, int change);
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *ptr, int x, size_t len);

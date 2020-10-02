@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/30 18:20:19 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:10:34 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	print_pointer(t_flags *data)
 	int			i;
 
 	pointer = va_arg(data->args,uintmax_t);
-	p =  ft_strjoin("0x", ft_itoa_base(pointer, 16));
+	p =  ft_strjoin("0x", ft_itoa_base(pointer, 16, 0));
 	i = ft_strlen(p);
 	if (data->width && !data->minus && data->precision == -1)
 	{

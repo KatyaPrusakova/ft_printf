@@ -6,22 +6,13 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/01 19:59:50 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:16:38 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 static void	print_float(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
-static void	print_octal(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
-
-static void	print_uint(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
 }
@@ -40,12 +31,14 @@ static int	print_width(char *s, int len, t_flags *data)
 	if (data->precision != -1 && data->zero)
 		data->zero = 0;
 	width = (data->zero > 0 ? '0' : ' ' );
+	if (data->pr_width && data->precision == -1) /* case for (%0*i", 7, -54) */
+		data->width = (data->pr_width < 0) ? -data->pr_width : data->pr_width;
 	if (data->negative && data->precision && !data->zero)
 	{
 		s = ft_strjoin(temp, s);
 		data->width--;
 	}
-	if (data->width && !data->minus && data->precision == -1)
+	if (data->width && !data->minus && data->precision == -1 && !data->pr_width)
 	{
 		data->width -= len;
 		if (data->zero && data->negative)
@@ -115,18 +108,40 @@ static char	*print_precision(char *s, int len, int num, t_flags *data)
 	return (s);
 }
 
+static void	print_uint(t_flags *data)
+{
+	char	*s;
+	int		len;
+	unsigned int		num;
+
+	num = va_arg(data->args, unsigned int);
+	if (data->minus && data->zero)
+		data->zero = 0;
+	s = ft_itoa_base(num, 10, 0);
+	if (!s)
+		s = "(null)";
+	len = ft_strlen(s);
+	s = ft_strdup(s);
+	if (data->precision != -1 && !data->pr_width && !data->width)
+		return ;
+	if (data->precision > 0)
+		s = print_precision(s, len, num, data);
+	if (print_width(s, len, data))
+		return ;
+	else
+	{
+		string_to_buff(s, data);
+	}
+}
+
 static void	print_decimal(t_flags *data)
 {
 	char	*s;
 	int		len;
-	char	*new_s;
-	char	*temp;
 	int		num;
 
-	temp = ft_memalloc(data->width);
-	new_s = ft_memalloc(data->pr_width + data->width);
-
 	num = va_arg(data->args,int);
+
 	if (num < 0)
 	{
 		data->negative = TRUE;
@@ -134,11 +149,9 @@ static void	print_decimal(t_flags *data)
 	}
 	if (data->minus && data->zero)
 		data->zero = 0;
-	s = ft_itoa(num);
+	s = ft_itoa_base(num, 10, 0);
 	if (!s)
-	{
 		s = "(null)";
-	}
 	len = ft_strlen(s);
 	s = ft_strdup(s);
 	if (data->precision != -1 && !data->pr_width && !data->width)
@@ -153,8 +166,6 @@ static void	print_decimal(t_flags *data)
 			save_to_buff('-', data);
 		string_to_buff(s, data);
 	}
-	free(temp);
-	free(new_s);
 }
 
 // printf("precision %s %s\n",new_s, s);
@@ -163,62 +174,77 @@ static void	print_hex(t_flags *data)
 {
 	uintmax_t	pointer;
 	char		*p;
-	int			i;
+	int			len;
 
 	pointer = va_arg(data->args,uintmax_t);
-	p =  ft_itoa_base(pointer, 16);
-	i = ft_strlen(p);
-	if (data->width && !data->minus && data->precision == -1)
-	{
-		data->width -= i;
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-		string_to_buff(p, data);
-	}
-	else if (data->width > 0 && data->minus == 1 && data->precision == -1)
-	{
-		data->width -= i;
-		string_to_buff(p, data);
-		while (data->width > 0)
-		{
-			save_to_buff(' ', data);
-			data->width--;
-		}
-	}
+	p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1);
+	len = ft_strlen(p);
+	if (data->minus && data->zero)
+		data->zero = 0;
+	if (data->precision != -1 && !data->pr_width && !data->width)
+		return ;
+	if (data->precision > 0)
+		p = print_precision(p, len, pointer, data);
+	if (print_width(p, len, data))
+		return ;
 	else
+	{
+		if (data->negative)
+			save_to_buff('-', data);
 		string_to_buff(p, data);
+	}
 	free(p);
 }
 
+static void	print_octal(t_flags *data)
+{
+	uintmax_t	pointer;
+	char		*p;
+	int			len;
+
+	pointer = va_arg(data->args,uintmax_t);
+	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1);
+	len = ft_strlen(p);
+	if (data->minus && data->zero)
+		data->zero = 0;
+	if (data->precision != -1 && !data->pr_width && !data->width)
+		return ;
+	if (data->precision > 0)
+		p = print_precision(p, len, pointer, data);
+	if (print_width(p, len, data))
+		return ;
+	else
+	{
+		if (data->negative)
+			save_to_buff('-', data);
+		string_to_buff(p, data);
+	}
+	free(p);
+}
+
+
 static void	switch_type(t_flags *data)
 {
-	char c;
-
-	c = data->str[data->pos];
 	data->type = data->str[data->pos];
-
-	if (c == 'd' || c == 'i' || c == 'D')
+	if (data->type == 'd' || data->type == 'i' || data->type == 'D')
 		print_decimal(data);
-	else if (c == 'c' || c == 'C')
+	else if (data->type == 'c' || data->type == 'C')
 		print_char(data);
-	else if (c == 's' || c == 'S')
+	else if (data->type == 's' || data->type == 'S')
 		print_string(data);
-	else if (c == 'p' || c == 'P')
+	else if (data->type == 'p' || data->type == 'P')
 		print_pointer(data);
-	else if (c == 'f' || c == 'F')
+	else if (data->type == 'f' || data->type == 'F')
 		print_float(data);
-	else if (c == 'x' || c == 'X')
+	else if (data->type == 'x' || data->type == 'X')
 		print_hex(data);
-	else if (c == 'u' || c == 'U')
+	else if (data->type == 'u' || data->type == 'U')
 		print_uint(data);
-	else if (c == 'o' || c == 'O')
+	else if (data->type == 'o' || data->type == 'O')
 		print_octal(data);
-	else if (c == 'b' || c == 'B')
+	else if (data->type == 'b' || data->type == 'B')
 		print_binary(data);
-	else if (c == '%')
+	else if (data->type == '%')
 		print_percent(data);
 	else
 		return ;
@@ -284,6 +310,12 @@ static	void		add_width(t_flags *data)
 				data->pos++;
 		}
 		data->width = ft_atoi(s);
+	}
+	if (data->str[data->pos] == '*')
+	{
+		data->star = TRUE;
+		data->pr_width = va_arg(data->args, int);
+		data->pos++;
 	}
 }
 

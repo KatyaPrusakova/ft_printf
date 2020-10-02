@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/09/30 18:27:23 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:04:19 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	{
 		save_to_buff('-', data);
 		s = ft_strsub(s, 1, (i-1));
-		data->width = data->pr_width;
+		data->width = data->star_width;
 		data->width -= (i-1);
 		while (data->width > 0)
 		{
@@ -28,7 +28,7 @@
 	}
 	else if (data->precision >= 0 && !data->minus)
 	{
-		data->width = data->pr_width;
+		data->width = data->star_width;
 		data->width -= i;
 		while (data->width > 0)
 		{

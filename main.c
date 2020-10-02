@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/01 19:54:43 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:03:42 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ printf("%030.3d|", 8375);
 	ft_printf("%7d\n", -14);
  */
 
- printf("\n");
+/*  printf("\n");
 	printf("%X|", 2375);
 	   printf("\n");
 	ft_printf("%X|\n\n", 2375);
@@ -69,12 +69,83 @@ printf("%030.3d|", 8375);
 	   printf("\n");
 	ft_printf("%07x", -14);
 
-
-
  printf("\n");
 	 printf("%.*X", -1, 12345);
 	   printf("\n");
 	ft_printf("%.*X\n", -1, 12345);
+ */
+/*
+ printf("\n");
+	printf("%O|", 2375);
+	   printf("\n");
+	ft_printf("%O|\n\n", 2375);
+
+ printf("\n");
+	printf("%o|", -2375);
+	   printf("\n");
+	ft_printf("%o|\n\n", -2375);
+
+ printf("\n");
+	printf("%07o", -14);
+	   printf("\n");
+	ft_printf("%07o", -14);
+
+ printf("\n");
+	 printf("%.*O", -1, 12345);
+	   printf("\n");
+	ft_printf("%.*O\n", -1, 12345);
+
+	 printf("\n");π
+	printf("%u|", 2375);
+	   printf("\n");
+	ft_printf("%u|\n\n", 2375);
+
+ printf("\n");
+	printf("%u|", -2375);
+	   printf("\n");
+	ft_printf("%u|\n\n", -2375);
+
+ printf("\n");
+	printf("%07u", -14);
+	   printf("\n");
+	ft_printf("%07u", -14);
+
+ printf("\n");
+	 printf("%.*u", -1, 12345);
+	   printf("\n");
+	ft_printf("%.*u\n", -1, 12345);
+ */
+
+/* 	 printf("\n");
+	printf("%i|", -2147483648);
+	   printf("\n");
+	ft_printf("%i|\n\n", -2147483648);
+
+ printf("\n");
+	printf("%u|", -2375);
+	   printf("\n");
+	ft_printf("%u|\n\n", -2375);
+ */
+
+ printf("\n");
+	printf("%0*i|", -7, -54);
+	   printf("\n");
+	ft_printf("%0*i|", -7, -54);
+
+ printf("\n");
+	printf("%i", 2147483658);
+	   printf("\n");
+	ft_printf("%i",2147483658);
+
+ printf("\n");
+	printf("%0*i", 7, -54);
+	   printf("\n");
+	ft_printf("%0*i", 7, -54);
+
+ printf("\n");
+	printf("%*i", -4, 94827);
+	   printf("\n");
+	ft_printf("%*i", -4, 94827);
 
 	/* i = printf("\n|real print %s|\n", str);
 	printf("|return %d|\n", i); */
