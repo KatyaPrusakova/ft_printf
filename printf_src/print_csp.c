@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/02 14:10:34 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/02 20:26:50 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,23 @@ void	print_string(t_flags *data)
 	char	*s;
 	int		i;
 
-	s = (char*)va_arg(data->args,char*);
+	s = va_arg(data->args,char*);
 	if (!s)
 	{
 		s = "(null)";
 	}
-	if (data->pr_width <= -1)
+	if (data->pr_width <= -1 && !data->width)
 	{
 		string_to_buff(s, data);
 		return ;
 	}
 	s = ft_strdup(s);
 	i = ft_strlen(s);
+	if (data->width < 0 || data->pr_width < 0)
+	{
+		data->width = -data->width;
+		data->pr_width = i;
+	}
 	if (data->width && !data->minus && data->precision == -1)
 	{
 		data->width -= i;
@@ -50,10 +55,10 @@ void	print_string(t_flags *data)
 			data->width--;
 		}
 	}
-	else if (data->width > 0 && !data->minus && data->precision >= 0)
+	else if (data->width && !data->minus && data->precision)
 	{
 		if (data->pr_width >= i)
-			data->width -= i;
+			 data->width -= i;
 		else
 			data->width -= data->pr_width;
 		while (data->width > 0)
@@ -64,7 +69,7 @@ void	print_string(t_flags *data)
 		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
 		string_to_buff(s, data);
 	}
-	else if (data->width > 0 && data->minus == 1 && data->precision >= 0)
+	else if (data->width && data->minus == 1 && data->precision)
 	{
 		if (data->pr_width >= i)
 			data->width -= i;

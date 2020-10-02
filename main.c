@@ -6,11 +6,12 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/02 16:04:11 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/02 20:52:23 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
+#include <limits.h>
 
 int		main(void)
 {
@@ -48,11 +49,38 @@ printf("%030.3d|", 8375);
 	   printf("\n");
 	ft_printf("%0-8.3d|\n", 8375);
  printf("\n"); */
-/*
- 	printf("%7d", -14);
+
+ 	printf("%lld", 9223372036854775807);
 	   printf("\n");
-	ft_printf("%7d\n", -14);
- */
+ ft_printf("%lld\n", 9223372036854775807);
+
+ 	printf("%ld", 9223372036854775807);
+	   printf("\n");
+ ft_printf("%ld\n", 9223372036854775807);
+
+ 	printf("%Ld", 9223372036854775807);
+	   printf("\n");
+ ft_printf("%Ld\n", 9223372036854775807);
+
+	printf("%hd", 9223372036854775807);
+	   printf("\n");
+ ft_printf("%hd\n", 9223372036854775807);
+
+ printf("%hhd", 9223372036854775807);
+	   printf("\n");
+ ft_printf("%hhd\n", 9223372036854775807);
+
+printf("%jd", 9223372036854775807);
+	   printf("\n");
+ ft_printf("%jd\n", 9223372036854775807);
+
+ printf("%zd", 9223372036854775807);
+	   printf("\n");
+ ft_printf("%zd\n", 9223372036854775807);
+
+ printf("%td", 9223372036854775807);
+	   printf("\n");
+ ft_printf("%td\n", 9223372036854775807);
 
 /*  printf("\n");
 	printf("%X|", 2375);
@@ -115,7 +143,7 @@ printf("%030.3d|", 8375);
 	   printf("\n");
 	ft_printf("%.*u\n", -1, 12345);
  */
-
+/*
 	 printf("\n");
 	printf("%i|", -2147483648);
 	   printf("\n");
@@ -145,10 +173,22 @@ printf("%030.3d|", 8375);
  printf("\n");
 	printf("%*i", -4, 94827);
 	   printf("\n");
-	ft_printf("%*i", -4, 94827);
-
-	/* i = printf("\n|real print %s|\n", str);
-	printf("|return %d|\n", i); */
+	ft_printf("%*i", -4, 94827); */
+/*
+	printf("%-*s|\n", 32, "abc");
+	ft_printf("%-*s|\n", 32, "abc"); */
+/*
+	printf("%-*.*s|\n", -7, -3, "yolo");
+	ft_printf("%-*.*s|\n", -7, -3, "yolo");
+ */
+	   // printf("%s", "Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoir");
+	//  ft_printf("%s", "Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoir");
+/*
+ printf("\n");
+	printf("%% *.5i 42 == |% *.5i|", 4, 42);
+	   printf("\n");
+	ft_printf("%% *.5i 42 == |% *.5i|\n", 4, 42);
+ */
 }
 
 
