@@ -110,32 +110,6 @@ static char	*print_precision(char *s, int len, int num, t_flags *data)
 	return (s);
 }
 
-static void	print_uint(t_flags *data)
-{
-	char	*s;
-	int		len;
-	unsigned int		num;
-
-	num = va_arg(data->args, unsigned int);
-	if (data->minus && data->zero)
-		data->zero = 0;
-	s = ft_itoa_base(num, 10, 0);
-	if (!s)
-		s = "(null)";
-	len = ft_strlen(s);
-	s = ft_strdup(s);
-	if (data->precision != -1 && !data->pr_width && !data->width)
-		return ;
-	if (data->precision > 0)
-		s = print_precision(s, len, num, data);
-	if (print_width(s, len, data))
-		return ;
-	else
-	{
-		string_to_buff(s, data);
-	}
-}
-
 static	void	check_lenght(t_flags *data, long long *number)
 {
 	if (data->length == H)
@@ -152,9 +126,30 @@ static	void	check_lenght(t_flags *data, long long *number)
 		*number = (intmax_t)va_arg(data->args, intmax_t);
 	else if (data->length == Z)
 		*number = (size_t)va_arg(data->args, size_t);
-/* 	else if (data->length == T)
-		number = va_arg(data->args, ptrdiff_t); */
+	else
+		*number = (int)va_arg(data->args, int);
 }
+
+static	void	check_unsigned_lenght(t_flags *data, long long *number)
+{
+	if (data->length == H)
+		*number = (unsigned short int)va_arg(data->args, int);
+	else if (data->length == HH)
+		*number = (unsigned char)va_arg(data->args, unsigned int);
+	else if (data->length == L)
+		*number = (unsigned long int)va_arg(data->args, unsigned long int);
+	else if (data->length == LL)
+		*number = (unsigned long long int)va_arg(data->args, unsigned long long int);
+	/* else if (data->length == BL)
+		return (va_arg(data->args, unsigned long double)); */
+	else if (data->length == J)
+		*number = (uintmax_t)va_arg(data->args, uintmax_t);
+	else if (data->length == Z)
+		*number = (size_t)va_arg(data->args, size_t);
+	else
+		*number = (unsigned int)va_arg(data->args, unsigned int);
+}
+
 
 static void	print_decimal(t_flags *data)
 {
@@ -162,10 +157,7 @@ static void	print_decimal(t_flags *data)
 	int		len;
 	long long	num;
 
-	if (data->length > 0)
-		check_lenght(data, &num);
-	else
-		num = va_arg(data->args, int);
+	check_lenght(data, &num);
 	if (num < 0)
 	{
 		data->negative = TRUE;
@@ -198,12 +190,14 @@ static void	print_decimal(t_flags *data)
 
 static void	print_hex(t_flags *data)
 {
-	uintmax_t	pointer;
+	long long		pointer;
 	char		*p;
 	int			len;
 
-	pointer = va_arg(data->args,uintmax_t);
+	check_unsigned_lenght(data, &pointer);
 	p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1);
+	if (data->hash)
+		p = (data->type == 'x') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
 	len = ft_strlen(p);
 	if (data->minus && data->zero)
 		data->zero = 0;
@@ -224,12 +218,14 @@ static void	print_hex(t_flags *data)
 
 static void	print_octal(t_flags *data)
 {
-	uintmax_t	pointer;
+	long long		pointer;
 	char		*p;
 	int			len;
 
-	pointer = va_arg(data->args,uintmax_t);
+	check_unsigned_lenght(data, &pointer);
 	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1);
+	if (data->hash)
+		p = (data->type == 'o') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
 	len = ft_strlen(p);
 	if (data->minus && data->zero)
 		data->zero = 0;
@@ -248,6 +244,31 @@ static void	print_octal(t_flags *data)
 	free(p);
 }
 
+static void	print_uint(t_flags *data)
+{
+	char	*s;
+	int		len;
+	long long		num;
+
+	check_unsigned_lenght(data, &num);
+	if (data->minus && data->zero)
+		data->zero = 0;
+	s = ft_itoa_base(num, 10, 0);
+	if (!s)
+		s = "(null)";
+	len = ft_strlen(s);
+	s = ft_strdup(s);
+	if (data->precision != -1 && !data->pr_width && !data->width)
+		return ;
+	if (data->precision > 0)
+		s = print_precision(s, len, num, data);
+	if (print_width(s, len, data))
+		return ;
+	else
+	{
+		string_to_buff(s, data);
+	}
+}
 
 static void	switch_type(t_flags *data)
 {

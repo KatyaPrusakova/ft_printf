@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/05 11:48:59 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/05 16:42:00 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define LENGTH		"hlLzjt"
 # define FLAGS		"#0-+ .*0123456789hlLzjt"
 # define CASE		"#0-+ .*0123456789hlLzjtcspdiouxXf" /* % separate case */
+# define OX			"0x"
+# define BIGOX		"0X"
 
 # define SIZE 1024
 # define TRUE 1
