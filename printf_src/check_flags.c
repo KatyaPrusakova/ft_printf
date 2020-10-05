@@ -106,6 +106,7 @@ static char	*print_precision(char *s, int len, int num, t_flags *data)
 	}
 	if (data->pr_width == 0 && num == 0)
 		s = " ";
+
 	return (s);
 }
 
@@ -135,25 +136,24 @@ static void	print_uint(t_flags *data)
 	}
 }
 
-static	void	check_lenght(t_flags *data)
+static	void	check_lenght(t_flags *data, long long *number)
 {
-
-	else if (data->length = H)
-
-	else if (data->length = HH)
-
-	else if (data->length = L)
-
-	else if (data->length = LL)
-
-	else if (data->length = BL)
-
-	else if (data->length = J)
-
-	else if (data->length = Z)
-
-	else if (data->length = T)
-
+	if (data->length == H)
+		*number = (short int)va_arg(data->args, int);
+	else if (data->length == HH)
+		*number = (signed char)va_arg(data->args, signed char*);
+	else if (data->length == L)
+		*number = (long int)va_arg(data->args, long int);
+	else if (data->length == LL)
+		*number = (long long int)va_arg(data->args, long long int);
+	/* else if (data->length == BL)
+		return (va_arg(data->args, long double)); */
+	else if (data->length == J)
+		*number = (intmax_t)va_arg(data->args, intmax_t);
+	else if (data->length == Z)
+		*number = (size_t)va_arg(data->args, size_t);
+/* 	else if (data->length == T)
+		number = va_arg(data->args, ptrdiff_t); */
 }
 
 static void	print_decimal(t_flags *data)
@@ -162,9 +162,10 @@ static void	print_decimal(t_flags *data)
 	int		len;
 	long long	num;
 
-	check_lenght(data);
-	num = va_arg(data->args, int);
-
+	if (data->length > 0)
+		check_lenght(data, &num);
+	else
+		num = va_arg(data->args, int);
 	if (num < 0)
 	{
 		data->negative = TRUE;
@@ -172,7 +173,7 @@ static void	print_decimal(t_flags *data)
 	}
 	if (data->minus && data->zero)
 		data->zero = 0;
-	if (data->space)
+	if (data->space && !data->negative)
 		save_to_buff(' ', data);
 	s = ft_itoa_base(num, 10, 0);
 	if (!s)

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/02 20:26:50 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/05 11:17:53 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_string(t_flags *data)
 	char	*s;
 	int		i;
 
-	s = va_arg(data->args,char*);
+	s = (char*)va_arg(data->args,char*);
 	if (!s)
 	{
 		s = "(null)";
