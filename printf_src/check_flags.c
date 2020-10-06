@@ -115,8 +115,6 @@ static	void	check_lenght(t_flags *data, long long *number)
 		*number = (long int)va_arg(data->args, long int);
 	else if (data->length == LL)
 		*number = (long long int)va_arg(data->args, long long int);
-	/* else if (data->length == BL)
-		return (va_arg(data->args, long double)); */
 	else if (data->length == J)
 		*number = (intmax_t)va_arg(data->args, intmax_t);
 	else if (data->length == Z)
@@ -135,8 +133,6 @@ static	void	check_unsigned_lenght(t_flags *data, long long *number)
 		*number = (unsigned long int)va_arg(data->args, unsigned long int);
 	else if (data->length == LL)
 		*number = (unsigned long long int)va_arg(data->args, unsigned long long int);
-	/* else if (data->length == BL)
-		return (va_arg(data->args, unsigned long double)); */
 	else if (data->length == J)
 		*number = (uintmax_t)va_arg(data->args, uintmax_t);
 	else if (data->length == Z)
@@ -272,9 +268,24 @@ static void	print_uint(t_flags *data)
 	}
 }
 
+static void		check_float(t_flags *data, double *number)
+{
+	long double num;
+
+	if (data->length == BL)
+		num = (long double)va_arg(data->args, long double);
+	else
+		*number = (double)va_arg(data->args, double);
+
+}
+
 static void	print_float(t_flags *data)
 {
-	printf("|buff string is %s|", data->buff);
+	double	num;
+
+	check_float(data, &num);
+	if (data->pr_width == 1)
+
 }
 
 static void	switch_type(t_flags *data)

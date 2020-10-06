@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/05 16:13:35 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/06 20:59:12 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ printf("%030.3d|", 8375);
 	   printf("\n");
  ft_printf("% hhd\n", (char)(-32));
  */
-
+/*
 	printf("minus values\n\n");
 	printf("%i%lli%hhi", i_pos_1, ll_neg_1, ch_pos_1);
 	   printf("\n\n");
@@ -104,7 +104,7 @@ printf("%030.3d|", 8375);
  printf("%llu", 9223372036854775807);
 	   printf("\n\n");
  ft_printf("%llu\n", 9223372036854775807);
-
+ */
 /*
  printf("%hhd", (signed char)(-32768));
 	   printf("\n");
@@ -234,6 +234,50 @@ printf("%jd", 9223372036854775807);
 	printf("%% *.5i 42 == |% *.5i|", 4, 42);
 	   printf("\n");
 	ft_printf("%% *.5i 42 == |% *.5i|\n", 4, 42); */
+
+printf("'%.20f'", 10.3456);
+printf("\n");
+ft_printf("'%.1f'", 10.3456);
+printf("\n");
+printf("\n");
+
+printf("'%.1f'", 10.5456);
+printf("\n");
+ft_printf("'%.1f'", 10.5456);
+printf("\n");
+printf("\n");
+
+printf("'%.2f'", 0.111);
+printf("\n");
+ft_printf("'%.2f'", 0.111);
+printf("\n");
+printf("\n");
+
+printf("'%.2f'", 10.3456);
+printf("\n");
+ft_printf("'%.2f'", 10.3456);
+printf("\n");
+printf("\n");
+
+printf("'%.1f'", 0.42);
+printf("\n");
+ft_printf("'%.1f'", 0.42);
+printf("\n");
+printf("\n");
+
+printf("'%8.2f'", 10.3456);
+printf("\n");
+ft_printf("'%8.2f'", 10.3456);
+printf("\n");
+printf("\n");
+printf("'%8.4f'", 10.3456);
+printf("\n");
+ft_printf("'%8.4f'", 10.3456);
+printf("\n");
+printf("\n");
+printf("'%-8.2f'", 10.3456);
+printf("\n");
+ft_printf("'%-8.2f'", 10.3456);
 
 }
 
