@@ -12,10 +12,6 @@
 
 #include "ft_printf.h"
 
-static void	print_float(t_flags *data)
-{
-	printf("|buff string is %s|", data->buff);
-}
 static void	print_binary(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
@@ -27,7 +23,6 @@ static int	print_width(char *s, int len, t_flags *data)
 	char	*temp;
 
 	data->width = (data->width < 0) ? -data->width : data->width;
-
 	temp = ft_memalloc(data->width);
 	temp[0] = '-';
 	if ((data->precision != -1 && data->zero))
@@ -167,6 +162,8 @@ static void	print_decimal(t_flags *data)
 		data->zero = 0;
 	if (data->space && !data->negative)
 		save_to_buff(' ', data);
+	if (data->plus)
+		save_to_buff('+', data);
 	s = ft_itoa_base(num, 10, 0);
 	if (!s)
 		s = "(null)";
@@ -196,11 +193,16 @@ static void	print_hex(t_flags *data)
 
 	check_unsigned_lenght(data, &pointer);
 	p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1);
-	if (data->hash)
+	if (data->hash && !data->zero)
 		p = (data->type == 'x') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
 	len = ft_strlen(p);
 	if (data->minus && data->zero)
 		data->zero = 0;
+	if (data->hash && data->width && data->zero)
+	{
+		data->type == 'x' ? string_to_buff(OX, data) : string_to_buff(BIGOX, data) ;
+		data->width -= 2;
+	}
 	if (data->precision != -1 && !data->pr_width && !data->width)
 		return ;
 	if (data->precision > 0)
@@ -268,6 +270,11 @@ static void	print_uint(t_flags *data)
 	{
 		string_to_buff(s, data);
 	}
+}
+
+static void	print_float(t_flags *data)
+{
+	printf("|buff string is %s|", data->buff);
 }
 
 static void	switch_type(t_flags *data)
