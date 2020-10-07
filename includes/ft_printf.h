@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/05 16:42:00 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/07 13:41:17 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	print_string(t_flags *data);
 void		string_to_buff(char *s, t_flags *data);
 void		print_buff(t_flags *data);
 void		save_to_buff(char c, t_flags *data);
+int     ft_itoa_float(double number, int pr_width);
 
 void	reset(t_flags *data);
 

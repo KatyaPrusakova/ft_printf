@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/06 20:59:12 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/07 13:38:03 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,11 @@ printf("%jd", 9223372036854775807);
 
 printf("'%.20f'", 10.3456);
 printf("\n");
-ft_printf("'%.1f'", 10.3456);
+
+printf("\t test start \n");
+printf("'%.2f'", 10.3456);
+printf("\n");
+ft_printf("'%.2f'", 10.3456);
 printf("\n");
 printf("\n");
 

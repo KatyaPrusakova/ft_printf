@@ -282,10 +282,11 @@ static void		check_float(t_flags *data, double *number)
 static void	print_float(t_flags *data)
 {
 	double	num;
-
+	char	*str = NULL;
 	check_float(data, &num);
 	if (data->pr_width == 1)
-
+		str = ft_itoa_float(num, (*data)->pr_width);
+	string_to_buff(str, data);
 }
 
 static void	switch_type(t_flags *data)
