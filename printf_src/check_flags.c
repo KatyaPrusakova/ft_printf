@@ -284,8 +284,7 @@ static void	print_float(t_flags *data)
 	double	num;
 	char	*str = NULL;
 	check_float(data, &num);
-	if (data->pr_width == 1)
-		str = ft_itoa_float(num, (*data)->pr_width);
+	str = ft_itoa_float(num, data);
 	string_to_buff(str, data);
 }
 
@@ -331,25 +330,15 @@ static int	scan_type(t_flags *data)
 int			add_flags(t_flags *data)
 {
 		if (data->str[data->pos] == '-')
-		{
 			data->minus = TRUE;
-		}
 		else if (data->str[data->pos] == '+')
-			{
 				data->plus = TRUE;
-			}
 		else if (data->str[data->pos] == ' ')
-			{
 				data->space = TRUE;
-			}
 		else if (data->str[data->pos] == '#')
-			{
 				data->hash = TRUE;
-			}
 		else if (data->str[data->pos] == '0') /* maybe to delete */
-			{
 				data->zero = TRUE;
-			}
 		else
 			return (0);
 		return (1);

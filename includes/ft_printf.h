@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/07 13:41:17 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/07 19:16:05 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef	struct	s_flags
 
 
 
+
 void	parse_menu(t_flags *data);
 int		add_flags(t_flags *data);
 // void	parse_flags(t_flags *data);
@@ -78,7 +79,7 @@ void	print_string(t_flags *data);
 void		string_to_buff(char *s, t_flags *data);
 void		print_buff(t_flags *data);
 void		save_to_buff(char c, t_flags *data);
-int     ft_itoa_float(double number, int pr_width);
+char*     ft_itoa_float(double number, t_flags *data);
 
 void	reset(t_flags *data);
 

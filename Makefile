@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/15 11:04:15 by eprusako          #+#    #+#              #
-#    Updated: 2020/10/07 13:41:04 by eprusako         ###   ########.fr        #
+#    Updated: 2020/10/07 16:26:43 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ DIR_OBJ = obj_dir
 HEADER = includes
 
 MAIN =	main.c
-SRC =	check_flags.c ft_printf.c print_csp.c print_buff.c itoa_float.c\
+SRC =	check_flags.c ft_printf.c print_csp.c print_buff.c ft_ftoa.c\
 
 YELLOW = "\033[1;33m"
 NOCOLOR = "\033[0m"
