@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/08 10:58:51 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/08 12:24:14 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,61 @@ printf("%jd", 9223372036854775807);
 	   printf("\n");
 	ft_printf("%.*X\n", -1, 12345);
  */
+
+/*  printf("%#08.3x|", 8375);
+	   printf("\n");
+	ft_printf("%#08.3x|", 8375);
+	printf("\n");
+ printf("\n");
+
+  printf("%#08.5X", 34);
+	   printf("\n");
+	ft_printf("%#08.5X", 34);
+	printf("\n");
+ printf("\n");
+ */
+/*  printf("%#x", 3);
+	   printf("\n");
+	ft_printf("%#x", 3);
+	printf("\n");
+ printf("\n");
+ */
+	 printf("%#8.5x", 34);
+	   printf("\n");
+	ft_printf("%#8.5x", 34);
+	printf("\n");
+ printf("\n");
+
+ printf("%#05x", 43);
+	   printf("\n");
+	ft_printf("%#05x", 43);
+	printf("\n");
+ printf("\n");
+
+	printf("%#3x", 0);
+	   printf("\n");
+	ft_printf("%#3x", 0);
+ printf("\n");
+ printf("\n");
+	printf("%#5.x|", 0);
+	   printf("\n");
+	ft_printf("%#5.x|", 0);
+ printf("\n");
+ printf("\n");
+	printf("%#03x", 0);
+	   printf("\n");
+	ft_printf("%#03x", 0);
+ printf("\n");
+ printf("\n");
+	 printf("%#8.5x", 34);
+	   printf("\n");
+	ft_printf("%#8.5x", 34);
+ printf("\n");
+ printf("\n");
+	 printf("%#08.5x", 0);
+	   printf("\n");
+	ft_printf("%#08.5x", 0);
+	printf("\n");
 /*
  printf("\n");
 	printf("%O|", 2375);
@@ -242,6 +297,17 @@ ft_printf("'%.5f'", 99.999999);
 printf("\n");
  */
 
+
+/* FLOATTTTTTTT */
+/*
+printf("%.*f", -3, 3.1415926535);
+printf("\n");
+ft_printf("%.*f", -3, 3.1415926535);
+printf("\n");
+printf("\n");
+
+
+
 printf("\t test start \n");
 printf("'%.0f'", 10.3456);
 printf("\n");
@@ -286,7 +352,7 @@ printf("\n");
 printf("'%-8.2f'", 10.3456);
 printf("\n");
 ft_printf("'%-8.2f'", 10.3456);
-
+ */
 }
 
 

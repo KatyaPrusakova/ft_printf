@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/08 11:05:00 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/08 11:26:26 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char		*ft_itoa_float(double number, t_flags *data)
 		sign = 1;
 	}
 	temp = number;
-	if (pr_w == 0)
+	if (pr_w == 0 && !data->hash)
 	{
 		return (ft_itoa_base((uintmax_t)temp, 10, 0));
 	}

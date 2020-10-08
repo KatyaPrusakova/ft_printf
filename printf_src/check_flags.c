@@ -181,6 +181,25 @@ static void	print_decimal(t_flags *data)
 
 // printf("precision %s %s\n",new_s, s);
 
+static char *print_hash(char *p, t_flags *data)
+{
+	if (data->hash && data->width && data->zero)
+	{
+		if (data->pr_width)
+			p = (data->type == 'x') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
+		else
+			data->type == 'x' ? string_to_buff(OX, data) : string_to_buff(BIGOX, data) ;
+		data->width -= 2;
+	}
+	if (data->hash && !data->zero)
+	{
+		p = (data->type == 'x') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
+		if (data->width > 0)
+			data->width -= 2;
+	}
+	return (p);
+}
+
 static void	print_hex(t_flags *data)
 {
 	long long		pointer;
@@ -189,20 +208,18 @@ static void	print_hex(t_flags *data)
 
 	check_unsigned_lenght(data, &pointer);
 	p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1);
-	if (data->hash && !data->zero)
-		p = (data->type == 'x') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
+
 	len = ft_strlen(p);
 	if (data->minus && data->zero)
 		data->zero = 0;
-	if (data->hash && data->width && data->zero)
-	{
-		data->type == 'x' ? string_to_buff(OX, data) : string_to_buff(BIGOX, data) ;
-		data->width -= 2;
-	}
+	if (*p == '0')
+		data->hash = 0;
 	if (data->precision != -1 && !data->pr_width && !data->width)
 		return ;
 	if (data->precision > 0)
 		p = print_precision(p, len, pointer, data);
+	if (data->hash > 0)
+		p = print_hash(p, data);
 	if (print_width(p, len, data))
 		return ;
 	else
