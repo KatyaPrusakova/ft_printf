@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/08 11:26:26 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/09 18:32:08 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,56 @@
 
 #include "ft_printf.h"
 
-char		*ft_itoa_float(double number, t_flags *data)
+static	char	*ft_sign(long double *number)
 {
-	char			*str;
-	char			*pr;
-	int				sign = 0;
-	uintmax_t		temp;
-	int				pr_w;
-	double			round_up;
-	int				real_number;
-	int				pr_width;
-
-	pr_w = data->pr_width;
-	pr_width = data->pr_width;
-	if (number < 0)
+	char * sign;
+	if (( 1 / *number ) < 0)
 	{
-		number = -number;
-		sign = 1;
+		*number *= -1;
+		sign = ft_strnew(1);
+		sign[0] = '-';
+		return (sign);
 	}
-	temp = number;
-	if (pr_w == 0 && !data->hash)
-	{
-		return (ft_itoa_base((uintmax_t)temp, 10, 0));
-	}
-	pr = ft_strnew(pr_width);
-	while (pr_w--)
-	{
-		number *= 10;
-	}
-	real_number = number;
-	number *= 10;
-	round_up = (int)number % 10;
-	number = number - real_number;
-	if (round_up > 4)
-		real_number++;
-	while(pr_width > 0)
-	{
-		pr_width--;
-		pr[pr_width] = (int)real_number % 10 + '0';
-		real_number /= 10;
-	}
-	str = ft_strcat(ft_itoa_base((uintmax_t)temp, 10, 0), ".");
-	if (sign)
-		save_to_buff('-', data);
-	// printf("temp is %s |%s| |%c|\n", str, pr, number_to_change);
-	return (ft_strcat(str,pr));
+	return (0);
 }
-/*
 
-number_to_change = (int)number % 10 + '0';
-	if (number_to_change > '4' && number_to_change <= '9' )
+
+static long double	ft_roundup(int precision, long double f)
+{
+	long double			rounding;
+	unsigned long long	temp;
+
+	rounding = 0.5;
+	temp = f + rounding;
+	if (temp % 2 != 0 && precision == 0)
+		return (0);
+	while (precision--)
+		rounding /= 10;
+	return (rounding);
+}
+
+char				*ft_ftoa(long double f, int precision)
+{
+	unsigned long long	first_part;
+	char				*number;
+	char				*sign;
+	char				*after_dot_part;
+	int					i;
+
+	i = 1;
+	sign = ft_sign(&f);
+	f = f + ft_roundup(precision, f);
+	first_part = f;
+	number = ft_itoa_base(first_part, 10, 0);
+	if (sign)
+		number = ft_strjoin(sign, number);
+	after_dot_part = ft_strnew(precision + 1);
+	after_dot_part[0] = (precision == 0) ? '\0' : '.';
+	while (precision-- > 0)
 	{
-		if (number_to_change == '9')
-			temp += 0.5;
-		else
-			number_to_change++;
-	} */
+		f *= 10;
+		first_part = f;
+		after_dot_part[i++] = first_part % 10 + '0';
+	}
+	return (ft_strjoin(number, after_dot_part));
+}

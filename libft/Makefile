@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/05 14:47:24 by eprusako          #+#    #+#              #
-#    Updated: 2020/09/29 11:58:43 by eprusako         ###   ########.fr        #
+#    Updated: 2020/10/09 19:08:00 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,8 @@ SRC =	ft_bzero.c \
 		ft_strequ.c \
 		ft_strnequ.c \
 		ft_strjoin.c \
+		ft_strcharjoin.c \
+		ft_strjoinfree.c \
 		ft_strsub.c \
 		ft_putendl.c \
 		ft_putchar_fd.c \

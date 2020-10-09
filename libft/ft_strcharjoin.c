@@ -1,15 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_di.c                                         :+:      :+:    :+:   */
+/*   ft_strcharjoin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 15:56:37 by eprusako         ###   ########.fr       */
+/*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
+/*   Updated: 2020/10/09 19:15:46 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
+char		*ft_strcharjoin(int c, const char *s)
+{
+	size_t			len;
+	size_t			i;
+	size_t			j;
+	char			*str;
 
+	i = 0;
+	len = (1 + ft_strlen(s));
+	str = (char *)malloc(sizeof(char) * (len));
+	if (!str)
+		return (NULL);
+	str[0] = (char)c;
+	j = 1;
+	while (s[i] != '\0')
+	{
+		str[j] = s[i];
+		i++;
+		j++;
+	}
+	str[len] = '\0';
+	free((char*)s);
+	return (str);
+}

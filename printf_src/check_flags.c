@@ -285,7 +285,7 @@ static void	print_uint(t_flags *data)
 	}
 }
 
-static void		check_float(t_flags *data, double *number)
+static void		check_float(t_flags *data, long double *number)
 {
 	long double num;
 
@@ -293,16 +293,26 @@ static void		check_float(t_flags *data, double *number)
 		num = (long double)va_arg(data->args, long double);
 	else
 		*number = (double)va_arg(data->args, double);
-
+	if (data->pr_width < 0 && data->precision != -1)
+	{
+				data->pr_width = 0;
+				data->precision = -1;
+	}
+	if (data->pr_width == 0 && data->precision == -1)
+		data->pr_width = 6;
 }
 
 static void	print_float(t_flags *data)
 {
-	double	num;
-	char	*str = NULL;
+	long double	num;
+	char		*str;
+
 	check_float(data, &num);
-	str = ft_itoa_float(num, data);
+	str = ft_ftoa(num, data->pr_width);
+	if (data->plus)
+		str = ft_strcharjoin('+', str);
 	string_to_buff(str, data);
+	data->hash && !data->pr_width ? save_to_buff('.', data) : data->hash ;
 }
 
 static void	switch_type(t_flags *data)
@@ -366,20 +376,14 @@ static	void		add_width(t_flags *data)
 	char	*s;
 	int		i;
 
-	i = 10;
-	s = ft_strnew(i);
-	i =0;
+	i = 0;
+	s = ft_strnew(T);
 	if (ft_isdigit(data->str[data->pos]))
 	{
 		while (ft_isdigit(data->str[data->pos]))
 		{
-			if (data->str[data->pos] == '0')
-			{
-					data->zero = TRUE;
-			}
-				s[i] = data->str[data->pos];
-				i++;
-				data->pos++;
+			data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
+			s[i++] = data->str[data->pos++];
 		}
 		data->width = ft_atoi(s);
 	}
@@ -393,14 +397,18 @@ static	void		add_width(t_flags *data)
 	}
 }
 
+
+
+
+
+
 static	void	add_precision(t_flags *data)
 {
 	char	*s;
 	int		i;
 
-	i = 10;
-	s = ft_strnew(i);
-	i =0;
+	i = 0;
+	s = ft_strnew(T);
 	if (data->str[data->pos] == '.')
 	{
 		data->precision = TRUE;
@@ -414,13 +422,8 @@ static	void	add_precision(t_flags *data)
 		}
 		while (ft_isdigit(data->str[data->pos]))
 		{
-			if (data->str[data->pos] == '0')
-			{
-					data->zero = TRUE;
-			}
-				s[i] = data->str[data->pos];
-				i++;
-				data->pos++;
+			data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
+			s[i++] = data->str[data->pos++];
 		}
 		data->pr_width = ft_atoi(s);
 	}
@@ -457,18 +460,17 @@ static int	parse_flags(t_flags *data)
 	add_width(data);
 	add_precision(data);
 	add_lenght(data);
-	data->printed += scan_type(data);
+	scan_type(data);
 	return (1);
 }
 
-void	parse_menu(t_flags *data)
+int		parse_menu(t_flags *data)
 {
 	while (data->str[data->pos] != '\0')
 	{
 		if (data->str[data->pos] != '%')
 		{
 			save_to_buff(data->str[data->pos], data);
-			data->printed++;
 		}
 		else if (data->str[data->pos] == '%')
 		{
@@ -478,5 +480,5 @@ void	parse_menu(t_flags *data)
 		}
 	data->pos++;
 	}
-	print_buff(data);
+	return (print_buff(data));
 }

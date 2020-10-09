@@ -6,12 +6,16 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/05 11:17:53 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/09 19:58:33 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static void		help_to_print_string(t_flags *data)
+{
+
+}
 
 void	print_string(t_flags *data)
 {
@@ -20,9 +24,7 @@ void	print_string(t_flags *data)
 
 	s = (char*)va_arg(data->args,char*);
 	if (!s)
-	{
 		s = "(null)";
-	}
 	if (data->pr_width <= -1 && !data->width)
 	{
 		string_to_buff(s, data);
@@ -155,7 +157,9 @@ void	print_percent(t_flags *data)
 	char	percent;
 	char	width;
 
- 	width = (data->zero > 0 ? '0' : ' ' );
+	if (data->zero && data->minus)
+		data->zero = 0;
+ 	width = (data->zero > 0 )? '0' : ' ' ;
 	percent = data->str[data->pos];
 	if (data->width && !data->minus && data->precision == -1)
 	{
@@ -173,7 +177,7 @@ void	print_percent(t_flags *data)
 		save_to_buff(percent, data);
 		while (data->width > 0)
 		{
-			save_to_buff(' ', data);
+			save_to_buff(width, data);
 			data->width--;
 		}
 	}
