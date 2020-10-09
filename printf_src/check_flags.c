@@ -240,7 +240,7 @@ static void	print_octal(t_flags *data)
 	check_unsigned_lenght(data, &pointer);
 	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1);
 	if (data->hash)
-		p = (data->type == 'o') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
+		p = ft_strcharjoin('0', p);
 	len = ft_strlen(p);
 	if (data->minus && data->zero)
 		data->zero = 0;

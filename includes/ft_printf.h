@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 19:42:30 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/09 20:42:17 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #include <stdio.h>
 # include "libft.h"
 
-# define SPECIFIERS	"cspdiouxXf%"
+# define SPECIFIERS	"cspdioOuxXf%"
 # define LENGTH		"hlLzjt"
 # define FLAGS		"#0-+ .*0123456789hlLzjt"
-# define CASE		"#0-+ .*0123456789hlLzjtcspdiouxXf" /* % separate case */
+# define CASE		"#0-+ .*0123456789hlLzjtcCsSpdioOuUxXfF" /* % separate case */
 # define OX			"0x"
 # define BIGOX		"0X"
 

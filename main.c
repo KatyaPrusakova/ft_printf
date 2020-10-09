@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 19:54:34 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/09 20:37:56 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,23 @@ static long			lmax	= 9223372036854775807;
 static long			lmin	= -9223372036854775807;
 static long long	llmax = 9223372036854775807;
 static long long	llmin = -9223372036854775807ll;
-
-/* 		printf(" print %05%\n");
+/*
+		printf(" print %05%\n");
 	 ft_printf("fprint %05%\n");
 
-	 	printf(" print %-05%\n");
-	 ft_printf("fprint %-05%\n");
+	printf("%#o\n", 42);
+	ft_printf("%#o\n", 42);
+ */
+	   printf("%#O\n", 3);
+	ft_printf("%#O\n", 3);
+/*
+	printf("%");
+	ft_printf("%");
+
+
+	printf("test to lose your mind\n");
+	printf("print |%-05%|\n");
+	 ft_printf("print |%-05%|\n");
  */
 	/*    printf("|realpri |%10.2s| |%5.1s| |%3.0s| |%6.10s|\n", str, str, str, str);
 	ft_printf("|myprint |%10.2s| |%5.1s| |%3.0s| |%6.10s|\n", str, str, str, str);
