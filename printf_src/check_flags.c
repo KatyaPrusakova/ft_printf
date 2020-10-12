@@ -25,6 +25,12 @@ static int	print_width(char *s, int len, t_flags *data)
 	data->width = (data->width < 0) ? -data->width : data->width;
 	temp = ft_memalloc(data->width);
 	temp[0] = '-';
+	if (data->plus && data->width)
+	{
+		temp[0] = '+';
+		s = ft_strjoin(temp, s);
+		data->width--;
+	}
 	if ((data->precision != -1 && data->zero))
 		data->zero = 0;
 	width = (data->zero > 0 ? '0' : ' ' );
@@ -141,6 +147,26 @@ static	void	check_unsigned_lenght(t_flags *data, long long *number)
 		*number = (unsigned int)va_arg(data->args, unsigned int);
 }
 
+static	void	print_decimal_help(t_flags *data, long long *number)
+{
+	if (*number < 0)
+	{
+		data->negative = TRUE;
+		*number *= -1;
+	}
+	if (data->minus && data->zero)
+		data->zero = 0;
+	if (data->space && !data->negative && !data->plus)
+	{
+		save_to_buff(' ', data);
+		data->width--;
+	}
+	if (data->plus && !data->negative && !data->width)
+	{
+		save_to_buff('+', data);
+		data->width--;
+	}
+}
 
 static void	print_decimal(t_flags *data)
 {
@@ -149,18 +175,9 @@ static void	print_decimal(t_flags *data)
 	long long	num;
 
 	check_lenght(data, &num);
-	if (num < 0)
-	{
-		data->negative = TRUE;
-		num = -num;
-	}
-	if (data->minus && data->zero)
-		data->zero = 0;
-	if (data->space && !data->negative)
-		save_to_buff(' ', data);
-	if (data->plus)
-		save_to_buff('+', data);
+	print_decimal_help(data, &num);
 	s = ft_itoa_base(num, 10, 0);
+
 	if (!s)
 		s = "(null)";
 	len = ft_strlen(s);
@@ -240,7 +257,7 @@ static void	print_octal(t_flags *data)
 	check_unsigned_lenght(data, &pointer);
 	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1);
 	if (data->hash)
-		p = ft_strcharjoin('0', p);
+		*p == '0' ? string_to_buff(p, data) : ft_strcharjoin('0', p) ;
 	len = ft_strlen(p);
 	if (data->minus && data->zero)
 		data->zero = 0;
@@ -380,9 +397,9 @@ static	void		add_width(t_flags *data)
 	s = ft_strnew(T);
 	if (ft_isdigit(data->str[data->pos]))
 	{
+		data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
 		while (ft_isdigit(data->str[data->pos]))
 		{
-			data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
 			s[i++] = data->str[data->pos++];
 		}
 		data->width = ft_atoi(s);
@@ -472,7 +489,7 @@ int		parse_menu(t_flags *data)
 		{
 			save_to_buff(data->str[data->pos], data);
 		}
-		else if (data->str[data->pos] == '%')
+		else if (data->str[data->pos] == '%' && data->str[data->pos+1] != '\0')
 		{
 			data->pos++;
 			reset(data);

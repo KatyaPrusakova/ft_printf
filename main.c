@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 20:37:56 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/12 15:14:36 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,51 @@ static long long	llmin = -9223372036854775807ll;
 
 	printf("%#o\n", 42);
 	ft_printf("%#o\n", 42);
- */
+
 	   printf("%#O\n", 3);
 	ft_printf("%#O\n", 3);
-/*
-	printf("%");
+*/
+/* 	printf("%");
 	ft_printf("%");
+ */
+
+/*
+printf("{%10d}\n", 4);
+ft_printf("{%10d}\n", 4);
+ */
+
+ printf("{%0+5d}\n", 42);
+ft_printf("{%0+5d}\n", 42);
+
+ printf("{%0+5d}\n", -42);
+ft_printf("{%0+5d}\n", -42);
 
 
+ printf("{%#6o}\n", 2500);
+ft_printf("{%#6o}\n", 2500);
+
+printf("{%.d %.0d}\n", 42, 43);
+ft_printf("{%.d %.0d}\n", 42, 43);
+
+printf("\n TEST \n");
+   printf("{%+10.5d}\n", 004242);
+ft_printf("{%+10.5d}\n", 004242);
+
+   printf("{%+10.5d}\n", 114242);
+ft_printf("{%+10.5d}\n", 114242);
+
+   printf("{% +10.5d}\n", 114242);
+ft_printf("{% +10.5d}\n", 114242);
+
+   printf("{% +-10.5d}\n", 114242);
+ft_printf("{% +-10.5d}\n", 114242);
+
+printf("{%+ d}\n", 42);
+ft_printf("{%+ d}\n", 42);
+
+
+
+/*
 	printf("test to lose your mind\n");
 	printf("print |%-05%|\n");
 	 ft_printf("print |%-05%|\n");
@@ -235,6 +272,11 @@ printf("%jd", 9223372036854775807);
 	printf("%07o", -14);
 	   printf("\n");
 	ft_printf("%07o", -14);
+
+
+printf("{ %#.o %#.0o}\n", 0, 0);
+ft_printf("{ %#.o %#.0o}\n", 0, 0);
+
 
  printf("\n");
 	 printf("%.*O", -1, 12345);
@@ -442,9 +484,6 @@ printf("\n");
 i = ft_printf("P * %.*f\n", -1, 3.1415926535);
 ft_printf("%d", i); */
 
-
-printf("{%10d}", 42);
-ft_printf("{%10d}", 42);
 
 /* printf("P 0.35 %.1f\n", 0.35);
 printf("P 0.45 %.1f\n", 0.45);
