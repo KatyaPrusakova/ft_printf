@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/12 15:14:36 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:10:19 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,44 @@ static long long	llmin = -9223372036854775807ll;
 printf("{%10d}\n", 4);
 ft_printf("{%10d}\n", 4);
  */
-
+/*
  printf("{%0+5d}\n", 42);
 ft_printf("{%0+5d}\n", 42);
 
  printf("{%0+5d}\n", -42);
 ft_printf("{%0+5d}\n", -42);
 
+ */
+/*
+ printf("{%+10.5d}\n", -216);
+ft_printf("{%+10.5d}\n", -216);
 
- printf("{%#6o}\n", 2500);
-ft_printf("{%#6o}\n", 2500);
+ printf("{%0+5d}\n", -42);
+ft_printf("{%0+5d}\n", -42);
+*/
 
-printf("{%.d %.0d}\n", 42, 43);
+/* printf("{%.d %.0d}\n", 42, 43);
 ft_printf("{%.d %.0d}\n", 42, 43);
+
+   printf("{%+.0d}\n", 0);
+ft_printf("{%+.0d}\n", 0);
+
+   printf("{%-.0d}\n", 0);
+ft_printf("{%-.0d}\n", 0);
+ */
+
+   printf("{%010.5d}\n", -216);
+ft_printf("{%010.5d}\n", -216);
+
+   printf("{%03.2d\n", -1);
+ft_printf("{%03.2d\n", -1);
+/*
+   printf("{%+3.3d}\n", 6983);
+ft_printf("{%+3.3d}\n", 6983);
+
+   printf("{%+-3.7d}\n", 3267);
+ft_printf("{%+-3.7d}\n", 3267);
+
 
 printf("\n TEST \n");
    printf("{%+10.5d}\n", 004242);
@@ -81,10 +106,15 @@ ft_printf("{% +10.5d}\n", 114242);
 
    printf("{% +-10.5d}\n", 114242);
 ft_printf("{% +-10.5d}\n", 114242);
-
+ */
 printf("{%+ d}\n", 42);
 ft_printf("{%+ d}\n", 42);
 
+
+
+
+ printf("{%#6o}\n", 2500);
+ft_printf("{%#6o}\n", 2500);
 
 
 /*

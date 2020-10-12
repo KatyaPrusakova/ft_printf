@@ -25,14 +25,14 @@ static int	print_width(char *s, int len, t_flags *data)
 	data->width = (data->width < 0) ? -data->width : data->width;
 	temp = ft_memalloc(data->width);
 	temp[0] = '-';
-	if (data->plus && data->width)
+	if (data->plus && data->width && !data->zero && (data->width > data->pr_width) && !data->negative)
 	{
 		temp[0] = '+';
 		s = ft_strjoin(temp, s);
 		data->width--;
+		temp[0] = 0;
 	}
-	if ((data->precision != -1 && data->zero))
-		data->zero = 0;
+
 	width = (data->zero > 0 ? '0' : ' ' );
 
 	if (data->negative && data->precision && !data->zero)
@@ -47,6 +47,11 @@ static int	print_width(char *s, int len, t_flags *data)
 		{
 			data->width--;
 			save_to_buff('-', data);
+		}
+		else if (data->zero && data->plus && !data->negative)
+		{
+			data->width--;
+			save_to_buff('+', data);
 		}
 		while (data->width > 0)
 		{
@@ -93,6 +98,7 @@ static char	*print_precision(char *s, int len, int num, t_flags *data)
 	char		*new_s;
 
 	new_s = ft_memalloc(data->pr_width + len);
+
 	if (len < data->pr_width)
 	{
 		ft_memset(new_s, '0', data->pr_width - len);
@@ -103,6 +109,13 @@ static char	*print_precision(char *s, int len, int num, t_flags *data)
 	else if (data->star && data->pr_width < 0)
 	{
 		data->pr_width = 1;
+		data->precision = -1;
+	}
+	if ((data->precision != -1 && data->zero))
+		data->zero = 0;
+	else if (data->precision && data->pr_width == 0)
+	{
+		data->pr_width = 0;
 		data->precision = -1;
 	}
 	if (data->pr_width == 0 && num == 0)
@@ -164,6 +177,7 @@ static	void	print_decimal_help(t_flags *data, long long *number)
 	if (data->plus && !data->negative && !data->width)
 	{
 		save_to_buff('+', data);
+		data->plus = FALSE;
 		data->width--;
 	}
 }
@@ -182,9 +196,13 @@ static void	print_decimal(t_flags *data)
 		s = "(null)";
 	len = ft_strlen(s);
 	s = ft_strdup(s);
-	if (data->precision != -1 && !data->pr_width && !data->width)
+	if (data->precision == 1 && !data->pr_width && *s != '0')
+	{
+		data->precision = -1;
+	}
+	if (data->precision != -1 &&!data->pr_width && !data->width)
 		return ;
-	if (data->precision > 0)
+	if (data->precision >= 0)
 		s = print_precision(s, len, num, data);
 	if (print_width(s, len, data))
 		return ;
@@ -192,6 +210,8 @@ static void	print_decimal(t_flags *data)
 	{
 		if (data->negative)
 			save_to_buff('-', data);
+		if (data->plus && !data->negative)
+			save_to_buff('+', data);
 		string_to_buff(s, data);
 	}
 }
