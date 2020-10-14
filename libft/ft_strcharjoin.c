@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 19:15:46 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/14 13:27:13 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ char		*ft_strcharjoin(int c, const char *s)
 		j++;
 	}
 	str[len] = '\0';
-	free((char*)s);
+/* 	free((char*)s); */
 	return (str);
 }

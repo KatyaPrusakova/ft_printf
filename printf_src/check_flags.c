@@ -12,213 +12,14 @@
 
 #include "ft_printf.h"
 
-static void	print_binary(t_flags *data)
+void	print_binary(t_flags *data)
 {
 	printf("|buff string is %s|", data->buff);
 }
 
-static int	print_width(char *s, int len, t_flags *data)
-{
-	char	width;
-	char	*temp;
-
-	data->width = (data->width < 0) ? -data->width : data->width;
-	temp = ft_memalloc(data->width);
-	temp[0] = '-';
-	if (data->plus && data->width && !data->zero && (data->width > data->pr_width) && !data->negative)
-	{
-		temp[0] = '+';
-		s = ft_strjoin(temp, s);
-		data->width--;
-		temp[0] = 0;
-	}
-
-	width = (data->zero > 0 ? '0' : ' ' );
-
-	if (data->negative && data->precision && !data->zero)
-	{
-		s = ft_strjoin(temp, s);
-		data->width--;
-	}
-	if (data->width && !data->minus && data->precision == -1)
-	{
-		data->width -= len;
-		if (data->zero && data->negative)
-		{
-			data->width--;
-			save_to_buff('-', data);
-		}
-		else if (data->zero && data->plus && !data->negative)
-		{
-			data->width--;
-			save_to_buff('+', data);
-		}
-		while (data->width > 0)
-		{
-			save_to_buff(width, data);
-			data->width--;
-		}
-		string_to_buff(s, data);
-		return (1);
-	}
-	if (data->width && data->minus && data->precision == -1)
-	{
-		data->width -= len;
-		string_to_buff(s, data);
-		while (data->width > 0)
-		{
-			save_to_buff(width, data);
-			data->width--;
-		}
-		return (1);
-	}
-	else if (data->pr_width < data->width && !data->minus && data->precision != -1)
-	{
-
-		data->width = (data->pr_width < len)? data->width - len : data->width - data->pr_width ;
-		ft_memset(temp, ' ', data->width);
-		s = ft_strjoin(temp, s);
-		string_to_buff(s, data);
-		return (1);
-	}
-	else if (data->pr_width < data->width && data->minus && data->precision != -1)
-	{
-
-		data->width = (data->pr_width < len) ? data->width - len : data->width - data->pr_width ;
-		ft_memset(temp, ' ', data->width);
-		s = ft_strjoin(s, temp);
-		string_to_buff(s, data);
-		return (1);
-	}
-	return (0);
-}
-
-static char	*print_precision(char *s, int len, int num, t_flags *data)
-{
-	char		*new_s;
-
-	new_s = ft_memalloc(data->pr_width + len);
-
-	if (len < data->pr_width)
-	{
-		ft_memset(new_s, '0', data->pr_width - len);
-		new_s = ft_strjoin(new_s, s);
-		return (new_s);
-		data->zero = 0;
-	}
-	else if (data->star && data->pr_width < 0)
-	{
-		data->pr_width = 1;
-		data->precision = -1;
-	}
-	if ((data->precision != -1 && data->zero))
-		data->zero = 0;
-	else if (data->precision && data->pr_width == 0)
-	{
-		data->pr_width = 0;
-		data->precision = -1;
-	}
-	if (data->pr_width == 0 && num == 0)
-		s = " ";
-
-	return (s);
-}
-
-static	void	check_lenght(t_flags *data, long long *number)
-{
-	if (data->length == H)
-		*number = (short int)va_arg(data->args, int);
-	else if (data->length == HH)
-		*number = (signed char)va_arg(data->args, signed char*);
-	else if (data->length == L)
-		*number = (long int)va_arg(data->args, long int);
-	else if (data->length == LL)
-		*number = (long long int)va_arg(data->args, long long int);
-	else if (data->length == J)
-		*number = (intmax_t)va_arg(data->args, intmax_t);
-	else if (data->length == Z)
-		*number = (size_t)va_arg(data->args, size_t);
-	else
-		*number = (int)va_arg(data->args, int);
-}
-
-static	void	check_unsigned_lenght(t_flags *data, long long *number)
-{
-	if (data->length == H)
-		*number = (unsigned short int)va_arg(data->args, int);
-	else if (data->length == HH)
-		*number = (unsigned char)va_arg(data->args, unsigned int);
-	else if (data->length == L)
-		*number = (unsigned long int)va_arg(data->args, unsigned long int);
-	else if (data->length == LL)
-		*number = (unsigned long long int)va_arg(data->args, unsigned long long int);
-	else if (data->length == J)
-		*number = (uintmax_t)va_arg(data->args, uintmax_t);
-	else if (data->length == Z)
-		*number = (size_t)va_arg(data->args, size_t);
-	else
-		*number = (unsigned int)va_arg(data->args, unsigned int);
-}
-
-static	void	print_decimal_help(t_flags *data, long long *number)
-{
-	if (*number < 0)
-	{
-		data->negative = TRUE;
-		*number *= -1;
-	}
-	if (data->minus && data->zero)
-		data->zero = 0;
-	if (data->space && !data->negative && !data->plus)
-	{
-		save_to_buff(' ', data);
-		data->width--;
-	}
-	if (data->plus && !data->negative && !data->width)
-	{
-		save_to_buff('+', data);
-		data->plus = FALSE;
-		data->width--;
-	}
-}
-
-static void	print_decimal(t_flags *data)
-{
-	char	*s;
-	int		len;
-	long long	num;
-
-	check_lenght(data, &num);
-	print_decimal_help(data, &num);
-	s = ft_itoa_base(num, 10, 0);
-
-	if (!s)
-		s = "(null)";
-	len = ft_strlen(s);
-	s = ft_strdup(s);
-	if (data->precision == 1 && !data->pr_width && *s != '0')
-	{
-		data->precision = -1;
-	}
-	if (data->precision != -1 &&!data->pr_width && !data->width)
-		return ;
-	if (data->precision >= 0)
-		s = print_precision(s, len, num, data);
-	if (print_width(s, len, data))
-		return ;
-	else
-	{
-		if (data->negative)
-			save_to_buff('-', data);
-		if (data->plus && !data->negative)
-			save_to_buff('+', data);
-		string_to_buff(s, data);
-	}
-}
-
 // printf("precision %s %s\n",new_s, s);
 
-static char *print_hash(char *p, t_flags *data)
+char *print_hash(char *p, t_flags *data)
 {
 	if (data->hash && data->width && data->zero)
 	{
@@ -237,7 +38,7 @@ static char *print_hash(char *p, t_flags *data)
 	return (p);
 }
 
-static void	print_hex(t_flags *data)
+void	print_hex(t_flags *data)
 {
 	long long		pointer;
 	char		*p;
@@ -251,24 +52,22 @@ static void	print_hex(t_flags *data)
 		data->zero = 0;
 	if (*p == '0')
 		data->hash = 0;
-	if (data->precision != -1 && !data->pr_width && !data->width)
-		return ;
-	if (data->precision > 0)
+	if (data->precision >= 0)
 		p = print_precision(p, len, pointer, data);
 	if (data->hash > 0)
 		p = print_hash(p, data);
-	if (print_width(p, len, data))
-		return ;
-	else
-	{
-		if (data->negative)
-			save_to_buff('-', data);
-		string_to_buff(p, data);
-	}
-	free(p);
+	if (!data->zero && sign(data))
+		add_sign_nozero(&p, data);
+
+	if (data->width)
+		calculate_width(&p, len, data);
+
+	if (data->zero)
+		add_sign_zero(&p, data);
+	string_to_buff(p, data);
 }
 
-static void	print_octal(t_flags *data)
+void	print_octal(t_flags *data)
 {
 	long long		pointer;
 	char		*p;
@@ -281,22 +80,20 @@ static void	print_octal(t_flags *data)
 	len = ft_strlen(p);
 	if (data->minus && data->zero)
 		data->zero = 0;
-	if (data->precision != -1 && !data->pr_width && !data->width)
-		return ;
-	if (data->precision > 0)
+	if (data->precision >= 0)
 		p = print_precision(p, len, pointer, data);
-	if (print_width(p, len, data))
-		return ;
-	else
-	{
-		if (data->negative)
-			save_to_buff('-', data);
-		string_to_buff(p, data);
-	}
-	free(p);
+	if (!data->zero && sign(data))
+		add_sign_nozero(&p, data);
+
+	if (data->width)
+		calculate_width(&p, len, data);
+
+	if (data->zero)
+		add_sign_zero(&p, data);
+	string_to_buff(p, data);
 }
 
-static void	print_uint(t_flags *data)
+void	print_uint(t_flags *data)
 {
 	char	*s;
 	int		len;
@@ -310,86 +107,20 @@ static void	print_uint(t_flags *data)
 		s = "(null)";
 	len = ft_strlen(s);
 	s = ft_strdup(s);
-	if (data->precision != -1 && !data->pr_width && !data->width)
-		return ;
-	if (data->precision > 0)
+	if (data->precision >= 0)
 		s = print_precision(s, len, num, data);
-	if (print_width(s, len, data))
-		return ;
-	else
-	{
-		string_to_buff(s, data);
-	}
+	if (!data->zero && sign(data))
+		add_sign_nozero(&s, data);
+
+	if (data->width)
+		calculate_width(&s, len, data);
+
+	if (data->zero)
+		add_sign_zero(&s, data);
+	string_to_buff(s, data);
 }
 
-static void		check_float(t_flags *data, long double *number)
-{
-	long double num;
 
-	if (data->length == BL)
-		num = (long double)va_arg(data->args, long double);
-	else
-		*number = (double)va_arg(data->args, double);
-	if (data->pr_width < 0 && data->precision != -1)
-	{
-				data->pr_width = 0;
-				data->precision = -1;
-	}
-	if (data->pr_width == 0 && data->precision == -1)
-		data->pr_width = 6;
-}
-
-static void	print_float(t_flags *data)
-{
-	long double	num;
-	char		*str;
-
-	check_float(data, &num);
-	str = ft_ftoa(num, data->pr_width);
-	if (data->plus)
-		str = ft_strcharjoin('+', str);
-	string_to_buff(str, data);
-	data->hash && !data->pr_width ? save_to_buff('.', data) : data->hash ;
-}
-
-static void	switch_type(t_flags *data)
-{
-	data->type = data->str[data->pos];
-	if (data->type == 'd' || data->type == 'i' || data->type == 'D')
-		print_decimal(data);
-	else if (data->type == 'c' || data->type == 'C')
-		print_char(data);
-	else if (data->type == 's' || data->type == 'S')
-		print_string(data);
-	else if (data->type == 'p' || data->type == 'P')
-		print_pointer(data);
-	else if (data->type == 'f' || data->type == 'F')
-		print_float(data);
-	else if (data->type == 'x' || data->type == 'X')
-		print_hex(data);
-	else if (data->type == 'u' || data->type == 'U')
-		print_uint(data);
-	else if (data->type == 'o' || data->type == 'O')
-		print_octal(data);
-	else if (data->type == 'b' || data->type == 'B')
-		print_binary(data);
-	else if (data->type == '%')
-		print_percent(data);
-	else
-		return ;
-}
-
-static int	scan_type(t_flags *data)
-{
-	if (ft_strchr(SPECIFIERS, data->str[data->pos]))
-	{
-		data->type = data->str[data->pos];
-		switch_type(data);
-		reset(data);
-		return (1);
-	}
-	return (0);
-}
 
 int			add_flags(t_flags *data)
 {
@@ -408,7 +139,7 @@ int			add_flags(t_flags *data)
 		return (1);
 }
 
-static	void		add_width(t_flags *data)
+void		add_width(t_flags *data)
 {
 	char	*s;
 	int		i;
@@ -434,12 +165,7 @@ static	void		add_width(t_flags *data)
 	}
 }
 
-
-
-
-
-
-static	void	add_precision(t_flags *data)
+void	add_precision(t_flags *data)
 {
 	char	*s;
 	int		i;
@@ -466,56 +192,3 @@ static	void	add_precision(t_flags *data)
 	}
 }
 
-static	void	add_lenght(t_flags *data)
-{
-	if (data->str[data->pos] == 'h')
-		if (data->str[data->pos + 1] == 'h')
-			data->length = HH;
-		else
-			data->length = H;
-	else if (data->str[data->pos] == 'l')
-		if (data->str[data->pos + 1] == 'l')
-			data->length = LL;
-		else
-			data->length = L;
-	else if (data->str[data->pos] == 'L')
-		data->length = BL;
-	else if (data->str[data->pos] == 'j')
-		data->length = J;
-	else if (data->str[data->pos] == 'z')
-		data->length = Z;
-	else if (data->str[data->pos] == 't')
-		data->length = T;
-	while (ft_strchr(LENGTH, data->str[data->pos]))
-		data->pos++;
-}
-
-static int	parse_flags(t_flags *data)
-{
-	while (add_flags(data))
-		data->pos++;
-	add_width(data);
-	add_precision(data);
-	add_lenght(data);
-	scan_type(data);
-	return (1);
-}
-
-int		parse_menu(t_flags *data)
-{
-	while (data->str[data->pos] != '\0')
-	{
-		if (data->str[data->pos] != '%')
-		{
-			save_to_buff(data->str[data->pos], data);
-		}
-		else if (data->str[data->pos] == '%' && data->str[data->pos+1] != '\0')
-		{
-			data->pos++;
-			reset(data);
-			parse_flags(data);
-		}
-	data->pos++;
-	}
-	return (print_buff(data));
-}

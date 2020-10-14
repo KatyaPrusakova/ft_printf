@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 19:42:33 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/14 14:14:06 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int		print_buff(t_flags *data)
 
 void		string_to_buff(char *s, t_flags *data)
 {
+	if (!s)
+		return ;
 	while (*s)
 	{
 		if (data->len < 1024)

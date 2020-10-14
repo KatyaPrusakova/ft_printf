@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 14:10:06 by eprusako          #+#    #+#             */
-/*   Updated: 2020/06/30 09:35:41 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/14 15:17:01 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char		*ft_strcat(char *dst, const char *src)
 
 	i = 0;
 	ii = 0;
-	while (dst[i] != '\0')
+	while (dst && dst[i] != '\0')
 	{
 		i++;
 	}
-	while (src[ii] != '\0')
+	while (src && src[ii] != '\0')
 	{
 		dst[i] = src[ii];
 		i++;

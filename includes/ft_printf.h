@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 20:42:17 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/14 15:33:24 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,53 @@ typedef	struct	s_flags
 }				t_flags;
 
 
+int			scan_type(t_flags *data);
 
+void		switch_type(t_flags *data);
+int			parse_menu(t_flags *data);
+int			add_flags(t_flags *data);
 
-int		parse_menu(t_flags *data);
-int		add_flags(t_flags *data);
-// void	parse_flags(t_flags *data);
-int		ft_printf(const char *format, ...);
-void	print_percent(t_flags *data);
-void	print_pointer(t_flags *data);
-void	print_char(t_flags *data);
-void	print_string(t_flags *data);
+void		add_precision(t_flags *data);
+void		add_width(t_flags *data);
+
+void		add_lenght(t_flags *data);
+void		check_lenght(t_flags *data, long long *number);
+void		check_unsigned_lenght(t_flags *data, long long *number);
+
+char		*print_width(char *s, int len, t_flags *data);
+char		*print_width_minus(char *s, int len, t_flags *data);
+char		*print_precision(char *s, int len, int num, t_flags *data);
+void		print_decimal(t_flags *data);
+
+int				sign(t_flags *data);
+void			add_sign_nozero(char **s, t_flags *data);
+void			add_sign_zero(char **s, t_flags *data);
+void			calculate_width(char **s, int len, t_flags *data);
+
+int			ft_printf(const char *format, ...);
+
+void		print_percent(t_flags *data);
+void		print_pointer(t_flags *data);
+void		print_char(t_flags *data);
+void		print_string(t_flags *data);
+void		print_binary(t_flags *data);
+
+void	print_decimal_help(t_flags *data, long long *number);
+char 	*print_hash(char *p, t_flags *data);
+void	print_hex(t_flags *data);
+void	print_octal(t_flags *data);
+void	print_uint(t_flags *data);
 
 void		string_to_buff(char *s, t_flags *data);
 int			print_buff(t_flags *data);
 void		save_to_buff(char c, t_flags *data);
-char		*ft_ftoa(long double f, int precision);
+void		reset(t_flags *data);
 
-void	reset(t_flags *data);
+char		*ft_ftoa(long double f, int precision);
+void		print_float(t_flags *data);
+void		check_float(t_flags *data, long double *number);
+
+
 
 #endif
 
