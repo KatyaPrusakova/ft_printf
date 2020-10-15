@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/14 12:10:50 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:21:52 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	print_float(t_flags *data)
 	if (data->plus)
 		str = ft_strcharjoin('+', str);
 	string_to_buff(str, data);
+	free(str);
 	data->hash && !data->pr_width ? save_to_buff('.', data) : data->hash ;
 }

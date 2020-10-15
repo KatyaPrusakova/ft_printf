@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/08 11:00:12 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:37:00 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char			*ft_itoa_base(uintmax_t num, int base, int change)
 	len = ft_len(num, base);
 	if (!(str = ft_strnew(len)))
 		return (0);
-	str[len] = '\0';
 	while (len)
 	{
 		len--;

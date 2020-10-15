@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/14 15:33:24 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:51:55 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define Z	7
 # define T	8
 
-// lenght
 typedef	struct	s_flags
 {
 	va_list	args;
@@ -78,8 +77,8 @@ void		add_lenght(t_flags *data);
 void		check_lenght(t_flags *data, long long *number);
 void		check_unsigned_lenght(t_flags *data, long long *number);
 
-char		*print_width(char *s, int len, t_flags *data);
-char		*print_width_minus(char *s, int len, t_flags *data);
+char		*print_width(char *s, char *temp, t_flags *data);
+char		*print_width_minus(char *s, char *temp, t_flags *data);
 char		*print_precision(char *s, int len, int num, t_flags *data);
 void		print_decimal(t_flags *data);
 

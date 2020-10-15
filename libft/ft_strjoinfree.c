@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 19:03:04 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:12:16 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,12 @@
 
 char		*ft_strjoinfree(char const *s1, char const *s2)
 {
-	unsigned int	len;
-	unsigned int	i;
-	char			*str;
+	char *str;
 
-	i = 0;
-	len = (ft_strlen(s1)) + (ft_strlen(s2));
-	str = (char *)malloc(sizeof(char*) * (len + 1));
-	if (!str)
+	if (!(str = (char*)ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (NULL);
-	len = 0;
-	while (s1[i] != '\0')
-	{
-		str[len] = s1[i];
-		i++;
-		len++;
-	}
-	i = 0;
-	while (s2[i] != '\0')
-	{
-		str[len] = s2[i];
-		i++;
-		len++;
-	}
-	str[len] = '\0';
+	ft_strcpy(str, s1);
+	ft_strcat(str, s2);
 	free((char *)s1);
 	free((char *)s2);
 	return (str);

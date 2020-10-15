@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 18:32:08 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:38:02 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 #include "ft_printf.h"
 
-static	char	*ft_sign(long double *number)
+static	char	ft_sign(long double *number)
 {
-	char * sign;
+	char	sign;
+
 	if (( 1 / *number ) < 0)
 	{
 		*number *= -1;
-		sign = ft_strnew(1);
-		sign[0] = '-';
+		sign = '-';
 		return (sign);
 	}
 	return (0);
@@ -46,7 +46,7 @@ char				*ft_ftoa(long double f, int precision)
 {
 	unsigned long long	first_part;
 	char				*number;
-	char				*sign;
+	char				sign;
 	char				*after_dot_part;
 	int					i;
 
@@ -54,10 +54,15 @@ char				*ft_ftoa(long double f, int precision)
 	sign = ft_sign(&f);
 	f = f + ft_roundup(precision, f);
 	first_part = f;
-	number = ft_itoa_base(first_part, 10, 0);
+	if (!(number = ft_itoa_base(first_part, 10, 0)))
+		return (NULL);
 	if (sign)
-		number = ft_strjoin(sign, number);
-	after_dot_part = ft_strnew(precision + 1);
+		number = ft_strcharjoin(sign, number);
+	if (!(after_dot_part = ft_strnew(precision + 1)))
+	{
+		free(number);
+		return (0);
+	}
 	after_dot_part[0] = (precision == 0) ? '\0' : '.';
 	while (precision-- > 0)
 	{
@@ -65,5 +70,6 @@ char				*ft_ftoa(long double f, int precision)
 		first_part = f;
 		after_dot_part[i++] = first_part % 10 + '0';
 	}
-	return (ft_strjoin(number, after_dot_part));
+	number = ft_strjoinfree(number, after_dot_part);
+	return (number);
 }
