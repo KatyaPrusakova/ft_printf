@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 11:13:58 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 16:00:11 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:07:01 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char		*ft_strcharjoin(int c, const char *s)
 
 	i = 0;
 	len = (2 + ft_strlen(s));
-	str = (char *)malloc(sizeof(char) * (len));
+	str = (char *)ft_memalloc(sizeof(char) * (len));
 	if (!str)
 		return (NULL);
 	str[0] = (char)c;
@@ -32,7 +32,6 @@ char		*ft_strcharjoin(int c, const char *s)
 		i++;
 		j++;
 	}
-	str[len] = '\0';
 	free((char*)s);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 16:51:55 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:18:58 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ char		*print_precision(char *s, int len, int num, t_flags *data);
 void		print_decimal(t_flags *data);
 
 int				sign(t_flags *data);
-void			add_sign_nozero(char **s, t_flags *data);
-void			add_sign_zero(char **s, t_flags *data);
+void			add_sign(char **s, t_flags *data);
 void			calculate_width(char **s, int len, t_flags *data);
 
 int			ft_printf(const char *format, ...);

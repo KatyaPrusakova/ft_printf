@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 16:45:58 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:30:18 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,23 @@ ft_printf("%+5.0i|\n", 0);
 printf("{%*i}\n", -14, 94827);
 ft_printf("{%*i}\n", -14, 94827);
 
-printf("{%%04.5i 42 == |%04.5i|}\n", 42);
+   printf("{%%04.5i 42 == |%04.5i|}\n", 42);
 ft_printf("{%%04.5i 42 == |%04.5i|}\n", 42);
- */
 
-printf("%010x|\n", 542);
+ printf("%010x|\n", 542);
   ft_printf("%010x|\n", 542);
 
  printf("%#-08x|\n", 42);
 ft_printf("%#-08x|\n", 42);
 
-
+ */
 /* i = printf("%d|", 1);
 printf("\n%d\n", i);F
 i = ft_printf("%d|", 1);
 printf("\n%d\n", i);
 printf("\n"); */
 
-/*
+
   printf("%#6o|\n", 2500);
   ft_printf("%#6o|\n", 2500);
 
@@ -106,13 +105,14 @@ printf("\n"); */
   ft_printf("%03.2d|\n", -1);
     printf("%03.2d|\n", -4);
   ft_printf("%03.2d|\n", -4);
- */
 
+/*
  printf("{%08.5x}\n", 42);
 ft_printf("{%08.5x}\n", 42);
 
  printf("{%08.5u}\n", 42);
 ft_printf("{%08.5u}\n", 42);
+ */
 /*
  printf("{% +-10.5d}\n", 114242);
 ft_printf("{% +-10.5d}\n", 114242);
@@ -497,11 +497,20 @@ ft_printf("% 0-8.5i|\n", 0 );
 
  printf("\t test start \n");
 
-
-i = printf("real %f\n", 1.0);
+i = printf("% *.5i", 34, 5);
 printf("%d\n", i);
 printf("\n");
-i = ft_printf("my   %f\n", 1.0);
+i = ft_printf("% *.5i", 34, 5);
+printf("%d\n", i);
+printf("\n");
+
+
+
+
+i = printf("%07d\n", -54);
+printf("%d\n", i);
+printf("\n");
+i = ft_printf("%07d\n", -54);
 printf("%d\n", i);
 printf("\n");
 

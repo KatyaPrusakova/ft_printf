@@ -79,13 +79,13 @@ void	print_octal(t_flags *data)
 	if (data->precision >= 0)
 		p = print_precision(p, len, pointer, data);
 	if (!data->zero && sign(data))
-		add_sign_nozero(&p, data);
+		add_sign(&p, data);
 
 	if (data->width)
 		calculate_width(&p, len, data);
 
 	if (data->zero)
-		add_sign_zero(&p, data);
+		add_sign(&p, data);
 	string_to_buff(p, data);
 	free(p);
 }

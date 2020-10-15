@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 16:53:56 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:22:56 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,8 @@ int		sign(t_flags *data)
 	return (0);
 }
 
-void			add_sign_nozero(char **s, t_flags *data)
+void			add_sign(char **s, t_flags *data)
 {
-	char	*temp;
-
-	temp = ft_memalloc(data->width);
-	temp[0] = '-';
-
-	if (data->plus && !data->negative)
-	{
-		temp[0] = '+';
-		*s = ft_strjoin(temp, *s);
-	}
-	if (data->negative)
-	{
-		*s = ft_strjoin(temp, *s);
-	}
-	if (data->space && !data->plus && !data->negative)
-		*s = ft_strcharjoin(' ', *s);
-}
-
-void			add_sign_zero(char **s, t_flags *data)
-{
-	char	*temp;
-
-	temp = ft_memalloc(data->width);
-	temp[0] = '-';
 	if (data->negative )
 		*s = ft_strcharjoin('-', *s);
 	if (data->plus && !data->negative)
@@ -63,7 +39,10 @@ void			calculate_width(char **s, int len, t_flags *data)
 		data->width = (sign(data) && data->width > 0 ) ? --data->width : data->width;
 	if (data->width < len)
 		data->width = 0;
-
+	if (data->pr_width > data->width)
+	{
+		data->width = 0;
+	}
 	if (data->width && data->precision == -1 && **s)
 	{
 		data->width -= len;
@@ -188,19 +167,18 @@ void	print_decimal(t_flags *data)
 
 	check_lenght(data, &num);
 	print_decimal_help(data, &num);
-	s = ft_itoa_base(num, 10, 0);
-	if (!s)
-		s = "(null)";
+	if (!(s = ft_itoa_base(num, 10, 0)))
+		s = ft_strdup("(null)");
 	len = ft_strlen(s);
 	if (data->precision >= 0)
 		s = print_precision(s, len, num, data);
 	if (!data->zero && sign(data))
-		add_sign_nozero(&s, data);
+		add_sign(&s, data);
 
 	if (data->width)
 		calculate_width(&s, len, data);
 
 	if (data->zero)
-		add_sign_zero(&s, data);
+		add_sign(&s, data);
 	string_to_buff(s, data);
 }
