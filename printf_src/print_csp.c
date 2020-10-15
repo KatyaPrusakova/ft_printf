@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/09 20:27:07 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:16:34 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	print_string(t_flags *data)
 	if (data->pr_width <= -1 && !data->width)
 	{
 		string_to_buff(s, data);
+		free(s);
 		return ;
 	}
-	s = ft_strdup(s);
 	i = ft_strlen(s);
 	if (data->width < 0 || data->pr_width < 0)
 	{
@@ -65,7 +65,10 @@ void	print_string(t_flags *data)
 		data->pr_width = i;
 	}
 	if (help_to_print_string(i, s, data))
+	{
+		free(s);
 		return ;
+	}
 	else if (data->width && !data->minus && data->precision)
 	{
 		if (data->pr_width >= i)
@@ -134,10 +137,13 @@ void	print_pointer(t_flags *data)
 	int			i;
 
 	pointer = va_arg(data->args,uintmax_t);
-	p =  ft_strjoin("0x", ft_itoa_base(pointer, 16, 0));
+	p =  ft_strjoin(OX, ft_itoa_base(pointer, 16, 0));
 	i = ft_strlen(p);
 	if (help_to_print_string(i, p, data))
+	{
+		free(p);
 		return ;
+	}
 	else
 		string_to_buff(p, data);
 	free(p);

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 17:22:56 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:05:58 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,8 @@ char				*print_width(char *s, char *temp, t_flags *data)
 {
 	char	width;
 
-/* 	temp[0] = '-';
-	if (data->plus && data->width && !data->zero && (data->width > data->pr_width) && !data->negative)
-	{
-		temp[0] = '+';
-		s = ft_strjoin(temp, s);
-		data->width--;
-		temp[0] = 0;
-	} */
-
 	width = (data->zero > 0 ? '0' : ' ' );
-	/* if (data->negative && data->precision && !data->zero)
-	{
-		s = ft_strjoin(temp, s);
-		data->width--;
-	} */
+
 	if (data->width && data->precision == -1)
 	{
 		ft_memset(temp, width, data->width);

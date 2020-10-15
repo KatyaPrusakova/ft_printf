@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 17:18:58 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:07:16 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-#include <stdio.h>
+# include <stdio.h>
 # include "libft.h"
 
 # define SPECIFIERS	"cspdioOuxXf%"
@@ -82,9 +82,9 @@ char		*print_width_minus(char *s, char *temp, t_flags *data);
 char		*print_precision(char *s, int len, int num, t_flags *data);
 void		print_decimal(t_flags *data);
 
-int				sign(t_flags *data);
-void			add_sign(char **s, t_flags *data);
-void			calculate_width(char **s, int len, t_flags *data);
+int			sign(t_flags *data);
+void		add_sign(char **s, t_flags *data);
+void		calculate_width(char **s, int len, t_flags *data);
 
 int			ft_printf(const char *format, ...);
 
@@ -94,11 +94,11 @@ void		print_char(t_flags *data);
 void		print_string(t_flags *data);
 void		print_binary(t_flags *data);
 
-void	print_decimal_help(t_flags *data, long long *number);
-char 	*print_hash(char *p, t_flags *data);
-void	print_hex(t_flags *data);
-void	print_octal(t_flags *data);
-void	print_uint(t_flags *data);
+void		print_decimal_help(t_flags *data, long long *number);
+void		print_hash(char **p, t_flags *data);
+void		print_hex(t_flags *data);
+void		print_octal(t_flags *data);
+void		print_uint(t_flags *data);
 
 void		string_to_buff(char *s, t_flags *data);
 int			print_buff(t_flags *data);
@@ -112,36 +112,3 @@ void		check_float(t_flags *data, long double *number);
 
 
 #endif
-
-	// int c; // (character)
-	// int s; // (string)
-	// int p; // (address)
-	// int d; // (digit)
-	// int i; // (integer)
-	// int o; // (digit in octal)
-	// int u; // (unsigned integer)
-	// int x; // (hexadecimal in lowercase)
-	// int X; // (hexadecimal in upper case)
-	// int f; // (float)
-
-    /*
-    '#'(hash) - For o, x, X types, the text 0, 0x, 0X, respectively, is prepended to non-zero numbers.
-
-    '0'(zero) - When the 'width' option is specified, prepends zeros for numeric types.
-    For example, printf("%2X",3) produces ' 3', while printf("%04X",3) produces '0003'.
-
-    '-'(minus) - Left-align the output of this placeholder. (The default is to right-align the output.)
-
-    '+'(plus) - Prepends a plus for positive signed-numeric types.
-
-    ' '(space) - Prepends a space for positive signed-numeric types.This flag is ignored if the + flag exists.
-    */
-
-    /*
-    'L' - For integer types, causes ft_printf to expect a long-sized integer argument.
-    'LL' - For floating point types, causes ft_printf to expect a long double argument.
-    'hh' - For integer types, causes ft_printf to expect an int-sized integer argument which was promoted from a char.
-    'h' - For integer types, causes ft_printf to expect an int-sized integer argument which was promoted from a short.
-    'l' - For integer types, causes ft_printf to expect a long-sized integer argument.
-    'll' - For integer types, causes ft_printf to expect a long long-sized integer argument.
-     */

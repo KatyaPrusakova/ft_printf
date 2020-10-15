@@ -17,25 +17,22 @@ void	print_binary(t_flags *data)
 	printf("|buff string is %s|", data->buff);
 }
 
-// printf("precision %s %s\n",new_s, s);
-
-char *print_hash(char *p, t_flags *data)
+void		print_hash(char **p, t_flags *data)
 {
 	if (data->hash && data->width && data->zero)
 	{
 		if (data->pr_width)
-			p = (data->type == 'x') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
+			*p = (data->type == 'x') ? ft_strjoin(OX, *p) : ft_strjoin(BIGOX, *p);
 		else
 			data->type == 'x' ? string_to_buff(OX, data) : string_to_buff(BIGOX, data) ;
 		data->width -= 2;
 	}
 	if (data->hash && !data->zero)
 	{
-		p = (data->type == 'x') ? ft_strjoin(OX, p) : ft_strjoin(BIGOX, p);
+		*p = (data->type == 'x') ? ft_strjoin(OX, *p) : ft_strjoin(BIGOX, *p);
 		if (data->width > 0)
 			data->width -= 2;
 	}
-	return (p);
 }
 
 void	print_hex(t_flags *data)
@@ -49,15 +46,15 @@ void	print_hex(t_flags *data)
 	if (data->minus && data->zero)
 		data->zero = 0;
 	check_unsigned_lenght(data, &pointer);
-	p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1);
-
+	if (!(p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1)))
+		p = ft_strdup("null");
 	len = ft_strlen(p);
 	if (*p == '0')
 		data->hash = 0;
 	if (data->precision >= 0)
 		p = print_precision(p, len, pointer, data);
 	if (data->hash > 0)
-		p = print_hash(p, data);
+		print_hash(&p, data);
 	if (data->width)
 		calculate_width(&p, len, data);
 	string_to_buff(p, data);
@@ -67,15 +64,19 @@ void	print_hex(t_flags *data)
 void	print_octal(t_flags *data)
 {
 	long long		pointer;
-	char		*p;
-	int			len;
+	char			*p;
+	int				len;
 
 	check_unsigned_lenght(data, &pointer);
-	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1);
+	if (!(p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1)))
+		p = ft_strdup("null");
 	if (data->hash)
-		*p == '0' ? string_to_buff(p, data) : ft_strcharjoin('0', p) ;
+	{
+		*p == '0' ? string_to_buff(p, data) : ft_strcharjoin('0', p);
+		free(p);
+		return ;
+	}
 	len = ft_strlen(p);
-
 	if (data->precision >= 0)
 		p = print_precision(p, len, pointer, data);
 	if (!data->zero && sign(data))
