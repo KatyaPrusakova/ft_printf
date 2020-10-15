@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 18:16:34 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:34:11 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	print_string(t_flags *data)
 	if (data->pr_width <= -1 && !data->width)
 	{
 		string_to_buff(s, data);
-		free(s);
 		return ;
 	}
 	i = ft_strlen(s);
@@ -66,7 +65,6 @@ void	print_string(t_flags *data)
 	}
 	if (help_to_print_string(i, s, data))
 	{
-		free(s);
 		return ;
 	}
 	else if (data->width && !data->minus && data->precision)
@@ -141,7 +139,6 @@ void	print_pointer(t_flags *data)
 	i = ft_strlen(p);
 	if (help_to_print_string(i, p, data))
 	{
-		free(p);
 		return ;
 	}
 	else

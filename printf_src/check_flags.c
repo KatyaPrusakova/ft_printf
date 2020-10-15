@@ -73,7 +73,6 @@ void	print_octal(t_flags *data)
 	if (data->hash)
 	{
 		*p == '0' ? string_to_buff(p, data) : ft_strcharjoin('0', p);
-		free(p);
 		return ;
 	}
 	len = ft_strlen(p);
