@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 17:30:35 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 18:58:08 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		check_unsigned_lenght(t_flags *data, long long *n);
 char		*print_width(char *s, char *temp, t_flags *data);
 char		*print_width_minus(char *s, char *temp, t_flags *data);
 char		*print_precision(char *s, int len, int num, t_flags *data);
-void		print_decimal(t_flags *data);
+int			print_decimal(t_flags *data);
 
 int			sign(t_flags *data);
 void		add_sign(char **s, t_flags *data);

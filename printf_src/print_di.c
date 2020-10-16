@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 18:50:40 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 19:12:38 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char		*print_precision(char *s, int len, int num, t_flags *data)
 	if (len < data->pr_width)
 	{
 		ft_memset(new_s, '0', data->pr_width - len);
-		new_s = ft_strjoinfree(new_s, s, 1, 0);
+		new_s = ft_strjoinfree(new_s, s, 1, 1);
 		return (new_s);
 		data->zero = 0;
 	}
@@ -134,16 +134,16 @@ void	print_decimal_help(t_flags *data, long long *number)
 		data->zero = 0;
 }
 
-void	print_decimal(t_flags *data)
+int	print_decimal(t_flags *data)
 {
-	char	*s;
-	int		len;
+	char		*s;
+	int			len;
 	long long	num;
 
 	check_lenght(data, &num);
 	print_decimal_help(data, &num);
 	if (!(s = ft_itoa_base(num, 10, 0)))
-		s = ft_strdup("(null)");
+		return (0);
 	len = ft_strlen(s);
 	if (data->precision >= 0)
 		s = print_precision(s, len, num, data);
@@ -155,4 +155,5 @@ void	print_decimal(t_flags *data)
 		add_sign(&s, data);
 	string_to_buff(s, data);
 	free(s);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 18:47:01 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 19:13:54 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,12 @@ static long long	llmin = -9223372036854775807ll; */
 	ft_printf("%");
  */
 
+/*    printf("%-5.0d", 0);
+ft_printf("%-5.0d", 0);
+ */
 printf("{%-5d}\n", 14);
 ft_printf("{%-5d}\n", 14);
-
+/*
 printf("{%-5d}\n", -4444);
 ft_printf("{%-5d}\n", -4444);
 
@@ -69,7 +72,7 @@ ft_printf("{%10.5d}\n", -216);
 
   printf("{%5.0d}\n", 0);
 ft_printf("{%5.0d}\n", 0);
- 
+ */
 /*
 printf("%+5.0i|\n", 0);
 ft_printf("%+5.0i|\n", 0);
