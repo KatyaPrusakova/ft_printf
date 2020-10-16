@@ -67,13 +67,18 @@ void	print_octal(t_flags *data)
 	char			*p;
 	int				len;
 
+	if (data->minus && data->zero)
+		data->zero = 0;
 	check_unsigned_lenght(data, &pointer);
-	if (!(p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1)))
+	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1) ;
+	if (!p)
 		p = ft_strdup("null");
 	if (data->hash)
 	{
-		*p == '0' ? string_to_buff(p, data) : ft_strcharjoin('0', p);
-		return ;
+		if (p[0] == '0')
+			string_to_buff(p, data);
+		else
+			p = ft_strcharjoin('0', p);
 	}
 	len = ft_strlen(p);
 	if (data->precision >= 0)
@@ -113,23 +118,21 @@ void	print_uint(t_flags *data)
 	free(s);
 }
 
-
-
 int			add_flags(t_flags *data)
 {
-		if (data->str[data->pos] == '-')
-			data->minus = TRUE;
-		else if (data->str[data->pos] == '+')
-				data->plus = TRUE;
-		else if (data->str[data->pos] == ' ')
-				data->space = TRUE;
-		else if (data->str[data->pos] == '#')
-				data->hash = TRUE;
-		else if (data->str[data->pos] == '0') /* maybe to delete */
-				data->zero = TRUE;
-		else
-			return (0);
-		return (1);
+	if (data->str[data->pos] == '-')
+		data->minus = TRUE;
+	else if (data->str[data->pos] == '+')
+		data->plus = TRUE;
+	else if (data->str[data->pos] == ' ')
+		data->space = TRUE;
+	else if (data->str[data->pos] == '#')
+		data->hash = TRUE;
+	else if (data->str[data->pos] == '0')
+		data->zero = TRUE;
+	else
+		return (0);
+	return (1);
 }
 
 void		add_width(t_flags *data)
@@ -184,6 +187,6 @@ void	add_precision(t_flags *data)
 		}
 		data->pr_width = ft_atoi(s);
 	}
-		free(s);
+	free(s);
 }
 

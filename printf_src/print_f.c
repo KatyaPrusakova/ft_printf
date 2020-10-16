@@ -6,12 +6,11 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 16:21:52 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:14:26 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 void		check_float(t_flags *data, long double *number)
 {
@@ -23,8 +22,8 @@ void		check_float(t_flags *data, long double *number)
 		*number = (double)va_arg(data->args, double);
 	if (data->pr_width < 0 && data->precision != -1)
 	{
-				data->pr_width = 0;
-				data->precision = -1;
+		data->pr_width = 0;
+		data->precision = -1;
 	}
 	if (data->pr_width == 0 && data->precision == -1)
 		data->pr_width = 6;
@@ -41,5 +40,5 @@ void	print_float(t_flags *data)
 		str = ft_strcharjoin('+', str);
 	string_to_buff(str, data);
 	free(str);
-	data->hash && !data->pr_width ? save_to_buff('.', data) : data->hash ;
+	data->hash && !data->pr_width ? save_to_buff('.', data) : data->hash;
 }

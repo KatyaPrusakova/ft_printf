@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 18:34:11 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:12:13 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		help_to_print_string(int i, char *s, t_flags *data)
 
 	if (data->zero && data->minus)
 		data->zero = 0;
- 	width = (data->zero && data->type == '%' ) ? '0' : ' ' ;
+	width = (data->zero && data->type == '%') ? '0' : ' ';
 	if (data->width && !data->minus && data->precision == -1)
 	{
 		data->width -= i;
@@ -49,7 +49,7 @@ void	print_string(t_flags *data)
 	char	*s;
 	int		i;
 
-	s = (char*)va_arg(data->args,char*);
+	s = (char*)va_arg(data->args, char*);
 	if (!s)
 		s = "(null)";
 	if (data->pr_width <= -1 && !data->width)
@@ -134,8 +134,8 @@ void	print_pointer(t_flags *data)
 	char		*p;
 	int			i;
 
-	pointer = va_arg(data->args,uintmax_t);
-	p =  ft_strjoin(OX, ft_itoa_base(pointer, 16, 0));
+	pointer = va_arg(data->args, uintmax_t);
+	p = ft_strjoin(OX, ft_itoa_base(pointer, 16, 0));
 	i = ft_strlen(p);
 	if (help_to_print_string(i, p, data))
 	{

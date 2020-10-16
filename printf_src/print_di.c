@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 18:05:58 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:05:31 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			calculate_width(char **s, int len, t_flags *data)
 		data->width = (sign(data) && data->width > 0 ) ? --data->width : data->width;
 	if (data->width < len)
 		data->width = 0;
-	if (data->pr_width > data->width)
+	if (data->pr_width >= data->width)
 	{
 		data->width = 0;
 	}

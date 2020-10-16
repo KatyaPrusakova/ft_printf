@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/14 12:07:12 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:16:05 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	add_lenght(t_flags *data)
 		data->length = J;
 	else if (data->str[data->pos] == 'z')
 		data->length = Z;
-	else if (data->str[data->pos] == 't')
-		data->length = T;
 	while (ft_strchr(LENGTH, data->str[data->pos]))
 		data->pos++;
 }
@@ -54,20 +52,20 @@ void	check_lenght(t_flags *data, long long *number)
 		*number = (int)va_arg(data->args, int);
 }
 
-void	check_unsigned_lenght(t_flags *data, long long *number)
+void	check_unsigned_lenght(t_flags *data, long long *n)
 {
 	if (data->length == H)
-		*number = (unsigned short int)va_arg(data->args, int);
+		*n = (unsigned short int)va_arg(data->args, int);
 	else if (data->length == HH)
-		*number = (unsigned char)va_arg(data->args, unsigned int);
+		*n = (unsigned char)va_arg(data->args, unsigned int);
 	else if (data->length == L)
-		*number = (unsigned long int)va_arg(data->args, unsigned long int);
+		*n = (unsigned long int)va_arg(data->args, unsigned long int);
 	else if (data->length == LL)
-		*number = (unsigned long long int)va_arg(data->args, unsigned long long int);
+		*n = (unsigned long long int)va_arg(data->args, unsigned long long int);
 	else if (data->length == J)
-		*number = (uintmax_t)va_arg(data->args, uintmax_t);
+		*n = (uintmax_t)va_arg(data->args, uintmax_t);
 	else if (data->length == Z)
-		*number = (size_t)va_arg(data->args, size_t);
+		*n = (size_t)va_arg(data->args, size_t);
 	else
-		*number = (unsigned int)va_arg(data->args, unsigned int);
+		*n = (unsigned int)va_arg(data->args, unsigned int);
 }

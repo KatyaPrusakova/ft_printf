@@ -6,14 +6,13 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/14 14:14:06 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:14:58 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-void	reset(t_flags *data)
+void		reset(t_flags *data)
 {
 	data->width = FALSE;
 	data->precision = -1;
@@ -28,7 +27,6 @@ void	reset(t_flags *data)
 	data->star = FALSE;
 }
 
-
 void		save_to_buff(char c, t_flags *data)
 {
 	if (data->len < 1024)
@@ -38,7 +36,7 @@ void		save_to_buff(char c, t_flags *data)
 	}
 }
 
-int		print_buff(t_flags *data)
+int			print_buff(t_flags *data)
 {
 	write(1, data->buff, data->len);
 	return (data->printed + data->len);

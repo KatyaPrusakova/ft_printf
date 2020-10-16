@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 15:28:05 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 10:40:45 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	switch_type(t_flags *data)
 		print_binary(data);
 	else if (data->type == '%')
 		print_percent(data);
+	else if (data->type == 'n')
+		data->type = va_arg(data->args,uintmax_t);
 	else
 		return ;
 }

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 18:07:16 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:16:03 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include <stdio.h>
 # include "libft.h"
 
-# define SPECIFIERS	"cspdioOuxXf%"
-# define LENGTH		"hlLzjt"
-# define FLAGS		"#0-+ .*0123456789hlLzjt"
-# define CASE		"#0-+ .*0123456789hlLzjtcCsSpdioOuUxXfF" /* % separate case */
+# define SPECIFIERS	"ncspdioOuxXf%"
+# define LENGTH		"hlLzj"
+# define FLAGS		"#0-+ .*0123456789hlLzj"
+# define CASE		"#0-+ .*0123456789hlLzjcCsSnpdioOuUxXfF"
 # define OX			"0x"
 # define BIGOX		"0X"
 
@@ -63,7 +63,6 @@ typedef	struct	s_flags
 	int		negative;
 }				t_flags;
 
-
 int			scan_type(t_flags *data);
 
 void		switch_type(t_flags *data);
@@ -75,7 +74,7 @@ void		add_width(t_flags *data);
 
 void		add_lenght(t_flags *data);
 void		check_lenght(t_flags *data, long long *number);
-void		check_unsigned_lenght(t_flags *data, long long *number);
+void		check_unsigned_lenght(t_flags *data, long long *n);
 
 char		*print_width(char *s, char *temp, t_flags *data);
 char		*print_width_minus(char *s, char *temp, t_flags *data);
@@ -108,7 +107,5 @@ void		reset(t_flags *data);
 char		*ft_ftoa(long double f, int precision);
 void		print_float(t_flags *data);
 void		check_float(t_flags *data, long double *number);
-
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 17:55:01 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:01:42 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ printf("\n%d\n", i);F
 i = ft_printf("%d|", 1);
 printf("\n%d\n", i);
 printf("\n"); */
+/*
+     printf("pft%*.*ntest%d|\n", 5, 5, &i, 123, i);
+  ft_printf("pft%*.*ntest%d|\n", 5, 5, &i, 123, i);
 
 
   printf("%#6o|\n", 2500);
@@ -100,7 +103,7 @@ printf("\n"); */
 
   printf("%-5.10o|\n", 2500);
   ft_printf("%-5.10o|\n", 2500);
-
+ */
   printf("%03.2d|\n", -1);
   ft_printf("%03.2d|\n", -1);
 
@@ -496,7 +499,7 @@ ft_printf("% 0-8.5i|\n", 0 );
  */
 
 
-
+/*
  printf("\t test start \n");
 
 i = printf("% *.5i", 34, 5);
@@ -521,7 +524,7 @@ printf("\n");
 
 
 
-
+ */
 
 
 
