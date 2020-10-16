@@ -6,20 +6,14 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:20:38 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/15 18:26:24 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 11:21:07 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	init_data(t_flags *data)
-{
-	ft_bzero(data, sizeof(t_flags));
-}
-
 int		ft_printf(const char *format, ...)
 {
-
 	t_flags		*data;
 	uintmax_t	count;
 
@@ -30,6 +24,6 @@ int		ft_printf(const char *format, ...)
 	data->str = (char*)format;
 	count = parse_menu(data);
 	free(data);
-	va_end (data->args) ;
+	va_end(data->args);
 	return (count);
 }

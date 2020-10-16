@@ -85,10 +85,8 @@ void	print_octal(t_flags *data)
 		p = print_precision(p, len, pointer, data);
 	if (!data->zero && sign(data))
 		add_sign(&p, data);
-
 	if (data->width)
 		calculate_width(&p, len, data);
-
 	if (data->zero)
 		add_sign(&p, data);
 	string_to_buff(p, data);
@@ -97,8 +95,8 @@ void	print_octal(t_flags *data)
 
 void	print_uint(t_flags *data)
 {
-	char	*s;
-	int		len;
+	char			*s;
+	int				len;
 	long long		num;
 
 	check_unsigned_lenght(data, &num);
