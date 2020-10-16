@@ -6,13 +6,13 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 16:57:55 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 17:30:48 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		print_width_to_buf(char width, t_flags *data)
+void		print_width_to_buf(char width, t_flags *data)
 {
 	while (data->width > 0)
 	{
@@ -21,7 +21,7 @@ static void		print_width_to_buf(char width, t_flags *data)
 	}
 }
 
-static int		help_to_print_string(int i, char *s, t_flags *data)
+int		help_to_print_string(int i, char *s, t_flags *data)
 {
 	char	width;
 
@@ -45,31 +45,25 @@ static int		help_to_print_string(int i, char *s, t_flags *data)
 
 static void		print_string_with_presicion(int len, char *s, t_flags *data)
 {
+	char *new;
 
-	 if (data->width && data->precision)
-	{
-		if (data->pr_width >= len)
-			data->width -= len;
-		else
-			data->width -= data->pr_width;
-	}
+	data->width -= ((data->width && data->precision) && (data->pr_width >= len)) ? len : data->pr_width;
+	if(!(new = ft_strnew(data->pr_width)))
+			return ;
+	else
+		new = ft_strncpy(new, s, data->pr_width);
 	if (data->width && !data->minus && data->precision)
 	{
 		print_width_to_buf((char)' ', data);
-		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
-		string_to_buff(s, data);
+		string_to_buff(new, data);
 	}
 	else if (data->width && data->minus == 1 && data->precision)
 	{
-		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
-		string_to_buff(s, data);
+		string_to_buff(new, data);
 		print_width_to_buf((char)' ', data);
 	}
 	else if (data->precision >= 0)
-	{
-		s = ft_strncpy(ft_strnew(data->pr_width), s, data->pr_width);
-		string_to_buff(s, data);
-	}
+		string_to_buff(new, data);
 }
 
 void	print_string(t_flags *data)
@@ -85,20 +79,16 @@ void	print_string(t_flags *data)
 		string_to_buff(s, data);
 		return ;
 	}
-
 	i = ft_strlen(s);
 	if (data->pr_width < 0)
 		data->pr_width = i;
 	if (help_to_print_string(i, s, data))
-	{
 		return ;
-	}
 	if (data->precision != -1)
 	{
 		print_string_with_presicion(i, s, data);
 		return ;
 	}
-
 	else
 		string_to_buff(s, data);
 }

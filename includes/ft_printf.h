@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 16:17:04 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 17:30:35 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void		print_hex(t_flags *data);
 void		print_octal(t_flags *data);
 void		print_uint(t_flags *data);
 
+void		print_width_to_buf(char width, t_flags *data);
+int			help_to_print_string(int i, char *s, t_flags *data);
 void		string_to_buff(char *s, t_flags *data);
 int			print_buff(t_flags *data);
 void		save_to_buff(char c, t_flags *data);
