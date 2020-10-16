@@ -6,13 +6,13 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 10:40:45 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:43:53 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	switch_type(t_flags *data)
+void			switch_type(t_flags *data)
 {
 	data->type = data->str[data->pos];
 	if (data->type == 'd' || data->type == 'i' || data->type == 'D')
@@ -48,6 +48,8 @@ int		scan_type(t_flags *data)
 	add_width(data);
 	add_precision(data);
 	add_lenght(data);
+	if (data->zero && data->minus)
+		data->zero = 0;
 	if (ft_strchr(SPECIFIERS, data->str[data->pos]))
 	{
 		data->type = data->str[data->pos];
@@ -71,7 +73,8 @@ int		parse_menu(t_flags *data)
 		{
 			data->pos++;
 			reset(data);
-			scan_type(data);
+			if (!scan_type(data))
+				return (0);
 		}
 	data->pos++;
 	}

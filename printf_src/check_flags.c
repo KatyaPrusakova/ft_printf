@@ -14,7 +14,26 @@
 
 void	print_binary(t_flags *data)
 {
-	printf("|buff string is %s|", data->buff);
+	long long		pointer;
+	char			*p;
+	int				len;
+
+	if (data->zero && data->pr_width)
+		data->zero = 0;
+	check_unsigned_lenght(data, &pointer);
+	if (!(p = (data->type == 'x') ? ft_itoa_base(pointer, 2, 0) : ft_itoa_base(pointer, 2, 0)))
+		p = ft_strdup("null");
+	len = ft_strlen(p);
+	if (*p == '0')
+		data->hash = 0;
+	if (data->precision >= 0)
+		p = print_precision(p, len, pointer, data);
+	if (data->hash > 0)
+		print_hash(&p, data);
+	if (data->width)
+		calculate_width(&p, len, data);
+	string_to_buff(p, data);
+	free(p);
 }
 
 void		print_hash(char **p, t_flags *data)
@@ -43,8 +62,6 @@ void	print_hex(t_flags *data)
 
 	if (data->zero && data->pr_width)
 		data->zero = 0;
-	if (data->minus && data->zero)
-		data->zero = 0;
 	check_unsigned_lenght(data, &pointer);
 	if (!(p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1)))
 		p = ft_strdup("null");
@@ -67,8 +84,6 @@ void	print_octal(t_flags *data)
 	char			*p;
 	int				len;
 
-	if (data->minus && data->zero)
-		data->zero = 0;
 	check_unsigned_lenght(data, &pointer);
 	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1) ;
 	if (!p)
@@ -100,8 +115,6 @@ void	print_uint(t_flags *data)
 	long long		num;
 
 	check_unsigned_lenght(data, &num);
-	if (data->minus && data->zero)
-		data->zero = 0;
 	if (data->zero && data->pr_width)
 		data->zero = 0;
 	s = ft_itoa_base(num, 10, 0);
@@ -155,7 +168,10 @@ void		add_width(t_flags *data)
 		data->star = TRUE;
 		data->width = va_arg(data->args, int);
 		if (data->width < 0)
+		{
 			data->minus = TRUE;
+			data->width = -data->width;
+		}
 		data->pos++;
 	}
 }

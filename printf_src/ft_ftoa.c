@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 11:17:26 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 12:36:09 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,8 @@ char			*ft_ftoa(long double f, int precision)
 	first_part = f;
 	if (!(number = ft_itoa_base(first_part, 10, 0)))
 		return (NULL);
-	number = (sign > 0) ? ft_strcharjoin(sign, number) : sign;
-	if (!(after_dot_part = ft_strnew(precision + 1)))
-	{
-		free(number);
-		return (0);
-	}
+	number = (sign > 0) ? ft_strcharjoin(sign, number) : number;
+	after_dot_part = ft_strnew(precision + 1);
 	after_dot_part[0] = (precision == 0) ? '\0' : '.';
 	while (precision-- > 0)
 	{
@@ -69,6 +65,6 @@ char			*ft_ftoa(long double f, int precision)
 		first_part = f;
 		after_dot_part[i++] = first_part % 10 + '0';
 	}
-	number = ft_strjoinfree(number, after_dot_part);
+	number = ft_strjoinfree(number, after_dot_part, 0, 1);
 	return (number);
 }

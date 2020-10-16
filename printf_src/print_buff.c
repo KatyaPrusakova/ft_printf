@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 11:14:58 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 16:28:35 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ void		save_to_buff(char c, t_flags *data)
 
 int			print_buff(t_flags *data)
 {
-	write(1, data->buff, data->len);
+	if (data->option == 0)
+		write(1, data->buff, data->len);
+	if (data->option == 1)
+		data->str = data->buff;
+	if (data->option == 2)
+		data->str = data->buff;
 	return (data->printed + data->len);
 }
 

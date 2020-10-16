@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 11:16:03 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 16:17:04 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include "libft.h"
 
 # define SPECIFIERS	"ncspdioOuxXf%"
@@ -36,17 +37,16 @@
 # define Z	7
 # define T	8
 
+
 typedef	struct	s_flags
 {
 	va_list	args;
-
+	int		option;
 	char	*str;
 	char	buff[SIZE];
 	int		len;
 	int		pos;
 	int		printed;
-	int		format_size;
-
 	char	type;
 	int		width;
 	int		w_width;
@@ -54,7 +54,6 @@ typedef	struct	s_flags
 	int		precision;
 	int		pr_width;
 	int		length;
-
 	int		hash;
 	int		plus;
 	int		minus;
@@ -86,6 +85,8 @@ void		add_sign(char **s, t_flags *data);
 void		calculate_width(char **s, int len, t_flags *data);
 
 int			ft_printf(const char *format, ...);
+int			ft_snprintf(char *s, const char *format, ...);
+int			fd_printf(int fd, const char *form, ...);
 
 void		print_percent(t_flags *data);
 void		print_pointer(t_flags *data);
@@ -107,5 +108,6 @@ void		reset(t_flags *data);
 char		*ft_ftoa(long double f, int precision);
 void		print_float(t_flags *data);
 void		check_float(t_flags *data, long double *number);
-
+/* void		ft_n(int i);
+ */
 #endif

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 11:14:26 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 16:38:53 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,20 @@ void		check_float(t_flags *data, long double *number)
 void	print_float(t_flags *data)
 {
 	long double	num;
-	char		*str;
+	char		*s;
+	int			len;
 
 	check_float(data, &num);
-	str = ft_ftoa(num, data->pr_width);
-	if (data->plus)
-		str = ft_strcharjoin('+', str);
-	string_to_buff(str, data);
-	free(str);
-	data->hash && !data->pr_width ? save_to_buff('.', data) : data->hash;
+	s = ft_ftoa(num, data->pr_width);
+
+	if (data->hash && !data->pr_width)
+	{
+		save_to_buff('.', data);
+		return ;
+	}
+	len = ft_strlen(s);
+	
+	string_to_buff(s, data);
+	free(s);
+
 }

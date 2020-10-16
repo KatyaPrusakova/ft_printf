@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 11:01:42 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 16:37:57 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		main(void)
 	char *a;
 	char *b;
 	char *c;
-	char *d; */
-	int i;
+	char *d;
+	int i;*/
 
 /* 	str = "Hello";
 	i = 5;
@@ -104,12 +104,38 @@ printf("\n"); */
   printf("%-5.10o|\n", 2500);
   ft_printf("%-5.10o|\n", 2500);
  */
+/*
   printf("%03.2d|\n", -1);
   ft_printf("%03.2d|\n", -1);
+ */
+/*
+    printf("%5%");
+  ft_printf("%5%");
+ */
+  printf("%Z|\n");
+  ft_printf("%Z|\n");
 
-    printf("%.0p, %.p|\n", 0, 0);
+      printf("%-*.*s|\n", -7, -3, "yolo");
+  ft_printf("%-*.*s|\n", -7, -3, "yolo");
+
+
+/*
+    printf("%32s\n", "abc");
+  ft_printf("%32s\n", "abc");
+
+
+    printf("%10.5s|\n", "yolo111");
+  ft_printf("%10.5s|\n", "yolo111");
+ */
+ /*    printf("%.0p, %.p|\n", 0, 0);
   ft_printf("%.0p, %.p|\n", 0, 0);
 
+  printf("%#o\n", 0);
+ft_printf("%#o\n", 0);
+ *//*
+	printf("{%*c}\n", -15, 0);
+ ft_printf("{%*c}\n", -15, 0);
+ */
 
 /*
  printf("{%08.5x}\n", 42);
