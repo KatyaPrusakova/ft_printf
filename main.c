@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 16:37:57 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 18:47:01 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,29 @@ static long long	llmin = -9223372036854775807ll; */
 	   printf("%#O\n", 3);
 	ft_printf("%#O\n", 3);
 */
+
+/* 	printf("%.*s|\n", -3, "hello");
+	ft_printf("%.*s|\n", -3, "hello");
+
+	printf("%.*s|\n", 3, "hello");
+	ft_printf("%.*s|\n", 3, "hello"); */
 /* 	printf("%");
 	ft_printf("%");
  */
-/*
+
 printf("{%-5d}\n", 14);
 ft_printf("{%-5d}\n", 14);
 
 printf("{%-5d}\n", -4444);
 ft_printf("{%-5d}\n", -4444);
- */
 
-/* printf("{%10.5d}\n", -216);
+
+ printf("{%10.5d}\n", -216);
 ft_printf("{%10.5d}\n", -216);
 
   printf("{%5.0d}\n", 0);
 ft_printf("{%5.0d}\n", 0);
- */
+ 
 /*
 printf("%+5.0i|\n", 0);
 ft_printf("%+5.0i|\n", 0);

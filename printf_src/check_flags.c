@@ -192,6 +192,7 @@ void	add_precision(t_flags *data)
 			data->star = TRUE;
 			data->pr_width = va_arg(data->args, int);
 			data->pos++;
+			free(s);
 			return ;
 		}
 		while (ft_isdigit(data->str[data->pos]))

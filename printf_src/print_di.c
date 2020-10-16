@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 16:34:02 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/16 18:50:40 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		sign(t_flags *data)
 
 void			add_sign(char **s, t_flags *data)
 {
-	if (data->negative )
+	if (data->negative)
 		*s = ft_strcharjoin('-', *s);
 	if (data->plus && !data->negative)
 		*s = ft_strcharjoin('+', *s);
@@ -45,6 +45,7 @@ void			calculate_width(char **s, int len, t_flags *data)
 	else if (data->pr_width < data->width && data->precision != -1)
 		data->width = (data->pr_width < len)? data->width - len : data->width - data->pr_width;
 	*s = (data->minus > 0 && data->width) ? print_width_minus(*s, temp, data) : print_width(*s, temp, data);
+	free(temp);
 }
 
 char				*print_width(char *s, char *temp, t_flags *data)
@@ -73,12 +74,12 @@ char				*print_width_minus(char *s, char *temp, t_flags *data)
 	if (data->width && data->precision == -1)
 	{
 		ft_memset(temp, width, data->width);
-		s = ft_strjoin(s, temp);
+		s = ft_strjoinfree(s, temp, 1, 0);
 	}
 	else if (data->pr_width && data->width && data->precision != -1)
 	{
 		ft_memset(temp, width, data->width);
-		s = ft_strjoin(s, temp);
+		s = ft_strjoinfree(s, temp, 1, 0);
 	}
 	return (s);
 }
@@ -91,7 +92,7 @@ char		*print_precision(char *s, int len, int num, t_flags *data)
 	if (len < data->pr_width)
 	{
 		ft_memset(new_s, '0', data->pr_width - len);
-		new_s = ft_strjoin(new_s, s);
+		new_s = ft_strjoinfree(new_s, s, 1, 0);
 		return (new_s);
 		data->zero = 0;
 	}
