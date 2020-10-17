@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/17 14:05:12 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/17 14:05:46 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ void	print_string(t_flags *data)
 	if (data->pr_width < 0)
 		data->pr_width = i;
 	if (help_to_print_string(i, s, data))
-	{
 		return ;
-	}
 	if (data->precision != -1)
 	{
 		print_string_with_presicion(i, s, data);
