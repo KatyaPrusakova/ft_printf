@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 12:36:09 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/17 13:27:30 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ char			*ft_ftoa(long double f, int precision)
 		first_part = f;
 		after_dot_part[i++] = first_part % 10 + '0';
 	}
-	number = ft_strjoinfree(number, after_dot_part, 0, 1);
+	number = ft_strjoinfree(number, after_dot_part, 1, 1);
 	return (number);
 }

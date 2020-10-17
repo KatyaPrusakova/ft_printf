@@ -41,14 +41,14 @@ void		print_hash(char **p, t_flags *data)
 	if (data->hash && data->width && data->zero)
 	{
 		if (data->pr_width)
-			*p = (data->type == 'x') ? ft_strjoin(OX, *p) : ft_strjoin(BIGOX, *p);
+			*p = (data->type == 'x') ? ft_strjoinfree(OX, *p, 0, 1) : ft_strjoinfree(BIGOX, *p, 0, 1);
 		else
 			data->type == 'x' ? string_to_buff(OX, data) : string_to_buff(BIGOX, data) ;
 		data->width -= 2;
 	}
 	if (data->hash && !data->zero)
 	{
-		*p = (data->type == 'x') ? ft_strjoin(OX, *p) : ft_strjoin(BIGOX, *p);
+		*p = (data->type == 'x') ? ft_strjoinfree(OX, *p, 0, 1) : ft_strjoinfree(BIGOX, *p, 0, 1);
 		if (data->width > 0)
 			data->width -= 2;
 	}

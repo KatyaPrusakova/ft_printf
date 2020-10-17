@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 18:41:21 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/17 14:05:12 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void		print_string_with_presicion(int len, char *s, t_flags *data)
 	else if (data->precision >= 0)
 		string_to_buff(new, data);
 	free(new);
+	return ;
 }
 
 void	print_string(t_flags *data)
@@ -74,12 +75,14 @@ void	print_string(t_flags *data)
 
 	s = (char*)va_arg(data->args, char*);
 	if (!s)
-		s = ft_strdup("(null)");
+		s = "(null)";
 	i = ft_strlen(s);
 	if (data->pr_width < 0)
 		data->pr_width = i;
 	if (help_to_print_string(i, s, data))
+	{
 		return ;
+	}
 	if (data->precision != -1)
 	{
 		print_string_with_presicion(i, s, data);

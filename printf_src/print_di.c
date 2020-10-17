@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 19:12:38 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/17 13:47:11 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ char		*print_precision(char *s, int len, int num, t_flags *data)
 			data->width++;
 	}
 	if (data->precision == 1 && !data->pr_width && *s != '0')
-	{
 		data->precision = -1;
-	}
 	free(new_s);
 	return (s);
 }
