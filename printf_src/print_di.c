@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 16:00:50 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 18:14:47 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			calculate_width(char **s, int len, t_flags *data)
 	char	*temp;
 
 	temp = ft_memalloc(data->width + 1);
-	if (data->type == 'd' || data->type == 'i')
+	if (data->type == 'd' || data->type == 'i'  || data->type == 'f' || data->type == 'F')
 		data->width = (sign(data) && data->width > 0 ) ? --data->width : data->width;
 	if (data->width < len)
 		data->width = 0;
@@ -58,7 +58,7 @@ char				*print_width(char *s, char *temp, t_flags *data)
 		ft_memset(temp, width, data->width);
 		s = ft_strjoinfree(temp, s, 0, 1);
 	}
-	else if (data->pr_width && data->width && data->precision != -1)
+	else if (data->width && data->precision != -1)
 	{
 		ft_memset(temp, width, data->width);
 		s = ft_strjoinfree(temp, s, 0, 1);
@@ -76,7 +76,7 @@ char				*print_width_minus(char *s, char *temp, t_flags *data)
 		ft_memset(temp, width, data->width);
 		s = ft_strjoinfree(s, temp, 1, 0);
 	}
-	else if (data->pr_width && data->width && data->precision != -1)
+	else if (data->width && data->precision != -1)
 	{
 		ft_memset(temp, width, data->width);
 		s = ft_strjoinfree(s, temp, 1, 0);

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 15:58:42 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 18:13:27 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,12 +196,18 @@ ft_printf("%9.2p|\n", 1234); */
  printf("%+.0f|\n", -0.0);
 ft_printf("%+.0f|\n", -0.0);
  */
- printf("%5.0f|\n", 0.0);
+ printf("%#-5.0f|\n", 7.3);
+ft_printf("%#-5.0f|\n", 7.3);
+
+ printf("%-5.0f|\n", 7.3);
+ft_printf("%-5.0f|\n", 7.3);
+/*
+  printf("%5.0f|\n", 0.0);
 ft_printf("%5.0f|\n", 0.0);
 
  printf("%05.0f\n", 7.3);
 ft_printf("%05.0f\n", 7.3);
-
+ */
 /*
   printf("%.5p|\n", 0);
 ft_printf("%.5p|\n", 0);

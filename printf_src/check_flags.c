@@ -202,7 +202,8 @@ void	add_precision(t_flags *data)
 	}
 	while (ft_isdigit(data->str[data->pos]))
 	{
-		data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
+		if (!ft_strrchr(&data->str[data->pos], 'f'))
+			data->zero = (data->str[data->pos] == '0') ? TRUE : data->zero;
 		s[i++] = data->str[data->pos++];
 	}
 	data->pr_width = ft_atoi(s);

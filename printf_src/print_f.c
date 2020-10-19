@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 16:10:27 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:52:05 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +24,19 @@ char		*check_float(t_flags *data, long double *number)
 		data->negative = TRUE;
 		*number *= -1;
 	}
-	if (data->pr_width < 0 && data->precision != -1)
+	if (data->precision != -1 )
 	{
-		data->pr_width = 0;
-		data->precision = -1;
+		if (data->pr_width < 0)
+		{
+			data->pr_width = 0;
+			data->precision = -1;
+		}
+
 	}
 	if (data->pr_width == 0 && data->precision == -1)
+	{
 		data->pr_width = 6;
+	}
 	return (ft_ftoa(*number, data->pr_width));
 }
 
