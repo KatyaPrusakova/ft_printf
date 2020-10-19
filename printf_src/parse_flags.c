@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 15:43:53 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:14:55 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		scan_type(t_flags *data)
 	add_width(data);
 	add_precision(data);
 	add_lenght(data);
-	if (data->zero && data->minus)
+	if (data->zero && data->minus && !data->star)
 		data->zero = 0;
 	if (ft_strchr(SPECIFIERS, data->str[data->pos]))
 	{

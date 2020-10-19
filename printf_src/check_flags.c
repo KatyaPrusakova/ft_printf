@@ -85,13 +85,17 @@ void	print_octal(t_flags *data)
 	int				len;
 
 	check_unsigned_lenght(data, &pointer);
-	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1) ;
+	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1);
 	if (!p)
-		p = ft_strdup("null");
+		p ="null";
 	if (data->hash)
 	{
 		if (p[0] == '0')
+		{
 			string_to_buff(p, data);
+			free(p);
+			return ;
+		}
 		else
 			p = ft_strcharjoin('0', p);
 	}
@@ -157,9 +161,7 @@ void		add_width(t_flags *data)
 	{
 		data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
 		while (ft_isdigit(data->str[data->pos]))
-		{
 			s[i++] = data->str[data->pos++];
-		}
 		data->width = ft_atoi(s);
 	}
 	free(s);
@@ -173,6 +175,8 @@ void		add_width(t_flags *data)
 			data->width = -data->width;
 		}
 		data->pos++;
+		if (ft_isdigit(data->str[data->pos]))
+			add_width(data);
 	}
 }
 
@@ -187,20 +191,25 @@ void	add_precision(t_flags *data)
 	{
 		data->precision = TRUE;
 		data->pos++;
-		if (data->str[data->pos] == '*')
-		{
-			data->star = TRUE;
-			data->pr_width = va_arg(data->args, int);
-			data->pos++;
-			free(s);
-			return ;
-		}
-		while (ft_isdigit(data->str[data->pos]))
-		{
-			data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
-			s[i++] = data->str[data->pos++];
-		}
-		data->pr_width = ft_atoi(s);
+	}
+	if (data->str[data->pos] == '*')
+	{
+		data->star = TRUE;
+		data->pr_width = va_arg(data->args, int);
+		data->pos++;
+		free(s);
+		return ;
+	}
+	while (ft_isdigit(data->str[data->pos]))
+	{
+		data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
+		s[i++] = data->str[data->pos++];
+	}
+	data->pr_width = ft_atoi(s);
+	if (data->star && data->pr_width < 0)
+	{
+		data->pr_width = 0;
+		data->precision = -1;
 	}
 	free(s);
 }

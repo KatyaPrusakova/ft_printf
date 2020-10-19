@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 18:58:08 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:40:30 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define J	6
 # define Z	7
 # define T	8
-
 
 typedef	struct	s_flags
 {
@@ -85,7 +84,7 @@ void		add_sign(char **s, t_flags *data);
 void		calculate_width(char **s, int len, t_flags *data);
 
 int			ft_printf(const char *format, ...);
-int			ft_snprintf(char *s, const char *format, ...);
+char		*ft_sprintf(char *s, const char *format, ...);
 int			fd_printf(int fd, const char *form, ...);
 
 void		print_percent(t_flags *data);
@@ -109,7 +108,7 @@ void		reset(t_flags *data);
 
 char		*ft_ftoa(long double f, int precision);
 void		print_float(t_flags *data);
-void		check_float(t_flags *data, long double *number);
+char		*check_float(t_flags *data, long double *number);
 /* void		ft_n(int i);
  */
 #endif

@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/17 13:47:11 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 16:00:50 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ char				*print_width(char *s, char *temp, t_flags *data)
 	if (data->width && data->precision == -1)
 	{
 		ft_memset(temp, width, data->width);
-		s = ft_strjoin(temp, s);
+		s = ft_strjoinfree(temp, s, 0, 1);
 	}
 	else if (data->pr_width && data->width && data->precision != -1)
 	{
 		ft_memset(temp, width, data->width);
-		s = ft_strjoin(temp, s);
+		s = ft_strjoinfree(temp, s, 0, 1);
 	}
 	return (s);
 }
@@ -94,20 +94,9 @@ char		*print_precision(char *s, int len, int num, t_flags *data)
 		ft_memset(new_s, '0', data->pr_width - len);
 		new_s = ft_strjoinfree(new_s, s, 1, 1);
 		return (new_s);
+	}
+	if ((data->precision != -1 && data->zero && !data->star))
 		data->zero = 0;
-	}
-	else if (data->star && data->pr_width < 0)
-	{
-		data->pr_width = 1;
-		data->precision = -1;
-	}
-	if ((data->precision != -1 && data->zero))
-		data->zero = 0;
-	else if (data->precision && data->pr_width == 0)
-	{
-		data->pr_width = 0;
-		data->precision = -1;
-	}
 	if (data->pr_width == 0 && num == 0)
 	{
 		s[0] = 0;
@@ -116,6 +105,11 @@ char		*print_precision(char *s, int len, int num, t_flags *data)
 	}
 	if (data->precision == 1 && !data->pr_width && *s != '0')
 		data->precision = -1;
+	if (num == 0 && data->precision && !data->pr_width)
+	{
+		free(s);
+		s = ft_strnew(0);
+	}
 	free(new_s);
 	return (s);
 }
@@ -128,7 +122,9 @@ void	print_decimal_help(t_flags *data, long long *number)
 		data->negative = TRUE;
 		*number *= -1;
 	}
-	if (data->zero && data->pr_width)
+	if (data->zero && data->pr_width && !data->star)
+		data->zero = 0;
+	if (data->zero && data->width && data->minus && data->star)
 		data->zero = 0;
 }
 

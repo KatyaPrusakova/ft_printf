@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/17 13:27:30 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:34:42 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ static long double	ft_roundup(int precision, long double f)
 	return (rounding);
 }
 
+
+
+
+
+
 char			*ft_ftoa(long double f, int precision)
 {
 	unsigned long long	first_part;
@@ -65,6 +70,5 @@ char			*ft_ftoa(long double f, int precision)
 		first_part = f;
 		after_dot_part[i++] = first_part % 10 + '0';
 	}
-	number = ft_strjoinfree(number, after_dot_part, 1, 1);
-	return (number);
+	return (ft_strjoinfree(number, after_dot_part, 1, 1));
 }

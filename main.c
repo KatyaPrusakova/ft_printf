@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/17 14:03:32 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:58:42 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int				ft_printf(char const *str, ...);
 
-int				main(void)
+/* int				main(void)
 {
 
 	 ft_printf("%32s", "abc");
@@ -33,7 +33,7 @@ int				main(void)
   ft_printf("%X\\n", 505);
   ft_printf("%p\\n", &ft_printf);
   ft_printf("%20.15d\\n", 54321);
-  ft_printf("%-10d\\n", 3);
+   ft_printf("%-10d\\n", 3);
   ft_printf("% d\\n", 3);
   ft_printf("%+d\\n", 3);
   ft_printf("%010d\\n", 1);
@@ -55,11 +55,12 @@ int				main(void)
 
   return (0);
 }
+ */
 
-/*
+
 int		main(void)
 {
- 	char *str;
+/* 	char *str;
 	char *a;
 	char *b;
 	char *c;
@@ -96,7 +97,7 @@ static long long	llmin = -9223372036854775807ll;
 	ft_printf("%.*s|\n", -3, "hello");
 
 	printf("%.*s|\n", 3, "hello");
-	ft_printf("%.*s|\n", 3, "hello"); */
+	ft_printf("%.*s|\n", 3, "hello");  */
 /* 	printf("%");
 	ft_printf("%");
  */
@@ -183,12 +184,70 @@ i = 9;
     printf("%10.5s|\n", "yolo111");
   ft_printf("%10.5s|\n", "yolo111");
 
+ */
+
+/*  printf("%.5p|\n", 13);
+ft_printf("%.5p|\n", 13);
+ */
+/*  printf("%9.2p|\n", 1234);
+ft_printf("%9.2p|\n", 1234); */
+
+/*
+ printf("%+.0f|\n", -0.0);
+ft_printf("%+.0f|\n", -0.0);
+ */
+ printf("%5.0f|\n", 0.0);
+ft_printf("%5.0f|\n", 0.0);
+
+ printf("%05.0f\n", 7.3);
+ft_printf("%05.0f\n", 7.3);
+
+/*
+  printf("%.5p|\n", 0);
+ft_printf("%.5p|\n", 0);
+
    printf("%.0p, %.p|\n", 0, 0);
   ft_printf("%.0p, %.p|\n", 0, 0);
 
+   printf("%10p, %p|\n", 0, 0);
+  ft_printf("%10p, %p|\n", 0, 0);
+
+  printf("%#.f\n", 0);
+ft_printf("%#.f\n", 0);
+ */
+/*
   printf("%#o\n", 0);
 ft_printf("%#o\n", 0);
+ */
 
+/*   printf("mine\n");
+ft_printf("{%*2d|\n", 5, 0);
+ printf("real\n");
+printf("{%*2d|\n", 5, 0);
+ */
+/*  printf("mine\n");
+ft_printf("{%05.*d}\n", -15, 42);
+ printf("real\n");
+printf("{%05.*d}\n", -15, 42);
+
+printf("\n");
+
+printf("mine\n");
+ft_printf("{%0*i}\n", -7, -54);
+ printf("real\n");
+printf("{%0*i}\n", -7, -54);
+ */
+/*
+printf("mine\n");
+ft_printf("{%#.0f", 0.0);
+ printf("real\n");
+printf("{%#.0f", 0.0);
+ */
+/*
+printf("{%f}{%lf}{%Lf}\n", 1.42, 1.42, 1.42l);
+ft_printf("{%f}{%lf}{%Lf}\n", 1.42, 1.42, 1.42l);
+ */
+/*
 	printf("{%*c}\n", -15, 0);
  ft_printf("{%*c}\n", -15, 0);
 
@@ -571,14 +630,12 @@ ft_printf("'%.5f'", 99.999999);
 printf("\n");
  */
 
-
 /* FLOATTTTTTTT */
 
 /*
 printf("% 0-8.5i|\n", 0 );
 ft_printf("% 0-8.5i|\n", 0 );
  */
-
 
 /*
  printf("\t test start \n");
@@ -606,12 +663,6 @@ printf("\n");
 
 
  */
-
-
-
-
-
-
 
 /*
 printf("\t test start \n");
@@ -734,7 +785,6 @@ printf("\n");
 i = ft_printf("P * %.*f\n", -1, 3.1415926535);
 ft_printf("%d", i); */
 
-
 /* printf("P 0.35 %.1f\n", 0.35);
 printf("P 0.45 %.1f\n", 0.45);
 printf("P 0.55 %.1f\n", 0.55);
@@ -754,8 +804,13 @@ ft_printf("P 0.85 %.1f\n", 0.85);
 ft_printf("P 0.95 %.1f\n", 0.95);
 ft_printf("P 0.555 %.2f\n", 0.555); */
 
-/*
-printf("%.*f", -3, 3.1415926535);
+/* char *super;
+ super = malloc(sizeof(char) * 100);
+ft_bzero(super, 100);
+super = ft_sprintf(super, "%.*f", -3, 3.1415926535);
+printf("%s|\n%.*f\n",super, -3, 3.1415926535);
+
+
 printf("\n");
 ft_printf("%.*f", -3, 3.1415926535);
 printf("\n");
@@ -807,10 +862,9 @@ printf("\n");
 printf("'%-8.2f'", 10.3456);
 printf("\n");
 ft_printf("'%-8.2f'", 10.3456);
-
+ */
 }
 
 
- */
-		// printf("|break %c|\n", data->str[data->pos]);
 
+		// printf("|break %c|\n", data->str[data->pos]);
