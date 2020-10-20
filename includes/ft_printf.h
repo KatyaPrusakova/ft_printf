@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 14:36:57 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:46:22 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@
 # define HH	5
 # define J	6
 # define Z	7
-# define T	8
+# define W	8
 
 typedef	struct	s_flags
 {
 	va_list	args;
 	int		option;
-	char	*str;
+	char	*s;
 	char	buff[SIZE];
 	int		len;
 	int		pos;
@@ -51,7 +51,7 @@ typedef	struct	s_flags
 	int		w_width;
 	int		star;
 	int		precision;
-	int		pr_width;
+	int		p_w;
 	int		length;
 	int		hash;
 	int		plus;
@@ -68,6 +68,7 @@ int			parse_menu(t_flags *data);
 int			add_flags(t_flags *data);
 
 void		add_precision(t_flags *data);
+void		add_precision_help(t_flags *data);
 void		add_width(t_flags *data);
 
 void		add_lenght(t_flags *data);
@@ -109,6 +110,5 @@ void		reset(t_flags *data);
 char		*ft_ftoa(long double f, int precision, int hash);
 void		print_float(t_flags *data);
 char		*check_float(t_flags *data, long double *number);
-/* void		ft_n(int i);
- */
+
 #endif

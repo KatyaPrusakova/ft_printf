@@ -12,6 +12,10 @@
 		"string_view": "c",
 		"unordered_map": "c",
 		"vector": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"bitset": "cpp",
+		"cmath": "cpp",
+		"complex": "cpp",
+		"locale": "cpp"
 	}
 }

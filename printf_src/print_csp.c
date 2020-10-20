@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 14:51:17 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:42:48 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void		print_string_with_presicion(int len, char *s, t_flags *data)
 {
 	char *new;
 
-	data->width -= ((data->width && data->precision) && (data->pr_width >= len)) ? len : data->pr_width;
-	if(!(new = ft_strnew(data->pr_width)))
+	data->width -= ((data->width && data->precision) && (data->p_w >= len)) ? len : data->p_w;
+	if(!(new = ft_strnew(data->p_w)))
 			return ;
 	else
-		new = ft_strncpy(new, s, data->pr_width);
+		new = ft_strncpy(new, s, data->p_w);
 	if (data->width && !data->minus && data->precision)
 	{
 		print_width_to_buf((char)' ', data);
@@ -77,8 +77,8 @@ void	print_string(t_flags *data)
 	if (!s)
 		s = "(null)";
 	i = ft_strlen(s);
-	if (data->pr_width < 0)
-		data->pr_width = i;
+	if (data->p_w < 0)
+		data->p_w = i;
 	if (help_to_print_string(i, s, data))
 		return ;
 	if (data->precision != -1)
@@ -136,7 +136,7 @@ void	print_percent(t_flags *data)
 {
 	char	percent;
 
-	percent = data->str[data->pos];
+	percent = data->s[data->pos];
 	if (help_to_print_string(1, &percent, data))
 		return ;
 	else

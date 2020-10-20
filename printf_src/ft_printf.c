@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:20:38 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 10:08:23 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:18:27 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_printf(const char *format, ...)
 		return (0);
 	ft_bzero(data, sizeof(t_flags));
 	va_start(data->args, format);
-	data->str = (char*)format;
+	data->s = (char*)format;
 	data->option = 0;
 	count = parse_menu(data);
 	va_end(data->args);
@@ -39,7 +39,7 @@ char		*ft_sprintf(char *s, const char *format, ...)
 		return (0);
 	ft_bzero(data, sizeof(t_flags));
 	va_start(data->args, format);
-	data->str = (char*)format;
+	data->s = (char*)format;
 	data->option = 1;
 	count = parse_menu(data);
 	s = data->buff;
@@ -57,7 +57,7 @@ int				fd_printf(int fd, const char *format, ...)
 		return (0);
 	ft_bzero(data, sizeof(t_flags));
 	va_start(data->args, format);
-	data->str = (char*)format;
+	data->s = (char*)format;
 	data->option = 2;
 	count = parse_menu( data);
 	va_end(data->args);
@@ -65,14 +65,3 @@ int				fd_printf(int fd, const char *format, ...)
 	free(data);
 	return (count);
 }
-
-/*
-void		ft_n(int i)
-{
-	char c;
-
-	c = '\n';
-	i = c;
-	printf("%c\n", (char)i);
-}
- */

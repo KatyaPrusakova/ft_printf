@@ -12,16 +12,16 @@
 
 #include "ft_printf.h"
 
-void	print_binary(t_flags *data)
+void				print_binary(t_flags *data)
 {
 	long long		pointer;
 	char			*p;
 	int				len;
 
-	if (data->zero && data->pr_width)
+	if (data->zero && data->p_w)
 		data->zero = 0;
 	check_unsigned_lenght(data, &pointer);
-	if (!(p = (data->type == 'x') ? ft_itoa_base(pointer, 2, 0) : ft_itoa_base(pointer, 2, 0)))
+	if (!(p = ft_itoa_base(pointer, 2, 0)))
 		p = ft_strdup("null");
 	len = ft_strlen(p);
 	if (*p == '0')
@@ -38,17 +38,20 @@ void	print_binary(t_flags *data)
 
 void		print_hash(char **p, t_flags *data)
 {
+	char	*ox;
+
+	ox = (data->type == 'x') ? OX : BIGOX;
 	if (data->hash && data->width && data->zero)
 	{
-		if (data->pr_width)
-			*p = (data->type == 'x') ? ft_strjoinfree(OX, *p, 0, 1) : ft_strjoinfree(BIGOX, *p, 0, 1);
+		if (data->p_w)
+			*p = ft_strjoinfree(ox, *p, 0, 1);
 		else
-			data->type == 'x' ? string_to_buff(OX, data) : string_to_buff(BIGOX, data) ;
+			string_to_buff(ox, data);
 		data->width -= 2;
 	}
 	if (data->hash && !data->zero)
 	{
-		*p = (data->type == 'x') ? ft_strjoinfree(OX, *p, 0, 1) : ft_strjoinfree(BIGOX, *p, 0, 1);
+		*p = ft_strjoinfree(ox, *p, 0, 1);
 		if (data->width > 0)
 			data->width -= 2;
 	}
@@ -60,10 +63,11 @@ void	print_hex(t_flags *data)
 	char			*p;
 	int				len;
 
-	if (data->zero && data->pr_width)
+	if (data->zero && data->p_w)
 		data->zero = 0;
 	check_unsigned_lenght(data, &pointer);
-	if (!(p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : ft_itoa_base(pointer, 16, 1)))
+	if (!(p = (data->type == 'x') ? ft_itoa_base(pointer, 16, 0) : \
+	ft_itoa_base(pointer, 16, 1)))
 		p = ft_strdup("null");
 	len = ft_strlen(p);
 	if (*p == '0')
@@ -85,9 +89,10 @@ void	print_octal(t_flags *data)
 	int				len;
 
 	check_unsigned_lenght(data, &pointer);
-	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : ft_itoa_base(pointer, 8, 1);
+	p = (data->type == 'o') ? ft_itoa_base(pointer, 8, 0) : \
+	ft_itoa_base(pointer, 8, 1);
 	if (!p)
-		p ="null";
+		p = "null";
 	if (data->hash)
 	{
 		if (p[0] == '0')
@@ -119,7 +124,7 @@ void	print_uint(t_flags *data)
 	long long		num;
 
 	check_unsigned_lenght(data, &num);
-	if (data->zero && data->pr_width)
+	if (data->zero && data->p_w)
 		data->zero = 0;
 	s = ft_itoa_base(num, 10, 0);
 	if (!s)
@@ -135,15 +140,15 @@ void	print_uint(t_flags *data)
 
 int			add_flags(t_flags *data)
 {
-	if (data->str[data->pos] == '-')
+	if (data->s[data->pos] == '-')
 		data->minus = TRUE;
-	else if (data->str[data->pos] == '+')
+	else if (data->s[data->pos] == '+')
 		data->plus = TRUE;
-	else if (data->str[data->pos] == ' ')
+	else if (data->s[data->pos] == ' ')
 		data->space = TRUE;
-	else if (data->str[data->pos] == '#')
+	else if (data->s[data->pos] == '#')
 		data->hash = TRUE;
-	else if (data->str[data->pos] == '0')
+	else if (data->s[data->pos] == '0')
 		data->zero = TRUE;
 	else
 		return (0);
@@ -156,16 +161,16 @@ void		add_width(t_flags *data)
 	int		i;
 
 	i = 0;
-	s = ft_strnew(T);
-	if (ft_isdigit(data->str[data->pos]))
+	s = ft_strnew(W);
+	if (ft_isdigit(data->s[data->pos]))
 	{
-		data->zero = data->str[data->pos] == '0' ? TRUE : data->zero;
-		while (ft_isdigit(data->str[data->pos]))
-			s[i++] = data->str[data->pos++];
+		data->zero = data->s[data->pos] == '0' ? TRUE : data->zero;
+		while (ft_isdigit(data->s[data->pos]))
+			s[i++] = data->s[data->pos++];
 		data->width = ft_atoi(s);
 	}
 	free(s);
-	if (data->str[data->pos] == '*')
+	if (data->s[data->pos] == '*')
 	{
 		data->star = TRUE;
 		data->width = va_arg(data->args, int);
@@ -175,7 +180,7 @@ void		add_width(t_flags *data)
 			data->width = -data->width;
 		}
 		data->pos++;
-		if (ft_isdigit(data->str[data->pos]))
+		if (ft_isdigit(data->s[data->pos]))
 			add_width(data);
 	}
 }
@@ -186,32 +191,37 @@ void	add_precision(t_flags *data)
 	int		i;
 
 	i = 0;
-	s = ft_strnew(T);
-	if (data->str[data->pos] == '.')
-	{
-		data->precision = TRUE;
-		data->pos++;
-	}
-	if (data->str[data->pos] == '*')
+	s = ft_strnew(W);
+	add_precision_help(data);
+	if (data->s[data->pos] == '*')
 	{
 		data->star = TRUE;
-		data->pr_width = va_arg(data->args, int);
+		data->p_w = va_arg(data->args, int);
 		data->pos++;
 		free(s);
 		return ;
 	}
-	while (ft_isdigit(data->str[data->pos]))
+	while (ft_isdigit(data->s[data->pos]))
 	{
-		if (!ft_strrchr(&data->str[data->pos], 'f'))
-			data->zero = (data->str[data->pos] == '0') ? TRUE : data->zero;
-		s[i++] = data->str[data->pos++];
+		if (!ft_strrchr(&data->s[data->pos], 'f'))
+			data->zero = (data->s[data->pos] == '0') ? TRUE : data->zero;
+		s[i++] = data->s[data->pos++];
 	}
-	data->pr_width = ft_atoi(s);
-	if (data->star && data->pr_width < 0)
+	data->p_w = ft_atoi(s);
+	if (data->star && data->p_w < 0)
 	{
-		data->pr_width = 0;
+		data->p_w = 0;
 		data->precision = -1;
 	}
 	free(s);
+}
+
+void	add_precision_help(t_flags *data)
+{
+	if (data->s[data->pos] == '.')
+	{
+		data->precision = TRUE;
+		data->pos++;
+	}
 }
 

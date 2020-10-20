@@ -6,11 +6,9 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 15:59:53 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:58:20 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-	// str = ft_itoa_base(temp, 10, 0); /* first part before dot */
 
 #include "ft_printf.h"
 
@@ -18,7 +16,7 @@ static	char	ft_sign(long double *number)
 {
 	char	sign;
 
-	if (( 1 / *number ) < 0)
+	if ((1 / *number) < 0)
 	{
 		*number *= -1;
 		sign = '-';
@@ -26,7 +24,6 @@ static	char	ft_sign(long double *number)
 	}
 	return (0);
 }
-
 
 static long double	ft_roundup(int precision, long double f)
 {
@@ -43,11 +40,6 @@ static long double	ft_roundup(int precision, long double f)
 		rounding /= 10;
 	return (rounding);
 }
-
-
-
-
-
 
 char			*ft_ftoa(long double f, int precision, int hash)
 {
@@ -70,6 +62,7 @@ char			*ft_ftoa(long double f, int precision, int hash)
 	{
 		f *= 10;
 		first_part = f;
+		f -= first_part;
 		after_dot_part[i++] = first_part % 10 + '0';
 	}
 	return (ft_strjoinfree(number, after_dot_part, 1, 1));

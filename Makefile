@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/15 11:04:15 by eprusako          #+#    #+#              #
-#    Updated: 2020/10/16 12:19:30 by eprusako         ###   ########.fr        #
+#    Updated: 2020/10/20 16:49:02 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ DIR_SRC = printf_src
 DIR_OBJ = obj_dir
 HEADER = includes
 
-MAIN =	main.c
+MAIN =	testmain.c
 SRC =	check_flags.c ft_printf.c \
 		print_csp.c print_di.c print_f.c print_buff.c \
 		ft_ftoa.c \

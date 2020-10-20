@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 15:56:50 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:11:11 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ ft_printf("%-5.0f|\n", 7.3);
  */
    printf("%.0f\n", 2.5);
 ft_printf("%.0f\n", 2.5);
-
+/*
  printf(" notm 0.5 %.0f\n", 0.5);
  ft_printf("mine 0.5 %.0f\n", 0.5);
 
@@ -221,7 +221,7 @@ ft_printf("%.0f\n", 2.5);
 
  printf("0.99 %.0f\n", -0.999);
  ft_printf("0.99 %.0f\n", -0.999);
-
+ */
  /*     printf("minus %f\n", -0.89);
  ft_printf("minus %f\n", -0.89);
 
@@ -251,8 +251,14 @@ ft_printf("%#.f\n", 0);
 /*
   printf("%#o\n", 0);
 ft_printf("%#o\n", 0);
- */
 
+
+ */
+   printf("%.15Lf\n", 1444565444646.6465424242242l);
+ft_printf("%.15Lf\n", 1444565444646.6465424242242l);
+
+   printf("%Lf\n", 1444565444646.6465424242242l);
+ft_printf("%Lf\n", 1444565444646.6465424242242l);
 /*   printf("mine\n");
 ft_printf("{%*2d|\n", 5, 0);
  printf("real\n");

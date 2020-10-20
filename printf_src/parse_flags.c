@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 13:14:55 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:19:04 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			switch_type(t_flags *data)
 {
-	data->type = data->str[data->pos];
+	data->type = data->s[data->pos];
 	if (data->type == 'd' || data->type == 'i' || data->type == 'D')
 		print_decimal(data);
 	else if (data->type == 'c' || data->type == 'C')
@@ -36,7 +36,7 @@ void			switch_type(t_flags *data)
 	else if (data->type == '%')
 		print_percent(data);
 	else if (data->type == 'n')
-		data->type = va_arg(data->args,uintmax_t);
+		data->type = va_arg(data->args, uintmax_t);
 	else
 		return ;
 }
@@ -50,9 +50,9 @@ int		scan_type(t_flags *data)
 	add_lenght(data);
 	if (data->zero && data->minus && !data->star)
 		data->zero = 0;
-	if (ft_strchr(SPECIFIERS, data->str[data->pos]))
+	if (ft_strchr(SPECIFIERS, data->s[data->pos]))
 	{
-		data->type = data->str[data->pos];
+		data->type = data->s[data->pos];
 		switch_type(data);
 		reset(data);
 		return (1);
@@ -60,23 +60,20 @@ int		scan_type(t_flags *data)
 	return (0);
 }
 
-
 int		parse_menu(t_flags *data)
 {
-	while (data->str[data->pos] != '\0')
+	while (data->s[data->pos] != '\0')
 	{
-		if (data->str[data->pos] != '%')
-		{
-			save_to_buff(data->str[data->pos], data);
-		}
-		else if (data->str[data->pos] == '%' && data->str[data->pos+1] != '\0')
+		if (data->s[data->pos] != '%')
+			save_to_buff(data->s[data->pos], data);
+		else if (data->s[data->pos] == '%' && data->s[data->pos + 1] != '\0')
 		{
 			data->pos++;
 			reset(data);
 			if (!scan_type(data))
 				return (0);
 		}
-	data->pos++;
+		data->pos++;
 	}
 	return (print_buff(data));
 }

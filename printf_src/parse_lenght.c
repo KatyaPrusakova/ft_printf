@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 11:16:05 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:18:27 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	add_lenght(t_flags *data)
 {
-	if (data->str[data->pos] == 'h')
-		if (data->str[data->pos + 1] == 'h')
+	if (data->s[data->pos] == 'h')
+		if (data->s[data->pos + 1] == 'h')
 			data->length = HH;
 		else
 			data->length = H;
-	else if (data->str[data->pos] == 'l')
-		if (data->str[data->pos + 1] == 'l')
+	else if (data->s[data->pos] == 'l')
+		if (data->s[data->pos + 1] == 'l')
 			data->length = LL;
 		else
 			data->length = L;
-	else if (data->str[data->pos] == 'L')
+	else if (data->s[data->pos] == 'L')
 		data->length = BL;
-	else if (data->str[data->pos] == 'j')
+	else if (data->s[data->pos] == 'j')
 		data->length = J;
-	else if (data->str[data->pos] == 'z')
+	else if (data->s[data->pos] == 'z')
 		data->length = Z;
-	while (ft_strchr(LENGTH, data->str[data->pos]))
+	while (ft_strchr(LENGTH, data->s[data->pos]))
 		data->pos++;
 }
 
