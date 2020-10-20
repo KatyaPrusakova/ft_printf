@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 15:40:30 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:36:57 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			print_buff(t_flags *data);
 void		save_to_buff(char c, t_flags *data);
 void		reset(t_flags *data);
 
-char		*ft_ftoa(long double f, int precision);
+char		*ft_ftoa(long double f, int precision, int hash);
 void		print_float(t_flags *data);
 char		*check_float(t_flags *data, long double *number);
 /* void		ft_n(int i);

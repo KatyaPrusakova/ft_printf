@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 15:34:42 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:59:53 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static long double	ft_roundup(int precision, long double f)
 
 	rounding = 0.5;
 	temp = f + rounding;
-	if (temp % 2 != 0 && precision == 0)
+	if (f == rounding)
+		return (0);
+	if (temp % 2 != 0 && precision == 0 && temp != 1)
 		return (0);
 	while (precision--)
 		rounding /= 10;
@@ -47,7 +49,7 @@ static long double	ft_roundup(int precision, long double f)
 
 
 
-char			*ft_ftoa(long double f, int precision)
+char			*ft_ftoa(long double f, int precision, int hash)
 {
 	unsigned long long	first_part;
 	char				*number;
@@ -63,7 +65,7 @@ char			*ft_ftoa(long double f, int precision)
 		return (NULL);
 	number = (sign > 0) ? ft_strcharjoin(sign, number) : number;
 	after_dot_part = ft_strnew(precision + 1);
-	after_dot_part[0] = (precision == 0) ? '\0' : '.';
+	after_dot_part[0] = (precision == 0 && !hash) ? '\0' : '.';
 	while (precision-- > 0)
 	{
 		f *= 10;

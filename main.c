@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:01:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/19 18:13:27 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:56:50 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,11 +196,38 @@ ft_printf("%9.2p|\n", 1234); */
  printf("%+.0f|\n", -0.0);
 ft_printf("%+.0f|\n", -0.0);
  */
+
+/*
  printf("%#-5.0f|\n", 7.3);
 ft_printf("%#-5.0f|\n", 7.3);
 
  printf("%-5.0f|\n", 7.3);
 ft_printf("%-5.0f|\n", 7.3);
+ */
+   printf("%.0f\n", 2.5);
+ft_printf("%.0f\n", 2.5);
+
+ printf(" notm 0.5 %.0f\n", 0.5);
+ ft_printf("mine 0.5 %.0f\n", 0.5);
+
+  printf("-0.5 %.0f\n", -0.5);
+ ft_printf("-0.5 %.0f\n",-0.5);
+
+  printf("minus -0.89 %.0f\n", -0.89);
+ ft_printf("minus -0.89 %.0f\n", -0.89);
+
+    printf("plus 0.7 %.0f\n", 0.7);
+ ft_printf("plus 0.7 %.0f\n", 0.7);
+
+ printf("0.99 %.0f\n", -0.999);
+ ft_printf("0.99 %.0f\n", -0.999);
+
+ /*     printf("minus %f\n", -0.89);
+ ft_printf("minus %f\n", -0.89);
+
+   printf("plus %f\n", 0.7);
+ ft_printf("plus %f\n", 0.7);
+ */
 /*
   printf("%5.0f|\n", 0.0);
 ft_printf("%5.0f|\n", 0.0);
