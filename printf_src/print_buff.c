@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 16:42:48 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 19:35:37 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ void		save_to_buff(char c, t_flags *data)
 	{
 		data->buff[data->len] = c;
 		data->len++;
+	}
+	else if (data->len == 1024)
+	{
+		data->buff[data->len] = '\0';
+		data->printed += print_buff(data);
+		ft_bzero(data->buff, 1024);
+		data->len = 0;
+		save_to_buff(c, data);
 	}
 }
 

@@ -6,13 +6,13 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:16:08 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 16:42:48 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/20 19:47:31 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*check_float(t_flags *data, long double *number)
+char			*check_float(t_flags *data, long double *number)
 {
 	if (data->length == BL)
 		*number = (long double)va_arg(data->args, long double);
@@ -33,7 +33,7 @@ char		*check_float(t_flags *data, long double *number)
 	return (ft_ftoa(*number, data->p_w, data->hash));
 }
 
-void	print_float(t_flags *data)
+void			print_float(t_flags *data)
 {
 	long double	num;
 	char		*s;
