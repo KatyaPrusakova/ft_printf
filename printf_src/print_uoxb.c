@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_uob.c                                        :+:      :+:    :+:   */
+/*   print_uoxb.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:47:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 19:45:58 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:24:07 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		        print_binary(t_flags *data)
+void				print_binary(t_flags *data)
 {
 	long long		pointer;
 	char			*p;
@@ -36,29 +36,7 @@ void		        print_binary(t_flags *data)
 	free(p);
 }
 
-
-void		        print_hash(char **p, t_flags *data)
-{
-	char	        *ox;
-
-	ox = (data->type == 'x') ? OX : BIGOX;
-	if (data->hash && data->width && data->zero)
-	{
-		if (data->p_w)
-			*p = ft_strjoinfree(ox, *p, 0, 1);
-		else
-			string_to_buff(ox, data);
-		data->width -= 2;
-	}
-	if (data->hash && !data->zero)
-	{
-		*p = ft_strjoinfree(ox, *p, 0, 1);
-		if (data->width > 0)
-			data->width -= 2;
-	}
-}
-
-void	            print_hex(t_flags *data)
+void				print_hex(t_flags *data)
 {
 	long long		pointer;
 	char			*p;
@@ -83,7 +61,7 @@ void	            print_hex(t_flags *data)
 	free(p);
 }
 
-void	            print_octal(t_flags *data)
+void				print_octal(t_flags *data)
 {
 	long long		pointer;
 	char			*p;
@@ -94,17 +72,8 @@ void	            print_octal(t_flags *data)
 	ft_itoa_base(pointer, 8, 1);
 	if (!p)
 		p = "null";
-	if (data->hash)
-	{
-		if (p[0] == '0')
-		{
-			string_to_buff(p, data);
-			free(p);
-			return ;
-		}
-		else
-			p = ft_strcharjoin('0', p);
-	}
+	if (data->hash && print_hash_octal(&p, data))
+		return ;
 	len = ft_strlen(p);
 	if (data->precision >= 0)
 		p = print_precision(p, len, pointer, data);
@@ -118,7 +87,7 @@ void	            print_octal(t_flags *data)
 	free(p);
 }
 
-void	    print_uint(t_flags *data)
+void				print_uint(t_flags *data)
 {
 	char			*s;
 	int				len;
@@ -137,4 +106,15 @@ void	    print_uint(t_flags *data)
 		calculate_width(&s, len, data);
 	string_to_buff(s, data);
 	free(s);
+}
+
+void			print_percent(t_flags *data)
+{
+	char	percent;
+
+	percent = data->s[data->pos];
+	if (print_string_help(1, &percent, data))
+		return ;
+	else
+		save_to_buff(percent, data);
 }

@@ -6,22 +6,13 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 16:42:48 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:24:48 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		print_width_to_buf(char width, t_flags *data)
-{
-	while (data->width > 0)
-	{
-		save_to_buff(width, data);
-		data->width--;
-	}
-}
-
-int		help_to_print_string(int i, char *s, t_flags *data)
+int				print_string_help(int i, char *s, t_flags *data)
 {
 	char	width;
 
@@ -29,7 +20,7 @@ int		help_to_print_string(int i, char *s, t_flags *data)
 	if (data->width && !data->minus && data->precision == -1)
 	{
 		data->width -= i;
-		print_width_to_buf(width, data);
+		width_to_buf(width, data);
 		string_to_buff(s, data);
 		return (1);
 	}
@@ -37,13 +28,13 @@ int		help_to_print_string(int i, char *s, t_flags *data)
 	{
 		data->width -= i;
 		string_to_buff(s, data);
-		print_width_to_buf(width, data);
+		width_to_buf(width, data);
 		return (1);
 	}
 	return (0);
 }
 
-static void		print_string_with_presicion(int len, char *s, t_flags *data)
+void		print_string_with_presicion(int len, char *s, t_flags *data)
 {
 	char *new;
 
@@ -54,13 +45,13 @@ static void		print_string_with_presicion(int len, char *s, t_flags *data)
 		new = ft_strncpy(new, s, data->p_w);
 	if (data->width && !data->minus && data->precision)
 	{
-		print_width_to_buf((char)' ', data);
+		width_to_buf((char)' ', data);
 		string_to_buff(new, data);
 	}
 	else if (data->width && data->minus == 1 && data->precision)
 	{
 		string_to_buff(new, data);
-		print_width_to_buf((char)' ', data);
+		width_to_buf((char)' ', data);
 	}
 	else if (data->precision >= 0)
 		string_to_buff(new, data);
@@ -68,7 +59,7 @@ static void		print_string_with_presicion(int len, char *s, t_flags *data)
 	return ;
 }
 
-void	print_string(t_flags *data)
+void			print_string(t_flags *data)
 {
 	char	*s;
 	int		i;
@@ -79,7 +70,7 @@ void	print_string(t_flags *data)
 	i = ft_strlen(s);
 	if (data->p_w < 0)
 		data->p_w = i;
-	if (help_to_print_string(i, s, data))
+	if (print_string_help(i, s, data))
 		return ;
 	if (data->precision != -1)
 	{
@@ -89,7 +80,7 @@ void	print_string(t_flags *data)
 	string_to_buff(s, data);
 }
 
-void	print_char(t_flags *data)
+void			print_char(t_flags *data)
 {
 	if (data->width && data->minus == 0)
 	{
@@ -113,7 +104,7 @@ void	print_char(t_flags *data)
 		save_to_buff(va_arg(data->args,int), data);
 }
 
-void	print_pointer(t_flags *data)
+void			print_pointer(t_flags *data)
 {
 	uintmax_t	pointer;
 	char		*p;
@@ -132,13 +123,3 @@ void	print_pointer(t_flags *data)
 	free(p);
 }
 
-void	print_percent(t_flags *data)
-{
-	char	percent;
-
-	percent = data->s[data->pos];
-	if (help_to_print_string(1, &percent, data))
-		return ;
-	else
-		save_to_buff(percent, data);
-}

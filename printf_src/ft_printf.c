@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:20:38 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 16:18:27 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 10:51:50 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int		ft_printf(const char *format, ...)
 	return (count);
 }
 
+/*
+** Returns the string instead of printing.
+*/
 
 char		*ft_sprintf(char *s, const char *format, ...)
 {
@@ -48,6 +51,10 @@ char		*ft_sprintf(char *s, const char *format, ...)
 	return (s);
 }
 
+/*
+** Returns to specified file descriptor.
+*/
+
 int				fd_printf(int fd, const char *format, ...)
 {
 	t_flags		*data;
@@ -59,7 +66,7 @@ int				fd_printf(int fd, const char *format, ...)
 	va_start(data->args, format);
 	data->s = (char*)format;
 	data->option = 2;
-	count = parse_menu( data);
+	count = parse_menu(data);
 	va_end(data->args);
 	write(fd, data->buff, data->len);
 	free(data);

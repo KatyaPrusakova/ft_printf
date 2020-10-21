@@ -6,11 +6,11 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 16:58:20 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:27:12 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 static	char	ft_sign(long double *number)
 {

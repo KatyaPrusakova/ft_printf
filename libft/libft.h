@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 15:57:09 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/16 12:35:27 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:28:08 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(uintmax_t num, int base, int change);
 
-
+char				*ft_ftoa(long double f, int precision, int hash);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *ptr, int x, size_t len);
 void				*ft_memcpy(void *dest, const void *src, size_t len);

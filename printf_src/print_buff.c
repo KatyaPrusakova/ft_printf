@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 19:35:37 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:22:42 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,14 @@ void		string_to_buff(char *s, t_flags *data)
 			ft_bzero(data->buff, 1024);
 			data->len = 0;
 		}
+	}
+}
+
+void		width_to_buf(char width, t_flags *data)
+{
+	while (data->width > 0)
+	{
+		save_to_buff(width, data);
+		data->width--;
 	}
 }

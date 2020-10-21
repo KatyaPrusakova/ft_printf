@@ -6,7 +6,7 @@
 #    By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/15 11:04:15 by eprusako          #+#    #+#              #
-#    Updated: 2020/10/20 19:18:31 by eprusako         ###   ########.fr        #
+#    Updated: 2020/10/21 11:29:22 by eprusako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,8 @@ DIR_OBJ = obj_dir
 HEADER = includes
 
 MAIN =	testmain.c
-SRC =	check_flags.c ft_printf.c \
-		print_csp.c print_di.c print_f.c print_buff.c \
-		ft_ftoa.c \
-		parse_flags.c parse_lenght.c\
+SRC =	ft_printf.c parse_menu.c parse_flags.c parse_lenght.c\
+		print_csp.c print_uoxb.c print_di.c print_f.c print_width_hash.c print_buff.c \
 
 YELLOW = "\033[1;33m"
 NOCOLOR = "\033[0m"

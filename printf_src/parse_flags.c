@@ -1,79 +1,118 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_flags.c                                      :+:      :+:    :+:   */
+/*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 16:19:04 by eprusako         ###   ########.fr       */
+/*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
+/*   Updated: 2020/10/02 14:16:38 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			switch_type(t_flags *data)
+int			check_flags(t_flags *data)
 {
-	data->type = data->s[data->pos];
-	if (data->type == 'd' || data->type == 'i' || data->type == 'D')
-		print_decimal(data);
-	else if (data->type == 'c' || data->type == 'C')
-		print_char(data);
-	else if (data->type == 's' || data->type == 'S')
-		print_string(data);
-	else if (data->type == 'p' || data->type == 'P')
-		print_pointer(data);
-	else if (data->type == 'f' || data->type == 'F')
-		print_float(data);
-	else if (data->type == 'x' || data->type == 'X')
-		print_hex(data);
-	else if (data->type == 'u' || data->type == 'U')
-		print_uint(data);
-	else if (data->type == 'o' || data->type == 'O')
-		print_octal(data);
-	else if (data->type == 'b' || data->type == 'B')
-		print_binary(data);
-	else if (data->type == '%')
-		print_percent(data);
-	else if (data->type == 'n')
-		data->type = va_arg(data->args, uintmax_t);
+	if (data->s[data->pos] == '-')
+		data->minus = TRUE;
+	else if (data->s[data->pos] == '+')
+		data->plus = TRUE;
+	else if (data->s[data->pos] == ' ')
+		data->space = TRUE;
+	else if (data->s[data->pos] == '#')
+		data->hash = TRUE;
+	else if (data->s[data->pos] == '0')
+		data->zero = TRUE;
 	else
-		return ;
+		return (0);
+	return (1);
 }
 
-int		scan_type(t_flags *data)
+void		check_width(int i, t_flags *data)
 {
-	while (add_flags(data))
-		data->pos++;
-	add_width(data);
-	add_precision(data);
-	add_lenght(data);
-	if (data->zero && data->minus && !data->star)
-		data->zero = 0;
-	if (ft_strchr(SPECIFIERS, data->s[data->pos]))
+	char	*s;
+
+	s = ft_strnew(W);
+	if (ft_isdigit(data->s[data->pos]))
 	{
-		data->type = data->s[data->pos];
-		switch_type(data);
-		reset(data);
-		return (1);
+		data->zero = data->s[data->pos] == '0' ? TRUE : data->zero;
+		while (ft_isdigit(data->s[data->pos]))
+			s[i++] = data->s[data->pos++];
+		data->width = ft_atoi(s);
 	}
-	return (0);
-}
-
-int		parse_menu(t_flags *data)
-{
-	while (data->s[data->pos] != '\0')
+	free(s);
+	if (data->s[data->pos] == '*')
 	{
-		if (data->s[data->pos] != '%')
-			save_to_buff(data->s[data->pos], data);
-		else if (data->s[data->pos] == '%' && data->s[data->pos + 1] != '\0')
+		data->star = TRUE;
+		data->width = va_arg(data->args, int);
+		if (data->width < 0)
 		{
-			data->pos++;
-			reset(data);
-			if (!scan_type(data))
-				return (0);
+			data->minus = TRUE;
+			data->width = -data->width;
 		}
 		data->pos++;
+		if (ft_isdigit(data->s[data->pos]))
+			check_width(0, data);
 	}
-	return (print_buff(data));
+}
+
+void		check_precision(int i, t_flags *data)
+{
+	char	*s;
+
+	s = ft_strnew(W);
+	check_precision_help(data);
+	if (data->s[data->pos] == '*')
+	{
+		data->star = TRUE;
+		data->p_w = va_arg(data->args, int);
+		data->pos++;
+		free(s);
+		return ;
+	}
+	while (ft_isdigit(data->s[data->pos]))
+	{
+		if (!ft_strrchr(&data->s[data->pos], 'f'))
+			data->zero = (data->s[data->pos] == '0') ? TRUE : data->zero;
+		s[i++] = data->s[data->pos++];
+	}
+	data->p_w = ft_atoi(s);
+	if (data->star && data->p_w < 0)
+	{
+		data->p_w = 0;
+		data->precision = -1;
+	}
+	free(s);
+}
+
+void		check_precision_help(t_flags *data)
+{
+	if (data->s[data->pos] == '.')
+	{
+		data->precision = TRUE;
+		data->pos++;
+	}
+}
+
+void	check_lenght_modifier(t_flags *data)
+{
+	if (data->s[data->pos] == 'h')
+		if (data->s[data->pos + 1] == 'h')
+			data->length = HH;
+		else
+			data->length = H;
+	else if (data->s[data->pos] == 'l')
+		if (data->s[data->pos + 1] == 'l')
+			data->length = LL;
+		else
+			data->length = L;
+	else if (data->s[data->pos] == 'L')
+		data->length = BL;
+	else if (data->s[data->pos] == 'j')
+		data->length = J;
+	else if (data->s[data->pos] == 'z')
+		data->length = Z;
+	while (ft_strchr(LENGTH, data->s[data->pos]))
+		data->pos++;
 }
