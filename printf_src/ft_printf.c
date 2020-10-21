@@ -6,13 +6,13 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:20:38 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 10:51:50 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 14:26:07 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	t_flags		*data;
 	uintmax_t	count;
@@ -26,6 +26,7 @@ int		ft_printf(const char *format, ...)
 	count = parse_menu(data);
 	va_end(data->args);
 	free(data);
+	system("leaks a.out");
 	return (count);
 }
 
@@ -33,7 +34,7 @@ int		ft_printf(const char *format, ...)
 ** Returns the string instead of printing.
 */
 
-char		*ft_sprintf(char *s, const char *format, ...)
+char			*ft_sprintf(char *s, const char *format, ...)
 {
 	t_flags		*data;
 	uintmax_t	count;

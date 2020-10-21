@@ -6,15 +6,15 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:18:25 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 11:27:12 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:10:50 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	char	ft_sign(long double *number)
+static	char			ft_sign(long double *number)
 {
-	char	sign;
+	char				sign;
 
 	if ((1 / *number) < 0)
 	{
@@ -25,7 +25,7 @@ static	char	ft_sign(long double *number)
 	return (0);
 }
 
-static long double	ft_roundup(int precision, long double f)
+static long double		ft_roundup(int precision, long double f)
 {
 	long double			rounding;
 	unsigned long long	temp;
@@ -41,7 +41,7 @@ static long double	ft_roundup(int precision, long double f)
 	return (rounding);
 }
 
-char			*ft_ftoa(long double f, int precision, int hash)
+char					*ft_ftoa(long double f, int precision, int hash)
 {
 	unsigned long long	first_part;
 	char				*number;

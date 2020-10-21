@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 11:24:48 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:14:41 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				print_string_help(int i, char *s, t_flags *data)
 {
-	char	width;
+	char		width;
 
 	width = (data->zero && data->type == '%') ? '0' : ' ';
 	if (data->width && !data->minus && data->precision == -1)
@@ -34,13 +34,14 @@ int				print_string_help(int i, char *s, t_flags *data)
 	return (0);
 }
 
-void		print_string_with_presicion(int len, char *s, t_flags *data)
+void			print_string_with_presicion(int len, char *s, t_flags *data)
 {
-	char *new;
+	char		*new;
 
-	data->width -= ((data->width && data->precision) && (data->p_w >= len)) ? len : data->p_w;
-	if(!(new = ft_strnew(data->p_w)))
-			return ;
+	data->width -= (data->width && data->precision) && (data->p_w >= len) ? \
+	len : data->p_w;
+	if (!(new = ft_strnew(data->p_w)))
+		return ;
 	else
 		new = ft_strncpy(new, s, data->p_w);
 	if (data->width && !data->minus && data->precision)
@@ -61,8 +62,8 @@ void		print_string_with_presicion(int len, char *s, t_flags *data)
 
 void			print_string(t_flags *data)
 {
-	char	*s;
-	int		i;
+	char		*s;
+	int			i;
 
 	s = (char*)va_arg(data->args, char*);
 	if (!s)
@@ -89,11 +90,11 @@ void			print_char(t_flags *data)
 			save_to_buff(' ', data);
 			data->width--;
 		}
-		save_to_buff(va_arg(data->args,int), data);
+		save_to_buff(va_arg(data->args, int), data);
 	}
 	else if (data->width > 0 && data->minus == 1)
 	{
-		save_to_buff(va_arg(data->args,int), data);
+		save_to_buff(va_arg(data->args, int), data);
 		while (data->width > 1)
 		{
 			save_to_buff(' ', data);
@@ -101,7 +102,7 @@ void			print_char(t_flags *data)
 		}
 	}
 	else
-		save_to_buff(va_arg(data->args,int), data);
+		save_to_buff(va_arg(data->args, int), data);
 }
 
 void			print_pointer(t_flags *data)
@@ -115,11 +116,10 @@ void			print_pointer(t_flags *data)
 		return ;
 	if (data->precision > 0)
 		p = print_precision(p, ft_strlen(p), pointer, data);
-	p = ft_strjoinfree(OX, p, 0, 1);
+	p = ft_strjoinfree("0x", p, 0, 1);
 	len = ft_strlen(p);
 	if (data->width)
 		calculate_width(&p, len, data);
 	string_to_buff(p, data);
 	free(p);
 }
-

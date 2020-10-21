@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:16:00 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 11:25:57 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:55:03 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			switch_type(t_flags *data)
 		return ;
 }
 
-void	check_lenght(t_flags *data, long long *number)
+void			check_lenght(t_flags *data, long long *number)
 {
 	if (data->length == H)
 		*number = (short int)va_arg(data->args, int);
@@ -96,7 +96,7 @@ void	check_lenght(t_flags *data, long long *number)
 		*number = (int)va_arg(data->args, int);
 }
 
-void	check_unsigned_lenght(t_flags *data, long long *n)
+void			check_unsigned_lenght(t_flags *data, long long *n)
 {
 	if (data->length == H)
 		*n = (unsigned short int)va_arg(data->args, int);

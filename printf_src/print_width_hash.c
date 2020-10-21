@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 10:39:19 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 11:11:51 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:02:37 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void			print_hash(char **p, t_flags *data)
 {
 	char			*ox;
 
-	ox = (data->type == 'x') ? OX : BIGOX;
+	ox = (data->type == 'x') ? "0x" : "0X";
 	if (data->hash && data->width && data->zero)
 	{
 		if (data->p_w)

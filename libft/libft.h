@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 15:57:09 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 11:28:08 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:10:20 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ char				*ft_strnew(size_t size);
 void				ft_memdel(void **ap);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strcharjoin(int c, const char *s);
-char				*ft_strjoinfree(char const *s1, char const *s2, int left, int right);
+char				*ft_strjoinfree(char const *s1, char const *s2, \
+					int left, int right);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strtrim(char const *s);

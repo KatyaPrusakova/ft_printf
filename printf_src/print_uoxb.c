@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:47:33 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 11:24:07 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 13:37:51 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ void				print_uint(t_flags *data)
 	free(s);
 }
 
-void			print_percent(t_flags *data)
+void				print_percent(t_flags *data)
 {
-	char	percent;
+	char			percent;
 
 	percent = data->s[data->pos];
 	if (print_string_help(1, &percent, data))

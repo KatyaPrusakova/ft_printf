@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 18:39:34 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/20 19:30:57 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 14:28:41 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <limits.h>
 #include <assert.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 
 static void	ft_nl(int n)
@@ -343,6 +346,27 @@ void    test_p(void)
 
     ft_printf("FT %%p with 12 addresses and with 70|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
     printf("PF %%p with 12 addresses and with 70|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|%70p|\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
+}
+
+void    test_b(void)
+{
+    int a;
+    unsigned long long	ull_pos_1 = 2233720;
+
+    printf("TEST %%b\n-----------------------------------------------------------------\n\n");
+
+    a = ft_printf("FT 42 %%b = |%b|\n", 42);
+        printf("REAL 42    |101010|\n\n");
+
+    a = ft_printf("FT   2233720 |%b|\n", ull_pos_1);
+        printf("REAL 2233720 |1000100001010101111000|\n\n");
+
+    a = ft_printf("FT %%b INT32_MAX |%b|\n", INT32_MAX);
+        printf("REAL 2147483647 |1111111111111111111111111111111|\n\n");
+
+    a = ft_printf("FT unsigned %%b |%b|\n", 305419896);
+        printf("REAL 305419896 |10010001101000101011001111000|\n\n");
+
 }
 
 void    test_g(void)
@@ -705,16 +729,8 @@ void    test_float(void)
     assert(a == b);
     ft_nl(1);
 
-    a =    printf("PF inf |%010.15f|\n", 1.0 / 0.0);
-	b = ft_printf("FT inf |%010.15f|\n", 1.0 / 0.0);
-	assert(a == b);
-
-	a =    printf("PF -inf |%010.15f|\n", 1.0 / -0.0);
-	b = ft_printf("FT -inf |%010.15f|\n", 1.0 / -0.0);
-	assert(a == b);
-
-	a =    printf("PF nan |%010.15f|\n", 0.0 / 0.0);
-	b = ft_printf("FT nan |%010.15f|\n", 0.0 / 0.0);
+	a =    printf("PF null |%010.15f|\n", 0.0 );
+	b = ft_printf("FT null |%010.15f|\n", 0.0 );
     assert(a == b);
     ft_nl(2);
 }
@@ -837,7 +853,8 @@ void    test_G(void)
     assert(a == b);
     ft_nl(1);
 }
-/*
+
+
 void    test_sn(void)
 {
     int a;
@@ -847,61 +864,53 @@ void    test_sn(void)
 
     mine = ft_strnew(11000);
     original = ft_strnew(11000);
-    ft_printf("TEST ft_snprintf\n-----------------------------------------------------------------\n\n");
+    ft_printf("TEST ft_sprintf\n-----------------------------------------------------------------\n\n");
 
 
-    a = ft_snprintf(mine, 420, "FT snprintf = |%X|\n", 42);
-    b = snprintf(original, 420, "FT snprintf = |%X|\n", 42);
-    assert(a == b);
-    ft_printf("mine saves: |%s| with return value |%d|\n", mine, a);
-    printf("orig saves: |%s| with return value |%d| \n", original, b);
-	if (ft_strcmp(mine, original))
-		ft_printf("ERROR snprintf test 1");
-    ft_nl(1);
-//    free(mine);
-//    free(original);
+    mine = ft_sprintf(mine, "FT sprintf = |%X|\n", 42);
+    sprintf(original, "FT sprintf = |%X|\n", 42);
+    printf("%s\n%s\n", mine, original);
 
-    a = ft_snprintf(mine, 1000, "%%G width greater than presicion left|%-15.5G|\n", -9587.3333);
-    b = snprintf(original, 1000, "%%G width greater than presicion left|%-15.5G|\n", -9587.3333);
-    ft_printf("mine saves: |%s| with return value |%d|\n", mine, a);
-    ft_printf("orig saves: |%s| with return value |%d| \n", original, b);
-    assert(a == b);
-    if (ft_strcmp(mine, original))
-        ft_printf("ERROR snprintf test 2");
-    ft_nl(1);
-//    free(mine);
-//    free(original);
+    mine = ft_sprintf(mine, "|%.5f|\n", -9587.3333);
+          sprintf(original, "|%.5f|\n", -9587.3333);
+    printf("%s\n%s\n", mine, original);
 
-    a = ft_snprintf(mine, 2000, "%%G width greater than presicion zero padding minus|%0-15.5G|\n", -9587.3333);
-    b = snprintf(original, 2000, "%%G width greater than presicion zero padding minus|%0-15.5G|\n", -9587.3333);
-    ft_printf("mine saves: |%s| with return value |%d|\n", mine, a);
-    ft_printf("orig saves: |%s| with return value |%d| \n", original, b);
-    assert(a == b);
-    if (ft_strcmp(mine, original))
-        ft_printf("ERROR snprintf test 3");
-    ft_nl(1);
-//    free(mine);
-//    free()
+    mine = ft_sprintf(mine, "%%f width greater than presicion zero padding minus|%0-15.5f|\n", -9587.3333);
+          sprintf(original, "%%f width greater than presicion zero padding minus|%0-15.5f|\n", -9587.3333);
+    printf("%s\n%s\n", mine, original);
 
-    a = ft_snprintf(mine, 100, "%%G width greater than presicion zero padding minus|%015.5G|\n", -9587.3333);
-    b = snprintf(original, 100, "%%G width greater than presicion zero padding minus|%015.5G|\n", -9587.3333);
-    ft_printf("mine saves: |%s| with return value |%d|\n", mine, a);
-    ft_printf("orig saves: |%s| with return value |%d| \n", original, b);
-    assert(a == b);
-    if (ft_strcmp(mine, original))
-        ft_printf("ERROR snprintf test 4");
-    ft_nl(1);
+    mine = ft_sprintf(mine, "%%f width greater than presicion zero padding minus|%015.5f|\n", -9587.3333);
+          sprintf(original, "%%f width greater than presicion zero padding minus|%015.5f|\n", -9587.3333);
+    printf("%s\n%s\n", mine, original);
 
-    a = ft_snprintf(mine, 10000, "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\n");
-    b = snprintf(original, 10000, "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\n");
-    ft_printf("ft return value(long format string) = |%d|\npf return value(long format string) = |%d|\n", a, b);
-    assert(a == b);
-    if (ft_strcmp(mine, original))
-        ft_printf("ERROR snprintf test 5");
-    ft_nl(2);
+    mine = ft_sprintf(mine, "this is string %s\n", "wow");
+          sprintf(original, "this is string %s\n", "wow");
+    free(mine);
+    free(original);
+    printf("%s\n%s\n", mine, original);
+}
+
+void    test_fd(void)
+{
+    int a;
+    int b;
+    int fd;
+
+    ft_printf("TEST fd_printf\n-----------------------------------------------------------------\n\n");
+
+    fd = open("text_1.txt", O_RDWR);
+    fd_printf(fd, "FT fdprintf = |%X|\n", 42);
+    ft_printf("this is info written to text_1.txt\n");
+    system("cat text_1.txt");
+    ft_printf("\n");
+
+    fd = open("text_2.txt", O_RDWR);
+    fd_printf(fd, "this is string\n");
+    ft_printf("this is info written to text_2.txt\n");
+    system("cat text_2.txt");
 
 }
- */
+
 void	test_all(void)
 {
 	test_c();
@@ -915,6 +924,8 @@ void	test_all(void)
 	test_u();
 	test_percent();
 	test_float();
+    test_sn();
+    test_fd();
 }
 
 void    test_asterix(void)
@@ -983,12 +994,14 @@ void	run_argument(char *arg)
 		// test_e();
 		// test_G();
 		// test_E();
-	/* 	test_sn(); */
+	 	test_sn();
+        test_b();
+        test_fd();
 	}
 	else if (!ft_strcmp(arg, "3"))
 	{
 		test_c();
-		test_s();
+		test_sn();
 	}
 	else if (!ft_strcmp(arg, "4"))
 	{
@@ -1066,6 +1079,7 @@ int main(int ac, char **av)
 {
 	int i = 1;
 	char *arg;
+
 
 	while (i < ac)
 	{

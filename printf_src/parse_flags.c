@@ -1,12 +1,12 @@
-// /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_flags.c                                      :+:      :+:    :+:   */
+/*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/02 14:16:38 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:04:31 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		check_precision_help(t_flags *data)
 	}
 }
 
-void	check_lenght_modifier(t_flags *data)
+void		check_lenght_modifier(t_flags *data)
 {
 	if (data->s[data->pos] == 'h')
 		if (data->s[data->pos + 1] == 'h')
@@ -113,6 +113,6 @@ void	check_lenght_modifier(t_flags *data)
 		data->length = J;
 	else if (data->s[data->pos] == 'z')
 		data->length = Z;
-	while (ft_strchr(LENGTH, data->s[data->pos]))
+	while (ft_strchr("hlLzj", data->s[data->pos]))
 		data->pos++;
 }

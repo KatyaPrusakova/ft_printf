@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:54:05 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 11:22:42 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:13:54 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void		save_to_buff(char c, t_flags *data)
 	else if (data->len == 1024)
 	{
 		data->buff[data->len] = '\0';
-		data->printed += print_buff(data);
+		data->printed += data->len;
+		print_buff(data);
 		ft_bzero(data->buff, 1024);
 		data->len = 0;
 		save_to_buff(c, data);
@@ -64,7 +65,8 @@ void		string_to_buff(char *s, t_flags *data)
 		else
 		{
 			data->buff[data->len] = '\0';
-			data->printed += print_buff(data);
+			data->printed += data->len;
+			print_buff(data);
 			ft_bzero(data->buff, 1024);
 			data->len = 0;
 		}
