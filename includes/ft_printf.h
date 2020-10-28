@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 14:34:43 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/22 11:54:36 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			check_lenght_modifier(t_flags *data);
 ** ------ PRINT_WIDTH_HASH.C ------
 */
 void			calculate_width(char **s, int len, t_flags *data);
-char			*print_width(char *s, char *temp, t_flags *data);
+char			*print_width(char *s, char *temp, int minus, t_flags *data);
 char			*print_width_minus(char *s, char *temp, t_flags *data);
 void			print_hash(char **p, t_flags *data);
 int				print_hash_octal(char **p, t_flags *data);

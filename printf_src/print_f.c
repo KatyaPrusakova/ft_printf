@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:16:08 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/20 19:47:31 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/28 09:34:58 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ void			print_float(t_flags *data)
 	if (data->zero)
 		add_sign(&s, data);
 	string_to_buff(s, data);
+	free(s);
 }

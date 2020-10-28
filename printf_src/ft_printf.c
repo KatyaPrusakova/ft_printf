@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:20:38 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/21 14:26:07 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/28 09:52:30 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char			*ft_sprintf(char *s, const char *format, ...)
 	data->s = (char*)format;
 	data->option = 1;
 	count = parse_menu(data);
-	s = data->buff;
+	s = ft_strcpy(s ,data->buff);
 	va_end(data->args);
 	free(data);
 	return (s);

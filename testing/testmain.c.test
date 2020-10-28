@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 18:39:34 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/21 14:28:41 by eprusako         ###   ########.fr       */
+/*   Updated: 2020/10/28 09:52:47 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,248 +369,6 @@ void    test_b(void)
 
 }
 
-void    test_g(void)
-{
-    int a;
-    int b;
-
-    ft_printf("TEST %%g\n-----------------------------------------------------------------\n\n");
-
-    a = ft_printf("FT 0.15|%#.5g|\n", 0.15);
-    b = printf("PF 0.15|%#.5g|\n", 0.15);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.25|%#.5g|\n", 0.25);
-    b = printf("PF 0.25|%#.5g|\n", 0.25);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.15|%#.1g|\n", 0.15);
-    b = printf("PF 0.15|%#.1g|\n", 0.15);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.25|%#.1g|\n", 0.25);
-    b = printf("PF 0.25|%#.1g|\n", 0.25);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.35|%#.1g|\n", 0.35);
-    b = printf("PF 0.35|%#.1g|\n", 0.35);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.45|%.1g|\n", 0.45);
-    b = printf("PF 0.45|%.1g|\n", 0.45);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.55|%.1g|\n", 0.55);
-    b = printf("PF 0.55|%.1g|\n", 0.55);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.65|%.1g|\n", 0.65);
-    b = printf("PF 0.65|%.1g|\n", 0.65);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.75|%.1g|\n", 0.75);
-    b = printf("PF 0.75|%.1g|\n", 0.75);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.85|%.1g|\n", 0.85);
-    b = printf("PF 0.85|%.1g|\n", 0.85);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.95|%.1g|\n", 0.95);
-    b = printf("PF 0.95|%.1g|\n", 0.95);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.555|%.2g|\n", 0.555);
-    b = printf("PF 0.555|%.2g|\n", 0.555);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT   %%g, -958.125|%g|\n", -958.125);
-    b = printf("PF   %%g, -958.125|%g|\n", -958.125);
-    assert(a == b);
-    ft_nl(1);
-
-
-    a = ft_printf("FT %%g neg_val w presicion 0 |%.0g|\n", -958.125);
-    b = printf("PF %%g neg_val w presicion 0 |%.0g|\n", -958.125);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%g width greater than presicion |%15.5g|\n", -9587.3333);
-    b = printf("PF %%g width greater than presicion |%15.5g|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%g width greater than presicion left|%-15.5g|\n", -9587.3333);
-    b = printf("PF %%g width greater than presicion left|%-15.5g|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%g width greater than presicion zero padding minus|%0-15.5g|\n", -9587.3333);
-    b = printf("PF %%g width greater than presicion zero padding minus|%0-15.5g|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%g width greater than presicion zero padding minus|%015.5g|\n", -9587.3333);
-    b = printf("PF %%g width greater than presicion zero padding minus|%015.5g|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ g with # flag presicion 1|%#.1g|\n", -0.0);
-    b = printf("PF_ g with # flag presicion 1|%#.1g|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ g with # flag presicion 0|%#.0g|\n", -0.0);
-    b = printf("PF_ g with # flag presicion 0|%#.0g|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ g #-5.3|%#-5.3g|\n", 0.0);
-    b = printf("PF_ g #-5.3|%#-5.3g|\n", 0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ g #.1g|%#.1g|\n", -7.3);
-    b = printf("PF_ g #.1g|%#.1g|\n", -7.3);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("ft_ significant digits %s |%g|\n", "23.00041", 23.00041);
-    b = printf("pf_ significant digits %s |%g|\n", "23.00041", 23.00041);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("significant digits, shouldn't be rounded up ft_ |%.4g|\n", -1.2385);
-    b = printf("significant digits, shouldn't be rounded up pf_ |%.4g|\n", -1.2385);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("ft_ significant digits, should print all the digits with no presicion %%g |%g|\n", 0.00894255);
-    b = printf("pf_ significant digits, should print all the digits with no presicion %%g |%g|\n", 0.00894255);
-    assert(a == b);
-    ft_nl(1);
-}
-
-void    test_e(void)
-{
-    int a;
-    int b;
-
-    ft_printf("TEST %%e\n-----------------------------------------------------------------\n\n");
-
-    a = ft_printf("FT test e basic |%e|\n", 7.5);
-    b = printf("PF test e basic |%e|\n", 7.5);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.15|%#.5e|\n", 0.15);
-    b = printf("PF 0.15|%#.5e|\n", 0.15);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.25|%#.5e|\n", 0.25);
-    b = printf("PF 0.25|%#.5e|\n", 0.25);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.35|%#.1e|\n", 0.35);
-    b = printf("PF 0.35|%#.1e|\n", 0.35);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.45|%.1e|\n", 0.45);
-    b = printf("PF 0.45|%.1e|\n", 0.45);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.55|%.1e|\n", 0.55);
-    b = printf("PF 0.55|%.1e|\n", 0.55);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.65|%.1e|\n", 0.65);
-    b = printf("PF 0.65|%.1e|\n", 0.65);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.75|%.1e|\n", 0.75);
-    b = printf("PF 0.75|%.1e|\n", 0.75);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.85|%.1e|\n", 0.85);
-    b = printf("PF 0.85|%.1e|\n", 0.85);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.95|%.1e|\n", 0.95);
-    b = printf("PF 0.95|%.1e|\n", 0.95);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT 0.555|%.2e|\n", 0.555);
-    b = printf("PF 0.555|%.2e|\n", 0.555);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT   %%e, -958.125|%e|\n", -958.125);
-    b = printf("PF   %%e, -958.125|%e|\n", -958.125);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%e width greater than presicion |%15.5e|\n", -9587.3333);
-    b = printf("PF %%e width greater than presicion |%15.5e|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%e width greater than presicion left|%-15.5e|\n", -9587.3333);
-    b = printf("PF %%e width greater than presicion left|%-15.5e|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%e width greater than presicion zero padding minus|%0-15.5e|\n", -9587.3333);
-    b = printf("PF %%e width greater than presicion zero padding minus|%0-15.5e|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%e width greater than presicion zero padding minus|%015.5e|\n", -9587.3333);
-    b = printf("PF %%e width greater than presicion zero padding minus|%015.5e|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ e with # flag presicion 1|%#.1e|\n", -0.0);
-    b = printf("PF_ e with # flag presicion 1|%#.1e|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ e with # flag presicion 0|%#.0e|\n", -0.0);
-    b = printf("PF_ e with # flag presicion 0|%#.0e|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ e #-5.3|%#-5.3e|\n", 0.0);
-    b = printf("PF_ e #-5.3|%#-5.3e|\n", 0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ e #.1e|%#.1e|\n", -7.3);
-    b = printf("PF_ e #.1e|%#.1e|\n", -7.3);
-    assert(a == b);
-    ft_nl(1);
-}
-
 void    test_float(void)
 {
     int a;
@@ -748,113 +506,6 @@ void    test_percent(void)
     ft_nl(1);
 }
 
-void    test_E(void)
-{
-    int a;
-    int b;
-
-    ft_printf("TEST %%E\n-----------------------------------------------------------------\n\n");
-
-    a = ft_printf("FT   %%E, -958.125|%E|\n", -958.125);
-    b = printf("PF   %%E, -958.125|%E|\n", -958.125);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%E width greater than presicion |%15.5E|\n", -9587.3333);
-    b = printf("PF %%E width greater than presicion |%15.5E|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%E width greater than presicion left|%-15.5E|\n", -9587.3333);
-    b = printf("PF %%E width greater than presicion left|%-15.5E|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%E width greater than presicion zero padding minus|%0-15.5E|\n", -9587.3333);
-    b = printf("PF %%E width greater than presicion zero padding minus|%0-15.5E|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%E width greater than presicion zero padding minus|%015.5E|\n", -9587.3333);
-    b = printf("PF %%E width greater than presicion zero padding minus|%015.5E|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ E with # flag presicion 1|%#.1E|\n", -0.0);
-    b = printf("PF_ E with # flag presicion 1|%#.1E|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ E with # flag presicion 0|%#.0E|\n", -0.0);
-    b = printf("PF_ E with # flag presicion 0|%#.0E|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ E #-5.3|%#-5.3E|\n", 0.0);
-    b = printf("PF_ E #-5.3|%#-5.3E|\n", 0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ E #.1e|%#.1E|\n", -7.3);
-    b = printf("PF_ E #.1e|%#.1E|\n", -7.3);
-    assert(a == b);
-    ft_nl(1);
-}
-
-void    test_G(void)
-{
-    int a;
-    int b;
-
-    ft_printf("TEST %%G\n-----------------------------------------------------------------\n\n");
-
-    a = ft_printf("FT   %%G, -958.125|%G|\n", -958.125);
-    b = printf("PF   %%G, -958.125|%G|\n", -958.125);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%G width greater than presicion |%15.5G|\n", -9587.3333);
-    b = printf("PF %%G width greater than presicion |%15.5G|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%G width greater than presicion left|%-15.5G|\n", -9587.3333);
-    b = printf("PF %%G width greater than presicion left|%-15.5G|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%G width greater than presicion zero padding minus|%0-15.5G|\n", -9587.3333);
-    b = printf("PF %%G width greater than presicion zero padding minus|%0-15.5G|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT %%G width greater than presicion zero padding minus|%015.5G|\n", -9587.3333);
-    b = printf("PF %%G width greater than presicion zero padding minus|%015.5G|\n", -9587.3333);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ G with # flag presicion 1|%#.1G|\n", -0.0);
-    b = printf("PF_ G with # flag presicion 1|%#.1G|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ G with # flag presicion 0|%#.0G|\n", -0.0);
-    b = printf("PF_ G with # flag presicion 0|%#.0G|\n", -0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ G #-5.3|%#-5.3G|\n", 0.0);
-    b = printf("PF_ G #-5.3|%#-5.3G|\n", 0.0);
-    assert(a == b);
-    ft_nl(1);
-
-    a = ft_printf("FT_ G #.1G|%#.1G|\n", -7.3);
-    b = printf("PF_ G #.1G|%#.1G|\n", -7.3);
-    assert(a == b);
-    ft_nl(1);
-}
-
-
 void    test_sn(void)
 {
     int a;
@@ -862,8 +513,8 @@ void    test_sn(void)
 	char *mine;
 	char *original;
 
-    mine = ft_strnew(11000);
-    original = ft_strnew(11000);
+    mine = ft_strnew(1000);
+    original = ft_strnew(1000);
     ft_printf("TEST ft_sprintf\n-----------------------------------------------------------------\n\n");
 
 
@@ -871,23 +522,27 @@ void    test_sn(void)
     sprintf(original, "FT sprintf = |%X|\n", 42);
     printf("%s\n%s\n", mine, original);
 
+
     mine = ft_sprintf(mine, "|%.5f|\n", -9587.3333);
           sprintf(original, "|%.5f|\n", -9587.3333);
     printf("%s\n%s\n", mine, original);
+
 
     mine = ft_sprintf(mine, "%%f width greater than presicion zero padding minus|%0-15.5f|\n", -9587.3333);
           sprintf(original, "%%f width greater than presicion zero padding minus|%0-15.5f|\n", -9587.3333);
     printf("%s\n%s\n", mine, original);
 
+
     mine = ft_sprintf(mine, "%%f width greater than presicion zero padding minus|%015.5f|\n", -9587.3333);
           sprintf(original, "%%f width greater than presicion zero padding minus|%015.5f|\n", -9587.3333);
     printf("%s\n%s\n", mine, original);
 
+
     mine = ft_sprintf(mine, "this is string %s\n", "wow");
           sprintf(original, "this is string %s\n", "wow");
-    free(mine);
+     printf("%s\n%s\n", mine, original);
     free(original);
-    printf("%s\n%s\n", mine, original);
+    free(mine);
 }
 
 void    test_fd(void)
@@ -939,35 +594,35 @@ void    test_asterix(void)
 	assert(a == b);
 	ft_nl(1);
 
-    // a = ft_printf("FT %%G width greater than presicion zero padding minus|%0-*15.5G|\n", 10, -9587.3333);
-    // b = printf("PF %%G width greater than presicion zero padding minus|%0-*15.5G|\n", 10, -9587.3333);
-    // assert(a == b);
-    // ft_nl(1);
+    a = ft_printf("FT %%F width greater than presicion zero padding minus|%0-*15.5F|\n", 10, -9587.33);
+    b = printf("PF %%F width greater than presicion zero padding minus|%0-*15.5F|\n", 10, -9587.33);
+    assert(a == b);
+    ft_nl(1);
 
-    // a = ft_printf("FT %%G width greater than presicion zero padding minus|%*015.5G|\n", 10, -9587.3333);
-    // b = printf("PF %%G width greater than presicion zero padding minus|%*015.5G|\n", 10, -9587.3333);
-    // assert(a == b);
-    // ft_nl(1);
+    a = ft_printf("FT %%f width greater than presicion zero padding minus|%*015.5f|\n", 10, -957.3333);
+    b = printf("PF %%f width greater than presicion zero padding minus|%*015.5f|\n", 10, -957.3333);
+    assert(a == b);
+    ft_nl(1);
 
-    // a = ft_printf("FT_ G with # flag presicion 1|%#*.1G|\n", 5, -0.0);
-    // b = printf("PF_ G with # flag presicion 1|%#*.1G|\n", 5, -0.0);
-    // assert(a == b);
-    // ft_nl(1);
+    a = ft_printf("FT_ f with # flag presicion 1|%#*.1f|\n", 5, -0.0);
+    b = printf("PF_ f with # flag presicion 1|%#*.1f|\n", 5, -0.0);
+    assert(a == b);
+    ft_nl(1);
 
-    // a = ft_printf("FT_ G with # flag presicion 0|%#*.*0G|\n", 5, 5, -0.0);
-    // b = printf("PF_ G with # flag presicion 0|%#*.*0G|\n", 5, 5, -0.0);
-    // assert(a == b);
-    // ft_nl(1);
+    a = ft_printf("FT_ f with # flag presicion 0|%#*.*0f|\n", 5, 5, -0.0);
+    b = printf("PF_ f with # flag presicion 0|%#*.*0f|\n", 5, 5, -0.0);
+    assert(a == b);
+    ft_nl(1);
 
-    // a = ft_printf("FT %%d LONG_MAX |%.*ld|\n", 5, LONG_MAX);
-    // b = printf("PF %%d LONG_MAX |%.*ld|\n", 5, LONG_MAX);
-    // assert(a == b);
-    // ft_nl(1);
+    a = ft_printf("FT %%d LONG_MAX |%.*ld|\n", 5, LONG_MAX);
+    b = printf("PF %%d LONG_MAX |%.*ld|\n", 5, LONG_MAX);
+    assert(a == b);
+    ft_nl(1);
 
-    // a = ft_printf("FT %%d LONG_MIN |%*0ld|\n", 35, LONG_MIN);
-    // b = printf("PF %%d LONG_MIN |%*0ld|\n", 35, LONG_MIN);
-    // assert(a == b);
-    // ft_nl(1);
+    a = ft_printf("FT %%d LONG_MIN |%*0ld|\n", 35, LONG_MIN);
+    b = printf("PF %%d LONG_MIN |%*0ld|\n", 35, LONG_MIN);
+    assert(a == b);
+    ft_nl(1);
 
     a = ft_printf("FT width > pre %%d |%20.5d|\n", 444);
     b = printf("PF width > pre %%d |%20.5d|\n", 444);
@@ -987,13 +642,8 @@ void	run_argument(char *arg)
 	{
 		test_all();
 	}
-	else if (!ft_strcmp(arg, "2"))
+	else if (!ft_strcmp(arg, "bonus"))
 	{
-		test_all();
-		// test_g();
-		// test_e();
-		// test_G();
-		// test_E();
 	 	test_sn();
         test_b();
         test_fd();
@@ -1025,28 +675,15 @@ void	run_argument(char *arg)
 		test_float();
 	}
 	else if (!ft_strcmp(arg, "8"))
-	{
-		test_g();
-		test_e();
-		test_G();
-		test_E();
-	}
-	else if (!ft_strcmp(arg, "9"))
 		test_asterix();
-/* 	else if (!ft_strcmp(arg, "10"))
-		test_sn(); */
     else if (!ft_strcmp(arg, "undef"))
         test_undefined();
     else if (!ft_strcmp(arg, "leaks"))
     {
         while (1);
     }
-    else if (!ft_strcmp(arg, "e"))
-        test_e();
     else if (!ft_strcmp(arg, "s"))
         test_s();
-    else if (!ft_strcmp(arg, "g"))
-        test_g();
     else if (!ft_strcmp(arg, "f"))
         test_float();
     else if (!(ft_strcmp(arg, "d")))
@@ -1061,8 +698,6 @@ void	run_argument(char *arg)
         test_u();
     else if (!ft_strcmp(arg, "*"))
         test_asterix();
-  /*   else if (!(ft_strcmp(arg, "sn")))
-        test_sn(); */
     else if (!(ft_strcmp(arg, "x")))
         test_x();
     else if (!(ft_strcmp(arg, "p")))
