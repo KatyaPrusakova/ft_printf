@@ -100,7 +100,6 @@ The format specifiers `%b` is custom. They print binary, respectively.
 
 ```C
 #include "ft_printf.h"
-#include <locale.h>
 
 int    main(void)
 {
@@ -133,33 +132,6 @@ This is ft_printf
 02017
 0XFA81A4
 0x7fff5c7159e8
-```
-
-## Code snippet:
-
-```C
-void    ft_process_string(const char *format, t_struct *f, va_list ap)
-{
-    while (format[f->i] != '\0')
-    {
-        if (format[f->i] == '%')
-        {
-            f->i++;
-            if (ft_strchr("#-+ .*0123456789hljz", format[f->i]))
-                ft_parse_modifiers(format, f, ap);
-            if (ft_strchr("sSpdDioOuUxXcCbr%", format[f->i]))
-            {
-                ft_print(format, f, ap);
-                if (f->len == -1)
-                    return ;
-                ft_reset_struct(f);
-            }
-        }
-        else
-            f->len += write(f->fd, &format[f->i], 1);
-        f->i++;
-    }
-}
 ```
 
 ## [Subject](https://github.com/fpetras/42-subjects/blob/master/ft_printf.en.pdf "ft_printf.en.pdf")
