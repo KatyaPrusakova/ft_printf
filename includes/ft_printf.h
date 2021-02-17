@@ -6,7 +6,7 @@
 /*   By: eprusako <eprusako@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:00:30 by eprusako          #+#    #+#             */
-/*   Updated: 2020/10/22 11:54:36 by eprusako         ###   ########.fr       */
+/*   Updated: 2021/02/17 18:50:46 by eprusako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void			print_uint(t_flags *data);
 void			print_percent(t_flags *data);
 
 /*
-** ------ PRINT_f.C ------
+** ------ PRINT_F.C ------
 */
 
 char			*ft_ftoa(long double f, int precision, int hash);
